@@ -1,0 +1,33 @@
+.header > .indigo > .header-navbar > .navbar-brand{
+    cursor: pointer;
+}
+.navItem:hover{
+    transition: 0.2s 0.2s ;
+    border-bottom: 2px solid rgb(117, 66, 130);
+}
+.navItem.active{
+    border-bottom: 2px solid rgb(117, 66, 130);
+}
+.navItem-img{
+    padding: 0 !important;
+    border-bottom: 2px solid rgb(35, 191, 118);
+    border-left: 2px solid rgb(35, 191, 118);
+    border-top: 2px solid rgb(35, 155, 191);
+    border-right: 2px solid rgb(35, 155, 191);
+    border-radius: 100%;
+    cursor: pointer;
+}
+.navItem-img > img{
+    width: 50px;
+    border: 1px solid #fff;
+    border-radius: 100%;
+}
+.navDropMenu.show{
+    transition: 0.2s 0.2s;
+
+    transform: translate3d(-40px, 54px, 0px) !important;
+}
+.navDropMenu{
+
+    transform: translate3d(31px, 54px, 0px) !important;
+}
