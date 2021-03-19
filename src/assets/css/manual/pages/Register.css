@@ -1,0 +1,120 @@
+
+
+ .container-fluid.register{
+  background: url("../../../images/pages/landingPage/sign-up/sign-up.jpg") no-repeat;
+  background-position: center;
+  background-size: cover;
+  /* height: 1000px; */
+  min-height: 1000px;
+  font-family: est;
+  perspective: 500px;
+}
+.register >.registerForm{
+    margin-top: 60px;
+    /* padding-left: 10px;
+    padding-right: 10px; */
+    width: 30%;
+    position: absolute;
+    right:5%;
+    min-height: 300px;
+    /* border-radius: 100%; */
+    /* background-color: rgb(119, 178, 226); */
+}
+
+.register >.registerForm > .form-group > label{
+    font-size: large;
+}
+/* .register >.registerForm > .form-group > label[for= email]{
+    margin-right: 10%;
+} */
+.register >.registerForm > .form-group > input{
+     border-radius: 16px;
+     text-align: left;
+     margin-bottom: 2px;
+  background-color: rgb(116, 153, 158);
+  border: 1px solid transparent;
+  color: #fff;
+  text-align: left;
+}
+.register >.registerForm > .form-group > input::placeholder{
+    color: #fff;
+}
+/* .register >.registerForm > .form-group > input[name=email]{
+    margin:2px auto;
+    width: 95%;
+} */
+
+.register >.registerForm > button{
+  margin: 6% auto;
+  border-radius: 20px;
+  padding: 7px ;
+  width: 70%;
+  box-shadow: 0px 0px 10px #000000;
+  display: block;
+  font-size: large;
+}
+.register >.registerForm > a{  
+    display: block;
+    margin: 5px auto;
+    text-align: center;
+    color: #0442b4;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 990px) {
+.register >.registerForm{
+    width: 35%;
+}
+}
+@media screen and (max-width: 768px) {
+    .container-fluid.register{
+        background-size: 100% 100%;
+        background-position: top;
+    }
+    .register >.registerForm{
+        width: 40%;
+    }
+    
+}
+@media screen and (max-width: 578px) {
+ .container-fluid.register{
+    background-size:110% 80%;
+    background-position: top;
+}
+.register >.registerForm{
+    width: 45%;
+}
+}
+
+
+
+@media screen and (max-width: 375px) {
+ .container-fluid.register{
+    background: transparent;
+
+}
+.register >.registerForm{
+    padding: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    background: rgb(18, 209, 177);
+    width: 90%;
+}
+.register >.registerForm > .title{
+    color: #fff;
+    font-size: x-large;
+    background-color: #44b891;
+    width: 50%;
+    border-radius: 20px;
+    margin: 10px auto;
+    margin-bottom: 0;
+}
+.register >.registerForm > .form-group > label{
+    color: #fff;
+    margin: 0;
+    margin-right: 10px;
+}
+
+}
+

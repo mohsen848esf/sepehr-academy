@@ -1,0 +1,210 @@
+.course-body{
+    /* border: 1px solid red; */
+    width: 100%;
+    /* height: 560px; */
+    margin-top: 7%;
+    padding: 0;
+    position: relative;
+}
+.course-style{
+    width: 85%;
+    height: 95%;
+    margin: 0 auto;
+}
+.right-style,.left-style{
+    padding: 0;
+}
+.right-style > div{
+    /* border: 2px solid green; */
+    border-radius: 30px;
+    box-shadow: 3px 3px 10px rgb(139, 139, 139);
+    /* width: 85%;     */
+}
+.course-view{
+    height: 60%;
+    margin: 1% auto;
+    margin-top: 0;
+    /* border: 2px solid orange; */
+}
+.course-view .courseImage{
+    margin:3px ;
+    width: 100%;
+    height: 98%;
+    /* border: 1px solid red; */
+    border-radius: 30px;
+}
+.course-description{
+    /* height: 35%; */
+    margin: 1% auto;
+    margin-top: 3%;
+    padding: 10px;
+}
+.description-title , .description-text{
+    border-bottom: 1px solid rgb(73, 73, 73);
+    height: 25%;
+    margin: 2% auto;
+    text-align: center;
+}
+.description-text{
+    height: 50%;
+    border: none;
+    text-align: right;
+}
+
+
+
+/* .left-style > .row{
+    height: 100%;
+} */
+.left-style > .row > .items {
+    border: 1px solid rgba(155, 154, 154, 0.295);
+    border-radius: 20px;
+    box-shadow: 3px 3px 10px rgb(139, 139, 139);
+    /* width: 85%;    */
+    /* height: 10%; */
+    margin: 0 auto;
+    margin-bottom: 5%;
+    font-size: 100%;
+    text-align: right;
+    /* border: 1px solid green; */
+
+}
+.left-style > .row > .course-price{
+    height: 28%;
+}
+
+.course-price > .price-items{
+    /* border: 1px solid red; */
+    height: 25%;
+    margin: 4% auto;
+    margin-top: 2%;
+    padding: 0;
+    text-align: center;
+}
+
+.price-items > button {
+    border: 1px solid transparent;
+    border-radius: 30px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: #ffffff;
+    background-color: rgb(77, 84, 192);
+}
+
+
+
+.course-access > .row{
+    height: 100%;
+    
+    margin: 3% auto;
+    
+}
+.access-items{
+    /* border: 1px solid red; */
+    /* height: 70%; */
+    padding: 0;
+    text-align: center;
+}
+.access-items > p{
+    /* border: 1px solid black; */
+    font-size: 16px;
+    margin-top: 2%;
+    text-align: center;
+}
+.access-items.access_icon{
+    font-size: x-large;
+}
+
+
+/* .course-instructor{ background: url("../../../images/pages/courses/68160.png") no-repeat; } */
+/* .course-comments{ background: url("../../../images/pages/courses/68160.png") no-repeat; }
+.course-student{ background: url("../../../images/pages/courses/68160.png") no-repeat; }
+
+.course-instructor , .course-comments , .course-student{
+
+    background-position: 92% center ;
+    background-size:10% ;
+} */
+.course-instructor > p , .course-comments > p , .course-student > p{ margin: 6% 0; }
+.course-instructor > p >i , .course-comments > p>i , .course-student >p> i{ margin:0 4% ; font-size: x-large; }
+/* .course-instructor > p , .course-comments > p , .course-student > p{  } */
+
+
+@media screen and (max-width: 990px){
+/* .left-style > .row > .items{
+    margin: 2% auto;
+} */
+/* .access-items > p{
+    font-size: 13px;
+    font-weight:500;
+} */
+
+}
+
+
+@media screen and (max-width: 768px){
+ /* <---------- course-body / course-style ----------> */
+.course-body{
+    /* height: 750px; */
+    margin-top: 12%;
+}
+/* .course-style{
+    height: 100%;
+} */
+/* .right-style{height: 60%;}
+.left-style{
+    height: 30%;
+} */
+/* .left-style > .row > .items {
+    margin-right: 4%;
+    height: 30%;
+} */
+/* .left-style > .row > .course-price{
+    height: 60%;
+}
+
+.left-style > .row > .course-access{
+    height: 60%;
+}
+.access-items{
+    height: 40%;
+
+}
+.access-items.title{
+    height: 30%;
+
+} */
+
+/* .access-items > p{
+    text-align: center;
+    font-size: 18px;    
+    margin-top: 2%;
+
+} */
+/* .course-instructor > p{ margin: 10% 0; }  
+.course-comments > p , .course-student > p{ margin: 14% 0 0 0; text-indent: 20%;}
+.course-comments  , .course-student { background-size: 13%;}
+*/
+} 
+
+@media screen and (max-width: 576px){
+    .course-body{
+        height: inherit;
+    }
+    /* .left-style{
+        height: 60%;
+    } */
+    .left-style > .row > .items {
+        margin:1% auto;
+        height: 30%;
+    }
+}
+
+@media screen and (max-width: 375px){
+ /* <---------- course-description ----------> */
+.course-description{
+    font-size: 12px;
+}
+
+}

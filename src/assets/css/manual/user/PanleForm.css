@@ -1,0 +1,92 @@
+
+
+/* * ---- particles.js container ---- * */
+
+#particles-js {
+  position: absolute;
+  top:7%;
+  width: 100%;
+  height: 90%;
+  background-color: transparent;
+}
+
+body {
+  margin: 0;
+}
+.body{
+  width: 100%;
+  height: 1200px;
+  background: url('../../../images//pages//landingPage/2596842-reflect-2.jpg') no-repeat ;
+  background-size: 100%;
+}
+.shape{
+  width: 100%;
+  height: 700px;
+  perspective: 1000px;
+  background: rgba(63, 63, 63, 0.315);
+  /* background: linear-gradient(to right bottom,#209e9181  30%,rgba(238, 172, 17, 0.459)  95%); */
+  background-color: linear-gradient(to right bottom,#209e9181  30%,rgba(17, 238, 72, 0.459)  95%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* border: 1px solid #082880;
+  border: 1px solid #ff0000; */
+}
+canvas {
+  display: block;
+  /* vertical-align: bottom; */
+  width: 100%; 
+  height: 100%;
+}
+
+
+.panel-body{
+    width: 90%;
+    height: 75%;
+    margin: 100px auto;
+    /* border: 1px solid red; */
+    position: relative;
+    padding: 0;
+
+
+}
+
+  .userPanel{
+    height: 100%;
+    margin-top: 0;
+    /* max-height: fit-content; */
+  }
+  .left-panel{
+    background: #fff;
+    border-top-left-radius:28px ;
+    border-bottom-left-radius:28px;
+    height: 100%;
+ 
+}
+
+  .tab-pane{
+    /* border: 1px solid red; */
+    width: 100%;
+    height: 100%;
+}
+.panel-header{
+  height: 15%;
+  border: 1px solid orange;
+  margin: 3px;
+}
+
+
+
+@media screen and (max-width:768px){
+.panel-body{
+   margin-top: 60px; 
+}
+  .left-panel{
+    height: 100%;
+    background: #fff;
+    border-top-left-radius:0 ;
+    border-bottom-left-radius:28px;
+    border-bottom-right-radius:28px;
+  }
+
+}

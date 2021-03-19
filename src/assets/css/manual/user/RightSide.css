@@ -1,0 +1,137 @@
+
+  .right-panel{
+    background: linear-gradient(#4984dd ,rgb(17, 138, 118) 80%);
+    border-top-right-radius:28px ;
+    border-bottom-right-radius:28px;
+    height: 100%;
+    width: 20%;
+  }
+
+    .right-panel > .userImg{
+    border: 2px solid white ;
+    border-radius: 20px;
+    /* width: 130px; */
+    flex: 0 0 20%;
+    padding: 0;
+  }
+  .userFname{
+    /* border: 1px solid red; */
+    margin-bottom:5px;
+  }
+  .userFname > h5{
+    color: #fff;
+    /* font-weight: bold; */
+    font-size: 17px;
+    border: 1px solid transparent;
+  }
+
+
+  .button-box{
+    /* border: 1px solid red; */
+    /* flex: 0 0 0; */
+    padding: 0;
+
+  }
+  .button{
+    display: inline-flex;
+
+        /* padding-right: 30px; */
+        /* font-size: 15px;
+        font-weight: bold;
+        text-indent: 15px; */
+      /* flex: 0 0 0; */
+    /* margin: 0 auto; */
+    /* width: 100%; */
+    /* padding: .5rem 50px; */
+
+    /* display: grid; */
+
+    /* <------- li background ------> */
+    background: white;
+
+    color: #303030 ; 
+    box-shadow: 0 2px 8px rgb(66, 66, 66);
+  }
+  .button > h5{
+    text-align: center;
+    margin: 0 auto;
+        font-size: 15px;
+        font-weight: bold;
+  }
+  .button > i{
+    display: none;
+  }
+  .button.nav-link.my-2.active{
+    background-color: orange;
+  }
+
+
+  
+@media screen and (max-width:768px){
+
+  .right-panel{
+    height: 15%;
+    border-top-right-radius:20px ;
+    border-top-left-radius:20px ;
+    border-bottom-right-radius:0;    
+  }
+  .userImg{
+    flex: 0 0 0;
+    width: 60px;
+    border-radius: 100%;
+    margin-bottom: 15px;
+  }
+  .userFname > h5{
+    font-size: 12px;
+    /* border: 1px solid red; */
+  }
+
+  .button-box{
+    position: relative;
+    bottom: 10%;
+  }
+  .button{
+    margin-left:  5px;
+    /* font-size: 13px; */
+    /* padding-right: 30px; */
+    /* text-indent: 2px; */
+    background-size: 14%;
+
+  }
+    .button.log-out{
+      background-size: 22%;
+  }
+ .button > h5{
+   display: none;
+ } 
+ .button > i{
+   display: inline-block;
+   font-size: large
+ }
+
+}
+
+@media screen and (max-width:576px){
+ .button > h5{
+   display: none;
+ } 
+ .button > i{
+   display: inline-block;
+   font-size: large
+ }
+}
+@media screen and (max-width:375px){
+  .button-box{
+    bottom: 20%;
+  }
+  .button{
+    padding: .3rem .3rem;
+  }
+ .button > h5{
+   display: none;
+ } 
+ .button > i{
+   display: inline-block;
+    font-size: medium;
+  }
+}

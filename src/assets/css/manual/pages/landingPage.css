@@ -1,0 +1,648 @@
+
+html{
+    overflow-x: hidden;
+}
+
+html *{
+    margin: 0;
+    padding: 0;
+}
+body{
+    margin:0;
+    padding:0;
+    
+    }
+    
+    
+/* ************************************************** */
+/* ************************************************** */
+/* ************************************************** */
+/* ************************************************** */
+
+
+
+ .section1 > .container-fluid.bg{
+    direction: rtl; 
+    height: 600px;
+	background: url("../../../images/pages/landingPage/2596842-reflect-2.jpg")no-repeat ;
+    background-size:contain;    
+} 
+
+ /* .section1 > .container-fluid > .row > .slider{
+    border: 1px solid #ccc;
+ }  */
+ .section1 .carousel{
+     height: 300px;
+     width: 300px;
+ }
+ @media screen and (max-width:768px){
+    .section1 .carousel{
+        height: 100px;
+        width: 100px;
+    }
+ }
+ 
+ .section1 .carousel-inner{
+     height: 100%;
+     
+ }
+ .section1 .carousel-caption.caption {
+     top: 20px;
+     text-align: right;
+ }
+ .section1 .carousel-caption.caption > h2 {
+      padding: 25px 0px;
+  }
+
+.section1 .carousel-indicators{
+     justify-content: start;
+ }
+
+ .section1 .carousel-indicators > li {
+  
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #adb5bd;
+ } 
+ .section1 .carousel-indicators > li.active {
+     background-color: cornflowerblue;
+ }
+
+ .section1 a.btn{
+    right: 44px;
+    top: 200px;
+    position: relative;
+    border-radius: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+    background-color: rgb(236, 95, 206);
+    padding: 0px 30px;
+    float: right;
+}
+
+
+
+
+
+
+
+
+/* section2 styles */
+
+.section2 {
+    background: url("../../../images/pages/landingPage/section2/shape6.jpg") no-repeat 100% 0;
+    background-size: 75% 100%;
+
+    font-size: calc(11px + (16 - 12) * ((100vw - 300px) / (1600 - 300)));
+}
+
+.section2 > .section2-title {
+    font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1600 - 300)));
+}
+
+.Grouping-list {
+}
+
+.Grouping-list > .Grouping-item-holder > .Grouping-item {
+    border: 1px solid #f9f9f9;
+    border-radius: 1.5rem;
+    background-color: white;
+    box-shadow: 0 4px 4px #ccc;
+}
+
+.Grouping-list >.Grouping-item-holder > .Grouping-item > .Grouping-item--img {
+    max-width: 85px;
+}
+
+.Grouping-list >.Grouping-item-holder > .Grouping-item > .Grouping-item--title {
+    font-size: inherit;
+}
+
+
+/* section2 responsive */
+@media (max-width: 767.98px) { 
+
+    .section2 {
+        background-position: 0% 50%;
+        background-size: 100% 50%;
+    
+    }
+}
+
+
+/* ************************************************** */
+/* ************************************************** */
+/* ************************************************** */
+/* ************************************************** */
+
+
+.section3{
+    background: url("../../../images/pages/landingPage/shape6.jpg") no-repeat;
+    background-size: 70% 100%;
+    font-size: calc(11px + (16 - 12) * ((100vw - 300px) / (1600 - 300)));
+}
+.section3 > .section3-title {
+    font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1600 - 300)));
+}
+
+/* .Grouping-list {
+    
+} */
+
+.Grouping-list > .Grouping-item-holder > .Grouping-item {
+    border: 1px solid #f9f9f9;
+    border-radius: 1.5rem;
+    background-color: white;
+    box-shadow: 0 4px 4px #ccc;
+    height: 300px ;
+}
+
+/* .Grouping-list >.Grouping-item-holder > .Grouping-item > .Grouping-item--img {
+    max-width: 85px;
+} */
+#section3--img{
+    max-width: 150px;
+}
+.Grouping-list >.Grouping-item-holder > .Grouping-item > .Grouping-item--title {
+    font-size: inherit;
+}
+
+
+/* section3 responsive */
+@media (max-width: 767.98px) { 
+
+    .section3 {
+        background-position: 0% 50%;
+        background-size: 100% 50%;
+    
+    }
+    #section3--img{
+        max-width: 85px;
+    }
+}
+/* ************************************************** */
+/* ************************************************** */
+/* ************************************************** */
+/* ************************************************** */
+
+.section4{
+        background: url("../../../images/pages/landingPage/3911318.png") no-repeat 100% 10%;
+        background-size:55% 100%;
+    
+    }
+    .left{
+    
+    float: left;
+    
+    
+    }
+    .left>.box{
+    margin:1% 1%;
+    height:46%;
+    
+    background:#eee;
+    border-radius:10px;
+    position:relative;
+    float:left;
+    
+    }
+    .left>.box>a{
+    text-decoration:none;
+    width:100%;
+    height:100%;
+    }
+    .left>.box>a>img{
+        display:block;
+        width:70%;
+        margin: 10% auto 0% ;
+        border-radius:100%;
+        height:70%;
+        
+        padding:0;}
+    .left>.box>a>p{
+    color:#222;
+
+    text-align:center;
+    
+    
+    }
+
+
+/* ************************************************** */
+/* ************************************************** */
+/* ************************************************** */
+/* ************************************************** */
+/* <----------section5 about us >> title / column ----------> */
+.aboutUs{
+    border: 1px solid transparent;
+    background: url("../../../images/pages/landingPage/shape4.jpg") no-repeat right 25%;
+    background-size: 95%;
+    position: relative;
+}
+.aboutUs-title{  
+    margin-top: 250px;
+    margin-right: 50px;
+}
+.aboutUs-title > h2{
+    text-align: center;
+    font-size: 55px;
+    font-weight: bolder;
+    color: #ffffff;
+}
+.aboutUs-column{
+    height: 650px;
+    margin-top: 10px;
+    perspective: 500px;
+}
+/* <---------- academy ----------> */
+.aboutUs-academy-shape{
+    height: 85%;
+    width: 73%;
+    border: 1px solid #f3efef96;
+    border-radius: 15px;
+    box-shadow: 10px 10px 15px #838383 ;
+    background:#FFFFFF;
+    perspective: 500px;
+    transform-style: preserve-3d;
+    transform: rotateX(17deg);
+    position: absolute;
+    top: 0;
+    left: 15%;
+}
+.academy-head{
+    height: 180px;
+    margin-top:20px ;
+}
+.academy-head > img{
+    height: 100%;
+    position: absolute;
+    left: 15%;
+    top:15%;
+}
+.academy-title{
+    width: 100%;
+    font-size: 34px;
+    font-weight: bolder;
+    position: absolute;
+    top: 70%;
+    left: 10%;    
+}
+.academy-description{
+    width: 65%;
+    height: 350px;
+    text-align: right;
+    font-size: 24px;
+    position: absolute;
+    top: 40%;
+    left: 17%;
+}
+/* <---------- teacher ----------> */
+.aboutUs-teacher-shape{
+    height: 81%;
+    width: 90%;
+    border: 1px solid #dad5d596;
+    border-radius: 15px;
+    box-shadow: 10px 10px 20px #636262 ;
+    background:#FFFFFF;
+    perspective: 500px;
+    transform-style: preserve-3d;
+    transform: skewX(-10deg);
+    position: absolute;
+    top: 9%;
+    left: 12%;
+}
+.aboutUs-teacher{
+    height: 100%;
+}
+.teacher-body{
+    height: 75%;
+    width: 75%;
+    position: absolute;
+    left: 19%;
+    top: 12%;
+}
+.teacher-row{
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    left: 5%;
+    top: 0;
+}
+.teacher-column{
+    height: 100%;
+    position: relative;
+}
+.teacher-column > .teacher-info-shape{
+    width: 100%;
+    height: 90%;
+    border: 1px solid rgba(170, 166, 166, 0.5);
+    margin: 15px auto;
+    background: #ffffff;
+    transform: skewX(-15deg);
+    border-radius: 8px;
+    perspective: 500px;
+    transform-style: preserve-3d;
+    position: absolute;
+}
+.teacher-info-shape.row-up{
+    position: relative;
+    left: 15%;
+}
+.teacher-info-shape.row-down{
+    position: relative;
+    right: 15%;
+}
+.teacher-info-box{
+    height: 80%;
+    width: 80%;
+    position: absolute;
+    bottom: 10%;
+    left: 23%;
+}
+.teacher-info-box.down{
+    position: absolute;
+    left: -8px;    
+}
+.teacher-info-box > img{
+    height: 65%;
+    width: 65%;
+    border:1px solid rgb(124, 124, 124);
+    border-radius: 100%;
+    position: absolute;
+    left: 22%;
+}
+.teacher-info-box > h3{
+    height: 30%;
+    text-align: center;
+    font-size: 30px;
+    position: absolute;
+    top: 75%;
+    left:27%;
+}
+
+
+@media screen and (max-width: 1200px){
+ /* <---------- academy img / title ----------> */
+.academy-head > img{
+    left: 10%;
+}
+.academy-title{
+    left: 5%;    
+}
+ /* <---------- teacher img ----------> */
+.teacher-info-box > img{
+    height: 60%;
+}
+ /* <---------- footer map / contact us ----------> */
+
+
+/* --------------------end-------------------- */
+}
+
+
+/* ====================================
+               990px
+==================================== */
+
+@media screen and (max-width: 990px){
+ /* <---------- about us >> title  ----------> */
+.aboutUs{
+    background-position: right 15%;
+}
+.aboutUs-title{
+    margin-top: 150px;
+}
+.aboutUs-title > h2{
+    font-size: 50px;
+}
+ /* <---------- about us column ----------> */
+.aboutUs-column{
+    height: 500px;
+}
+ /* <---------- about us column { academy } ----------> */
+
+.aboutUs-academy-shape{
+    height: 90%;
+    width: 80%;
+    left: 10%;
+    transform: rotateX(19deg);
+}
+.academy-head > img{
+    height: 75%;
+    top:5%;
+    left: 18%;
+}
+.academy-title{   
+    font-size: 30px;
+    top: 47%;
+    left: 15%;    
+}
+.academy-description{
+    width: 70%;
+    height: 250px;
+    font-size: 22px;
+    top: 40%;
+    left: 15%;
+}
+ /* <---------- about us column { teacher } ----------> */
+.aboutUs-teacher-shape{
+    height: 86%;
+    transform: skewX(-9deg);
+}
+.teacher-column > .teacher-info-shape{
+    width: 100%;
+    height: 80%;
+}
+.teacher-info-box{
+    height:70%;
+    width: 70%;
+    bottom: 18%;
+    left: 29%;
+}
+.teacher-info-box.down{
+    left: 2%;    
+}
+.teacher-info-box > h3{
+    font-size: 26px;
+    top: 68%;
+    left:22%;
+}
+
+/* ========end========     */
+}
+
+
+/* ====================================
+               768px
+==================================== */
+
+
+@media screen and (max-width: 768px){
+ /* <---------- about us >> background / title  ----------> */
+.aboutUs{
+    background-position: right 5%;
+    background-size: 50%;
+}
+.aboutUs-title{
+    margin: 130px 90px 40px 0px;
+}
+.aboutUs-title > h2{
+    text-align: right;
+    font-size: 50px;
+    color: #ffffff;
+}
+ /* <---------- about us column ----------> */
+ /* <---------- about us column { academy } ----------> */
+ .aboutUs-academy-shape{
+    height: 75%;
+    width: 78%;
+    border: 1px solid #b6abab96;
+    box-shadow: 5px 10px 20px #807a7a ;
+    background:#f1eeee;
+    transform: rotateX(27deg);
+    left: 10%;
+}
+.academy-head > img{
+    height: 75%;
+    top:5%;
+    left: 31%;
+}
+.academy-title{
+    font-size: 45px;
+    top: 30%;
+    left: 25%;  
+}
+.academy-description{
+    width: 75%;
+    height: 180px;
+    font-size: 26px;
+    top: 38%;
+    left: 9%;
+}
+ /* <---------- about us column { teacher } ----------> */
+.aboutUs-teacher-shape{
+    width: 90%;
+    height: 100%;
+    transform: rotateX(0deg);
+    border: 1px solid #b6abab96;
+    box-shadow: 5px 10px 20px #807a7a ;
+    background:#f1eeee;
+    left: 5%;
+    top: 0%;
+}
+.teacher-body{
+    height: 75%;
+    width: 75%;
+    left: 10%;
+    top: 12%;
+}
+.teacher-column > .teacher-info-shape{
+    width: 95%;
+    height: 90%;
+}
+.teacher-info-shape.row-up{
+    left: 10%;
+}
+.teacher-info-shape.row-down{
+    right: 10%;
+}
+.teacher-info-box{
+    height:85%;
+    width: 80%;
+    bottom: 5%;
+    left: 19%;
+}
+.teacher-info-box.down{
+    left:1%;    
+}
+.teacher-info-box > img{
+    height: 70%;
+    width: 60%;
+}
+.teacher-info-box > h3{
+    top:72%;
+    left:35%;
+}
+
+/* ========end========     */
+}
+
+
+/* ====================================
+               576px
+==================================== */
+
+
+@media screen and (max-width: 576px){
+ /* <---------- about us >> background / title  ----------> */
+.aboutUs-title{
+    margin: 100px 70px 40px 0px;
+}
+.aboutUs-title > h2{
+    font-size: 35px;
+}
+ /* <---------- about us column ----------> */
+ /* <---------- about us column { academy } ----------> */
+ /* .aboutUs-academy-shape{} */
+.academy-head > img{
+    height: 65%;
+    top:3%;
+    left: 62%;
+}
+.academy-title{
+    font-size: 30px;
+    top: -75%;
+    left: -45%;  
+}
+.academy-description{
+    width: 73%;
+    height: 190px;
+    font-size: 22px;
+    top: 34%;
+    left: 10%;
+}
+ /* <---------- about us column { teacher } ----------> */
+/* .aboutUs-teacher-shape{} */
+.teacher-body{
+    height: 90%;
+    width: 80%;
+    top: 5%;
+    left: 9%;
+}
+.teacher-column{
+    width:50%;
+}
+.teacher-column > .teacher-info-shape{
+    width: 90%;
+    height: 75%;
+}
+.teacher-info-shape.row-up{
+    left: 13%;
+}
+.teacher-info-shape.row-down{
+    right: 13%;
+}
+.teacher-info-box{
+    height:72%;
+    width: 80%;
+    bottom: 18%;
+    left: 21%;
+}
+.teacher-info-box.down{
+    left:0%;    
+}
+.teacher-info-box > img{
+    height: 65%;
+    width: 58%;
+}
+.teacher-info-box > h3{
+    top:72%;
+    left:25%;
+}
+
+
+/* ========end========     */
+}
+
