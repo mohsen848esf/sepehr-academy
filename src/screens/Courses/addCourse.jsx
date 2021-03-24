@@ -20,11 +20,7 @@ import { toast } from "react-toastify";
 import userImg from "../../assets/img/portrait/small/avatar-s-18.jpg";
 import Checkbox from "../../components/@vuexy/checkbox/CheckboxesVuexy";
 import { Check, Lock, Mail, Facebook } from "react-feather";
-import {
-  getAllCourses,
-  getAllTeacher,
-  addCourse,
-} from "../../services/student.api";
+import { addCourse } from "../../services/courses.api";
 
 export const AddCourse = () => {
   // const [data, setData] = useState({})
@@ -75,7 +71,7 @@ export const AddCourse = () => {
       const response = await addCourse(courseData);
       toast.success(response.data.message[0].message);
       {
-        <Redirect to="/admin" />;
+        <Redirect to="/admin/coursesList" />;
       }
     } catch (ex) {
       if (ex.response && ex.response.status >= 400) {
@@ -221,7 +217,7 @@ export const AddCourse = () => {
                       {" "}
                       <Link
                         style={{ textDecoration: "none" }}
-                        to="/admin/termList"
+                        to="/admin/CoursesList"
                       >
                         لغو
                       </Link>

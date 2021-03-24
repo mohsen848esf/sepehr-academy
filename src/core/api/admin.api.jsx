@@ -23,6 +23,7 @@ export const getAllStudents = async () => {
     return [];
   }
 };
+
 export const getStudentById = async (studentId) => {
   try {
     const res = await http.get(API_URL + `student/${studentId}`);
@@ -57,6 +58,14 @@ export const removeStudentFromTerm = async (studentId, termId) => {
   } catch (error) {
     toast.error(error.response.data.message[0].message);
 
+    return [];
+  }
+};
+export const getAllTeachers = async () => {
+  try {
+    const res = await http.get(API_URL + "employee/getallteachers");
+    return res.data.result;
+  } catch (error) {
     return [];
   }
 };

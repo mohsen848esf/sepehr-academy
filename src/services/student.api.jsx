@@ -75,9 +75,9 @@ export const createTerm = async (termData) => {
 //     return []
 //   }
 // };
-export const updateTerm = async (termData) => {
+export const updateTerm = async (termId, termData) => {
   try {
-    const res = await http.put(API_URL + "term/", termData);
+    const res = await http.put(API_URL + `term/${termId}`, termData);
     return res;
   } catch (error) {
     return [];

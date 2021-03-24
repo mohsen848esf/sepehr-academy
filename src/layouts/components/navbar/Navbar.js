@@ -58,17 +58,13 @@ const ThemeNavbar = (props) => {
               {props.horizontal ? (
                 <div className="logo d-flex align-items-center">
                   <div className="brand-logo mr-50"></div>
-                  <h2 className="text-primary brand-text mb-0">پنل ادمین</h2>
+                  <h2 className="text-primary  brand-text mb-0">پنل ادمین</h2>
                 </div>
               ) : null}
               <NavbarUser
                 handleAppOverlay={props.handleAppOverlay}
                 changeCurrentLang={props.changeCurrentLang}
-                userName={
-                  userInfo.employeeModel.fullName.split('+').length > 1
-                    ? userInfo.employeeModel.fullName.split('+')[2]
-                    : userInfo.employeeModel.fullName.split('+')[0]
-                }
+                userName={userInfo.employeeModel.fullName}
                 userImg={userImg}
               />
             </div>

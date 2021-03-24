@@ -15,6 +15,7 @@ import {
   Card,
   CardBody,
 } from "reactstrap";
+import { MDBSelect, MDBScrollbar } from "../../../assets/css/mdbreact";
 import { toast } from "react-toastify";
 import userImg from "../../../assets/img/portrait/small/avatar-s-18.jpg";
 import Checkbox from "../../../components/@vuexy/checkbox/CheckboxesVuexy";
@@ -22,12 +23,12 @@ import { Check, Lock, Mail, Facebook } from "react-feather";
 import Forms from "../../../components/layout/form";
 import * as Yup from "yup";
 
-import {
-  getAllCourses,
-  getAllTeacher,
-  updateTerm,
-  getTermById,
-} from "../../../services/student.api";
+import { updateTerm, getTermById } from "../../../services/student.api";
+import { getAllCourses } from "../../../services/courses.api";
+import { getAllTeachers } from "../../../core/api/admin.api";
+import { data } from "jquery";
+import "./MDBSELECT.css";
+import "./Scroll.css";
 
 export const EditTermInfo = ({ termID }) => {
   const [termdata, setTermData] = useState({});
@@ -60,7 +61,7 @@ export const EditTermInfo = ({ termID }) => {
 
   const TermInfo = async () => {
     const data = await getTermById(termID);
-    const teachers = await getAllTeacher();
+    const teachers = await getAllTeachers();
     const AllCourses = await getAllCourses();
     setTermData(data);
     setTeachers(teachers);
@@ -69,6 +70,23 @@ export const EditTermInfo = ({ termID }) => {
   useEffect(() => {
     TermInfo();
   }, []);
+
+  const options = teachers.map((teacher) => ({
+    value: teacher._id,
+    text: teacher.fullName,
+    checked:
+      teacher && data.teacher && teacher._id === data.teacher._id
+        ? true
+        : false,
+  }));
+  const CourseOptions = courses.map((course) => ({
+    value: course._id,
+    text: course.courseName,
+    checked:
+      course && termdata.course && course._id === termdata.course._id
+        ? true
+        : false,
+  }));
 
   const toggle = (tab) => {
     if (activeTab !== tab) {
@@ -83,15 +101,15 @@ export const EditTermInfo = ({ termID }) => {
       endDate: data.endDate,
       startDate: data.startDate,
       capacity: data.capacity,
-      teacher: data.teacher,
-      course: data.course,
+      teacher: data.teacher._id,
+      course: data.course._id,
     };
     try {
-      const response = await updateTerm(newTerm);
-      toast.success(response.data.message[0].message);
-      {
-        <Redirect to="/admin/termList" />;
-      }
+      const response = await updateTerm(termID, newTerm);
+      toast.success("ترم با موفقیت ویرایش شد ", { autoClose: 3000 });
+      // setTimeout(() => {
+      //   window.location = "/admin/termList";
+      // }, 3000);
     } catch (ex) {
       if (ex.response && ex.response.status >= 400) {
         toast.error(ex.response.data.message["message"][0].message);
@@ -117,7 +135,7 @@ export const EditTermInfo = ({ termID }) => {
       validationSchema={formSchema}
       onSubmit={(value) => doSubmit(value)}
     >
-      {({ errors, touched }) => (
+      {({ errors, touched, handleChange, setFieldValue }) => (
         <Row>
           <Col sm="12">
             <Media className="mb-2"></Media>
@@ -134,6 +152,7 @@ export const EditTermInfo = ({ termID }) => {
                       id="title"
                       name="title"
                       placeholder="نام ترم ..."
+                      onChange={handleChange}
                       className={`form-control ${
                         errors.title && touched.title && "is-invalid"
                       }`}
@@ -156,6 +175,7 @@ export const EditTermInfo = ({ termID }) => {
                       id="cost"
                       defaultValue={termdata.cost}
                       placeholder="قیمت ترم ..."
+                      onChange={handleChange}
                       className={`form-control ${
                         errors.cost && touched.cost && "is-invalid"
                       }`}
@@ -176,6 +196,7 @@ export const EditTermInfo = ({ termID }) => {
                     <Input
                       type="text"
                       id="startDate"
+                      onChange={handleChange}
                       defaultValue={
                         termdata.startDate &&
                         termdata.startDate.split("T")[0].replaceAll("-", "/")
@@ -206,6 +227,7 @@ export const EditTermInfo = ({ termID }) => {
                         termdata.endDate.split("T")[0].replaceAll("-", "/")
                       }
                       placeholder="0000/00/00"
+                      onChange={handleChange}
                       className={`form-control ${
                         errors.endDate && touched.endDate && "is-invalid"
                       }`}
@@ -228,6 +250,7 @@ export const EditTermInfo = ({ termID }) => {
                       id="capacity"
                       defaultValue={termdata.capacity}
                       placeholder="1-50"
+                      onChange={handleChange}
                       className={`form-control ${
                         errors.capacity && touched.capacity && "is-invalid"
                       }`}
@@ -244,22 +267,116 @@ export const EditTermInfo = ({ termID }) => {
                 </Col>
                 <Col md="6" sm="12">
                   <FormGroup>
-                    <Label for="teachers">استاد</Label>
-                    <Input type="select" name="teachers" id="teachers">
-                      {/* {teachers && teachers.map(teacher => (
-                                            <option key={teacher.teacher._id} id={teacher.teacher._id}>{teacher.teacher.fullName}</option>
-                                            ))} */}
+                    {/* <MDBSelect
+                    onChange={(event) =>
+                      setFieldValue("teacher", event.target.value)
+                    }
+                    search
+                    name="teacher"
+                    id="teacher"
+                    options={options}
+                    selected=" استاد را انتخاب کنید "
+                    color="primary"
+                    label="استاد"
+                    className={`form-control ${
+                      errors.teacher && touched.teacher && "is-invalid"
+                    }`}
+                  /> */}
+                    <Label for="teacher">نام استاد </Label>
+                    <Input
+                      type="select"
+                      search
+                      selected=" استاد را انتخاب کنید "
+                      name="teacher"
+                      id="teacher"
+                      onChange={(event) =>
+                        setFieldValue("teacher", event.target.value)
+                      }
+                      className={`form-control ${
+                        errors.teacher && touched.teacher && "is-invalid"
+                      }`}
+                    >
+                      {/* <option value={data.teacher && data.teacher._id}>
+                        {data.teacher && data.teacher.fullName}
+                      </option> */}
+                      <option value={termdata.teacher && termdata.teacher._id}>
+                        {termdata.teacher && termdata.teacher.fullName}
+                      </option>
+                      {teachers.map((teacher) => (
+                        <option
+                          checked={
+                            termdata.teacher._id === teacher._id ? true : false
+                          }
+                          value={teacher._id}
+                        >
+                          {teacher.fullName}
+                        </option>
+                      ))}
                     </Input>
+                    {errors.teacher && touched.teacher && (
+                      <span
+                        style={{ direction: "rtl" }}
+                        className="redError mb-2 danger"
+                      >
+                        {errors.teacher}!
+                      </span>
+                    )}
                   </FormGroup>
                 </Col>
                 <Col md="6" sm="12">
                   <FormGroup>
-                    <Label for="courses">دوره </Label>
-                    <Input type="select" name="courses" id="courses">
-                      {/* {courses && courses.map(co => (
-                                            <option key={co.course._id} id={co.course._id}>{co.course.courseName}</option>
-                                            ))} */}
+                    {/* <MDBSelect
+                      onChange={(event) =>
+                        setFieldValue("course", event.target.value)
+                      }
+                      search
+                      name="course"
+                      id="course"
+                      options={CourseOptions}
+                      selected=" دوره را انتخاب کنید "
+                      color="primary"
+                      label="دوره"
+                      className={`MDBSELECT form-control ${
+                        errors.course && touched.course && "is-invalid"
+                      }`}
+                    /> */}
+                    <Label for="course">دوره </Label>
+
+                    <Input
+                      type="select"
+                      search
+                      selected=" دوره را انتخاب کنید "
+                      name="course"
+                      id="course"
+                      onChange={(event) =>
+                        setFieldValue("course", event.target.value)
+                      }
+                      className={`form-control ${
+                        errors.course && touched.course && "is-invalid"
+                      }`}
+                    >
+                      <option value={termdata.course && termdata.course._id}>
+                        {termdata.course && termdata.course.courseName}
+                      </option>
+                      {courses.map((course) => (
+                        <option
+                          checked={
+                            termdata.course._id === course._id ? true : false
+                          }
+                          value={course._id}
+                        >
+                          {course.courseName}
+                        </option>
+                      ))}
                     </Input>
+                    {errors.course && touched.course && (
+                      <span
+                        style={{ direction: "rtl" }}
+                        className="redError mb-2 danger"
+                      >
+                        {errors.course}!
+                      </span>
+                    )}
                   </FormGroup>
                 </Col>
                 <Col

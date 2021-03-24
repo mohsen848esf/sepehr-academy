@@ -1,13 +1,7 @@
-import React from 'react';
+import React from "react";
 
 const Page2 = () => {
-  
-  return (
+  return <div className="container-lg"></div>;
+};
 
-    <div>Page2</div>
-
-  );
-
-}
- 
 export default Page2;

@@ -1,0 +1,29 @@
+@font-face {
+  font-family: "yek";
+  src: url("./assets/fonts/yek.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "yekan_bakh";
+  src: url("./assets/fonts/YekanBakh_Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "feather";
+  src: url("./assets/fonts/feather.eot");
+}
+
+@font-face {
+  font-family: "featherttf";
+  src: url("./assets/fonts/feather.ttf");
+}
+
+@font-face {
+  font-family: "featherwoff";
+  src: url("./assets/fonts/feather.woff");
+}
+* {
+  font-family: "yek", "Montserrat", Helvetica, Arial, serif !important;
+}
+a {
+  color: #777777 !important;
+}

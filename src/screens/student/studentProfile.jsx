@@ -9,6 +9,9 @@ import {
   Col,
   Button,
   Table,
+  Nav,
+  NavItem,
+  NavLink,
 } from "reactstrap";
 import {
   MDBContainer,
@@ -19,6 +22,9 @@ import {
   MDBModalFooter,
   MDBSelect,
 } from "../../assets/css/mdbreact";
+import Modals from "../../components/layout/modal";
+import classnames from "classnames";
+
 import { Link } from "react-router-dom";
 import CoursesTable from "./courseList";
 import ProfileForm from "./studentForm/ProfileForm";
@@ -29,14 +35,37 @@ import {
 import { getAllTerms } from "../../services/student.api";
 import userImg from "../../assets/images/pages/landingPage/62.jpg";
 import Checkbox from "../../components/@vuexy/checkbox/CheckboxesVuexy";
-import { Edit, Plus, Trash, Lock, Check, List } from "react-feather";
+import {
+  Edit,
+  Plus,
+  Trash,
+  Lock,
+  Check,
+  List,
+  Trash2,
+  Edit3,
+  UserCheck,
+  UserMinus,
+  UserX,
+  UserPlus,
+} from "react-feather";
 import { toast } from "react-toastify";
+import http from "../../services/http-service.api";
+import { Editor } from "draft-js";
+
+const API_URL = process.env.REACT_APP_PUBLIC_PATH;
 
 const StudentAccountTab = (props) => {
+  const [activeTab, setActiveTab] = useState("1");
+
   const [studentData, setStudentData] = useState({});
   const [AlltermLength, setAlltermLength] = useState("");
   const [modal, setModal] = useState(false);
   const [edit, setEdit] = useState(false);
+  const [ModalDelete, setModalDelete] = useState(false);
+  const [DeleteId, setDeleteId] = useState(null);
+  const [ModalDeleteTerm, setModalDeleteTerm] = useState(false);
+  const [DeleteTermId, setDeleteTermId] = useState(null);
 
   const studentId = props.match.params.studentId;
   const getStudentInformation = async () => {
@@ -51,7 +80,7 @@ const StudentAccountTab = (props) => {
   // console.log(studentData);
   useEffect(() => {
     getStudentInformation();
-  }, [studentData]);
+  }, []);
   // useEffect(() => {}, [studentData]);
   useEffect(() => {
     getAllterm();
@@ -66,31 +95,50 @@ const StudentAccountTab = (props) => {
     nationalId,
     terms,
   } = studentData;
-  //   console.log("termsdchnsjdhkvnskd", terms);
-  //   console.log("teskvnskd11", fullName.split("+")[0]);
-  const count = fullName && fullName.split("+").length;
+
   const termCount = terms && terms.length;
-  //   const name = fullName.split("+")[0];
-  //   console.log("name", name, "length", count);
-  //   console.log("name", name, "length", count);
-  //   let firsName = JSON.parse(fullName);
-  //   console.log(firsName);
-  //   let lastName = fullName;
-  //   let userName = fullName;
-  //   const firstName = fullName.split("+")[0];
-  const DeleteStudentFromTerm = async (termId) => {
+  const DeleteStudentFromTerm = (termId) => {
+    setModalDeleteTerm(true);
+    setDeleteTermId(termId);
+  };
+  const doDeleteTerm = async () => {
+    if (!DeleteTermId) {
+      return;
+    }
     const prevStudentTerms = termCount != 0 && terms;
 
     const filterTerms =
-      termCount != 0 && terms.filter((term) => term._id !== termId._id);
+      termCount != 0 && terms.filter((term) => term._id !== DeleteTermId);
     setStudentData(filterTerms);
     try {
-      await removeStudentFromTerm(studentId, termId);
+      await removeStudentFromTerm(studentId, DeleteTermId);
     } catch (error) {
       setStudentData(prevStudentTerms);
+    } finally {
+      setDeleteTermId(null);
     }
   };
 
+  const handledeleteStudent = () => {
+    setModalDelete(true);
+    setDeleteId(studentId);
+  };
+  const doDelete = async () => {
+    if (!DeleteId) {
+      return;
+    }
+    try {
+      const res = await http.delete(API_URL + `student/${DeleteId}`);
+      toast.success("دانشجو با موفقیت پاک شد ");
+      window.location = "/admin/students";
+    } catch (ex) {
+      if (ex.response && ex.response.status >= 400) {
+        toast.error("دوباره امتحان کنید ");
+      }
+    } finally {
+      setDeleteId(null);
+    }
+  };
   const toggle = () => {
     setModal(!modal);
   };
@@ -100,191 +148,193 @@ const StudentAccountTab = (props) => {
   return (
     <React.Fragment>
       <Row className=" ">
-        {/* <Col className="mt-1 pl-0 d-flex justify-content-lg-end" sm="12">
-          <Button.Ripple
-            onClick={() => closeEdit()}
-            className="mr-1"
-            color="primary"
-            outline
-          >
-            <Edit size={15} />
-            <span className="align-middle ml-50">ویرایش پروفایل</span>
-          </Button.Ripple>
-        </Col> */}
+        <Col sm="12">
+          <Card>
+            <CardHeader>
+              <Nav tabs>
+                <NavItem>
+                  <NavLink
+                    className={classnames({
+                      active: activeTab === "1",
+                    })}
+                  >
+                    <UserCheck size={16} />
+                    <span className="align-middle ml-50">پروفایل دانشجو</span>
+                  </NavLink>
+                </NavItem>
+              </Nav>
+            </CardHeader>
+
+            <MDBContainer>
+              <MDBModal isOpen={modal} toggle={toggle} centered>
+                <MDBModalHeader toggle={toggle}>لیست دوره ها</MDBModalHeader>
+                <MDBModalBody>
+                  <CoursesTable studentID={studentId} />
+                </MDBModalBody>
+                <MDBModalFooter>
+                  <MDBBtn color="secondary" onClick={toggle}>
+                    بستن
+                  </MDBBtn>
+                </MDBModalFooter>
+              </MDBModal>
+            </MDBContainer>
+
+            <CardBody>
+              <Row className="mx-0" col="12">
+                <Col className="pl-0" sm="12">
+                  <Media className="d-sm-flex d-block">
+                    <Media className="mt-md-1 mt-0" left>
+                      <Media
+                        className="rounded mr-2"
+                        object
+                        src={userImg}
+                        alt="Generic placeholder image"
+                        height="80"
+                        width="80"
+                      />
+                    </Media>
+                    <Media body>
+                      <Row>
+                        <Col md="5" lg="5">
+                          <div className="users-page-view-table m-5">
+                            <div className="d-flex user-info">
+                              <div className="user-info-title font-weight-bold">
+                                وضعیت :
+                              </div>
+                              <div
+                                className={
+                                  isActive === true
+                                    ? "success px-3 "
+                                    : "danger px-3"
+                                }
+                              >
+                                {isActive === true ? "فعال" : "غیرفعال"}
+                              </div>
+                            </div>
+                          </div>
+                        </Col>
+                      </Row>
+                    </Media>
+                  </Media>
+                </Col>
+                <Col
+                  className="mt-1 pl-0 d-flex justify-content-lg-between"
+                  sm="12"
+                >
+                  <Button.Ripple
+                    onClick={() => toggle()}
+                    className="mr-1"
+                    color="primary"
+                    outline
+                  >
+                    <Plus size={15} />
+                    <span className="align-middle ml-50">
+                      اضافه کردن به دوره
+                    </span>
+                  </Button.Ripple>
+                  <Button.Ripple
+                    onClick={() => closeEdit()}
+                    className="mr-1"
+                    color="warning"
+                    outline
+                  >
+                    <Edit size={15} />
+                    <span className="align-middle ml-50">ویرایش پروفایل</span>
+                  </Button.Ripple>
+                  <Button.Ripple
+                    onClick={() => handledeleteStudent()}
+                    className="mr-1"
+                    color="danger"
+                    outline
+                  >
+                    <Trash2 size={15} />
+                    <span className="align-middle ml-50">حذف دانشجو</span>
+                  </Button.Ripple>
+                </Col>
+              </Row>
+            </CardBody>
+          </Card>
+        </Col>
         {edit === false ? (
           <>
-            <Col sm="12">
-              <Card>
-                <CardHeader>
-                  <CardTitle>پروفایل دانشجو</CardTitle>
-                </CardHeader>
-
-                <MDBContainer>
-                  <MDBModal isOpen={modal} toggle={toggle} centered>
-                    <MDBModalHeader toggle={toggle}>
-                      لیست دوره ها
-                    </MDBModalHeader>
-                    <MDBModalBody>
-                      {/* <MDBDataTable striped bordered small data={termdata} />{" "} */}
-                      <CoursesTable studentID={studentId} />
-                    </MDBModalBody>
-                    <MDBModalFooter>
-                      <MDBBtn color="secondary" onClick={toggle}>
-                        بستن
-                      </MDBBtn>
-                    </MDBModalFooter>
-                  </MDBModal>
-                </MDBContainer>
-
-                <CardBody>
-                  <Row className="mx-0" col="12">
-                    <Col className="pl-0" sm="12">
-                      <Media className="d-sm-flex d-block">
-                        <Media className="mt-md-1 mt-0" left>
-                          <Media
-                            className="rounded mr-2"
-                            object
-                            src={userImg}
-                            alt="Generic placeholder image"
-                            height="112"
-                            width="112"
-                          />
-                        </Media>
-                        <Media body>
-                          <Row>
-                            <Col sm="9" md="6" lg="5">
-                              <div className="users-page-view-table">
-                                {count === 3 ? (
-                                  <>
-                                    <div className="d-flex user-info">
-                                      <div className="user-info-title font-weight-bold ml-2">
-                                        نام :
-                                      </div>
-                                      <div className="px-3">
-                                        {fullName.split("+")[0]}
-                                      </div>
-                                    </div>
-                                    <div className="d-flex user-info">
-                                      <div className="user-info-title font-weight-bold">
-                                        نام خانوادگی :
-                                      </div>
-                                      <div className="px-3">
-                                        {fullName.split("+")[1]}
-                                      </div>
-                                    </div>
-                                    <div className="d-flex user-info">
-                                      <div className="user-info-title font-weight-bold">
-                                        نام کاربری :
-                                      </div>
-                                      <div className="px-3">
-                                        {fullName.split("+")[2]}
-                                      </div>
-                                    </div>
-                                  </>
-                                ) : (
-                                  <div className="d-flex user-info">
-                                    <div className="user-info-title font-weight-bold">
-                                      نام :
-                                    </div>
-                                    <div className="px-3">{fullName}</div>
-                                  </div>
-                                )}
-                              </div>
-                            </Col>
-                            <Col md="12" lg="5">
-                              <div className="users-page-view-table">
-                                <div className="d-flex user-info">
-                                  <div className="user-info-title font-weight-bold">
-                                    وضعیت :
-                                  </div>
-                                  <div className="px-3">
-                                    {isActive === true ? "فعال" : "غیرفعال"}
-                                  </div>
-                                </div>
-                              </div>
-                            </Col>
-                          </Row>
-                        </Media>
-                      </Media>
-                    </Col>
-                    <Col
-                      className="mt-1 pl-0 d-flex justify-content-lg-between"
-                      sm="12"
-                    >
-                      <Button.Ripple
-                        onClick={() => toggle()}
-                        className="mr-1"
-                        color="primary"
-                        outline
-                      >
-                        <Plus size={15} />
-                        <span className="align-middle ml-50">
-                          اضافه کردن به دوره
-                        </span>
-                      </Button.Ripple>
-                      <Button.Ripple
-                        onClick={() => closeEdit()}
-                        className="mr-1"
-                        color="danger"
-                        outline
-                      >
-                        <Edit size={15} />
-                        <span className="align-middle ml-50">
-                          ویرایش پروفایل
-                        </span>
-                      </Button.Ripple>
-                    </Col>
-                  </Row>
-                </CardBody>
-              </Card>
-            </Col>
             <Col sm="12" md="12">
               <Card>
                 <CardHeader>
-                  <CardTitle>مشخصات دانشجو</CardTitle>
+                  <Nav tabs>
+                    <NavItem>
+                      <NavLink
+                        className={classnames({
+                          active: activeTab === "1",
+                        })}
+                      >
+                        <Plus size={16} />
+                        <span className="align-middle ml-50">
+                          مشخصات دانشجو
+                        </span>
+                      </NavLink>
+                    </NavItem>
+                  </Nav>
                 </CardHeader>
                 <CardBody>
-                  <div className="users-page-view-table">
-                    <div className="d-flex user-info">
-                      <div className="user-info-title font-weight-bold">
-                        تاریخ تولد :
+                  <Row>
+                    <Col sm="9" md="6" lg="5">
+                      <div className="users-page-view-table">
+                        <div className="d-flex user-info">
+                          <div className="user-info-title font-weight-bold">
+                            نام :
+                          </div>
+                          <div className="px-3">{fullName}</div>
+                        </div>
+                        <div className="d-flex user-info">
+                          <div className="user-info-title font-weight-bold">
+                            تاریخ تولد :
+                          </div>
+                          <div className="px-3"> {birthDate}</div>
+                        </div>
+                        <div className="d-flex user-info">
+                          <div className="user-info-title font-weight-bold">
+                            شماره همراه :
+                          </div>
+                          <div className="px-3">{phoneNumber}</div>
+                        </div>
+                        <div className="d-flex user-info">
+                          <div className="user-info-title font-weight-bold">
+                            ایمیل :
+                          </div>
+                          <div className="text-truncate">
+                            <span className="px-3">
+                              {email &&
+                                email.length > 30 &&
+                                "..." + email.substr(0, 30)}
+                            </span>
+                          </div>
+                        </div>
                       </div>
-                      <div className="px-3"> {birthDate}</div>
-                    </div>
-                    <div className="d-flex user-info">
-                      <div className="user-info-title font-weight-bold">
-                        شماره همراه :
+                    </Col>
+                    <Col md="12" lg="5">
+                      <div className="users-page-view-table">
+                        <div className="d-flex user-info">
+                          <div className="user-info-title font-weight-bold">
+                            شماره ملی :
+                          </div>
+                          <div className="text-truncate">
+                            <span className="px-3">{nationalId}</span>
+                          </div>
+                        </div>
+                        <div className="d-flex user-info">
+                          <div className="user-info-title font-weight-bold">
+                            تعداد دوره های اخذ شده:
+                          </div>
+                          <div className="text-truncate">
+                            <span className="px-3">
+                              {" "}
+                              {terms && terms.length} از {AlltermLength}
+                            </span>
+                          </div>
+                        </div>
                       </div>
-                      <div className="px-3">{phoneNumber}</div>
-                    </div>
-                    <div className="d-flex user-info">
-                      <div className="user-info-title font-weight-bold">
-                        ایمیل :
-                      </div>
-                      <div className="text-truncate">
-                        <span className="px-3">{email}</span>
-                      </div>
-                    </div>
-                    <div className="d-flex user-info">
-                      <div className="user-info-title font-weight-bold">
-                        شماره ملی :
-                      </div>
-                      <div className="text-truncate">
-                        <span className="px-3">{nationalId}</span>
-                      </div>
-                    </div>
-                    <div className="d-flex user-info">
-                      <div className="user-info-title font-weight-bold">
-                        تعداد دوره های اخذ شده:
-                      </div>
-                      <div className="text-truncate">
-                        <span className="px-3">
-                          {" "}
-                          {terms && terms.length} از {AlltermLength}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
+                    </Col>
+                  </Row>
                 </CardBody>
               </Card>
             </Col>
@@ -307,19 +357,20 @@ const StudentAccountTab = (props) => {
             </CardHeader>
             <CardBody>
               {" "}
-              <Table className="permissions-table" borderless responsive>
-                <thead>
-                  <tr>
-                    <th>نام دوره </th>
-                    <th>نام استاد</th>
-                    <th>نام ترم</th>
-                    <th>حذف دوره</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {termCount === 0
-                    ? "هیچ دوره ای اخذ نشده"
-                    : terms &&
+              {termCount === 0 ? (
+                "هیچ دوره ای اخذ نشده"
+              ) : (
+                <Table className="permissions-table" borderless responsive>
+                  <thead>
+                    <tr>
+                      <th>نام دوره </th>
+                      <th>نام استاد</th>
+                      <th>نام ترم</th>
+                      <th>حذف دوره</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {terms &&
                       terms.map((term) => (
                         <tr>
                           <td>
@@ -348,12 +399,30 @@ const StudentAccountTab = (props) => {
                           </td>
                         </tr>
                       ))}
-                </tbody>
-              </Table>
+                  </tbody>
+                </Table>
+              )}
             </CardBody>
           </Card>
         </Col>
       </Row>
+
+      <Modals
+        modal={ModalDelete}
+        setmodal={setModalDelete}
+        setChange={doDelete}
+        title={"حذف دانشجو"}
+        message={"آیا مطمئنید؟"}
+        pic={"trach.png"}
+      />
+      <Modals
+        modal={ModalDeleteTerm}
+        setmodal={setModalDeleteTerm}
+        setChange={doDeleteTerm}
+        title={"حذف ترم"}
+        message={"آیا مطمئنید؟"}
+        pic={"trach.png"}
+      />
     </React.Fragment>
   );
 };

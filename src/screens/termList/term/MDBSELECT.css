@@ -1,0 +1,24 @@
+.MDBSELECT{
+    border: 1px solid red;
+    position: relative !important;
+}
+.MDBSELECT > .caret{
+    transform: translateZ(20deg) !important;
+    position: relative !important;
+    left: 95%;
+}
+.MDBSELECT > .select-dropdown{
+    caret-color: aliceblue !important;
+    width: 95% !important;
+}
+.MDBSELECT > ul{
+    background-color: #fff;
+    z-index: 100 !important;
+    position: absolute !important;
+    top:100% !important;
+    right: 5% !important;
+    width: 80% !important;
+    list-style: none !important;
+    padding: 5px !important;
+    height: 300px !important;
+}

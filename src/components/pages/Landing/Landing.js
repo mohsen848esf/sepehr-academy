@@ -30,6 +30,10 @@ import {
   MDBSelect,
 } from '../../../assets/css/mdbreact'
 import { BrowserRouter as Router } from 'react-router-dom'
+import WithUs from './withUs'
+import Assortment from './assortment'
+import OurServices from './ourServices'
+import '../../../assets/css/manual/pages/landingPage.css'
 const Landing = () => {
   const [state, setState] = useState(false)
   const [flipped1, setFlipped1] = useState(false)
@@ -42,212 +46,15 @@ const Landing = () => {
     setState(!state)
   }
   return (
-    <section>
+    <section className="landing">
+      {/* <Navar /> */}
       {/* header */}
-      <Navar />
-
 
       {/* content */}
-      <div className="container">
-        <div className="row mt-5 mb-4">
-          <div className="col-lg-6 ml-5 text-justify">
-            <h1>با ما تا اعماق دریای مهارت ها پیش بروید</h1>
-            <h3>
-              اموزشگاه سپهر یکی از بهترین اموزشگاه های استان مازندران است.این
-              اموزشگاه با جمع کردن بهترین اساتید مهارت های دانشجویان را بیشتر
-              کند
-            </h3>
-          </div>
-          <div className="col-lg-6">
-            <img className="img-fluid" />
-          </div>
-        </div>
-        <div className="row mt-5 d-flex justify-content-center">
-          <div className="col-lg-4 col-md-6" style={{ maxWidth: '25rem' }}>
-            <MDBCard>
-              <MDBCardImage
-                className="img-fluid"
-                src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
-                waves
-              />
-              <MDBCardBody>
-                <MDBCardTitle>Card title</MDBCardTitle>
-                <MDBCardText>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </MDBCardText>
-                <MDBBtn href="#">Click</MDBBtn>
-              </MDBCardBody>
-            </MDBCard>
-          </div>
-          <div className="col-lg-4 col-md-6" style={{ maxWidth: '25rem' }}>
-            <MDBCard>
-              <MDBCardImage
-                className="img-fluid"
-                src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
-                waves
-              />
-              <MDBCardBody>
-                <MDBCardTitle>Card title</MDBCardTitle>
-                <MDBCardText>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </MDBCardText>
-                <MDBBtn href="#">Click</MDBBtn>
-              </MDBCardBody>
-            </MDBCard>
-          </div>
-          <div className="col-lg-4 col-md-6" style={{ maxWidth: '25rem' }}>
-            <MDBCard>
-              <MDBCardImage
-                className="img-fluid"
-                src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
-                waves
-              />
-              <MDBCardBody>
-                <MDBCardTitle>Card title</MDBCardTitle>
-                <MDBCardText>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </MDBCardText>
-                <MDBBtn href="#">Click</MDBBtn>
-              </MDBCardBody>
-            </MDBCard>
-          </div>
-          <div className="row mt-5 d-flex justify-content-center">
-            <div
-              className="col-lg-4 col-md-6 col-sm-12"
-              style={{ maxWidth: '22rem' }}
-            >
-              <MDBCard>
-                <MDBCardImage
-                  className="img-fluid"
-                  src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
-                  waves
-                />
-                <MDBCardBody>
-                  <MDBCardTitle>Card title</MDBCardTitle>
-                  <MDBCardText>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </MDBCardText>
-                  <MDBBtn href="#">Click</MDBBtn>
-                </MDBCardBody>
-              </MDBCard>
-            </div>
-            <div
-              className="col-lg-4  col-md-6 col-sm-12"
-              style={{ maxWidth: '22rem' }}
-            >
-              <MDBCard>
-                <MDBCardImage
-                  className="img-fluid"
-                  src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
-                  waves
-                />
-                <MDBCardBody>
-                  <MDBCardTitle>Card title</MDBCardTitle>
-                  <MDBCardText>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </MDBCardText>
-                  <MDBBtn href="#">Click</MDBBtn>
-                </MDBCardBody>
-              </MDBCard>
-            </div>
-            <div
-              className="col-lg-4 col-md-6 col-sm-12"
-              style={{ maxWidth: '22rem' }}
-            >
-              <MDBCard>
-                <MDBCardImage
-                  className="img-fluid"
-                  src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
-                  waves
-                />
-                <MDBCardBody>
-                  <MDBCardTitle>Card title</MDBCardTitle>
-                  <MDBCardText>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </MDBCardText>
-                  <MDBBtn href="#">Click</MDBBtn>
-                </MDBCardBody>
-              </MDBCard>
-            </div>
-          </div>
-          <div className="row mt-2 d-flex justify-content-center">
-            <div
-              className="col-lg-4 col-md-6 col-sm-12"
-              style={{ maxWidth: '22rem' }}
-            >
-              <MDBCard>
-                <MDBCardImage
-                  className="img-fluid"
-                  src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
-                  waves
-                />
-                <MDBCardBody>
-                  <MDBCardTitle>Card title</MDBCardTitle>
-                  <MDBCardText>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </MDBCardText>
-                  <MDBBtn href="#">Click</MDBBtn>
-                </MDBCardBody>
-              </MDBCard>
-            </div>
-            <div
-              className="col-lg-4  col-md-6 col-sm-12"
-              style={{ maxWidth: '22rem' }}
-            >
-              <MDBCard>
-                <MDBCardImage
-                  className="img-fluid"
-                  src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
-                  waves
-                />
-                <MDBCardBody>
-                  <MDBCardTitle>Card title</MDBCardTitle>
-                  <MDBCardText>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </MDBCardText>
-                  <MDBBtn href="#">Click</MDBBtn>
-                </MDBCardBody>
-              </MDBCard>
-            </div>
-            <div
-              className="col-lg-4 col-md-6 col-sm-12"
-              style={{ maxWidth: '22rem' }}
-            >
-              <MDBCard>
-                <MDBCardImage
-                  className="img-fluid"
-                  src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
-                  waves
-                />
-                <MDBCardBody>
-                  <MDBCardTitle>Card title</MDBCardTitle>
-                  <MDBCardText>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </MDBCardText>
-                  <MDBBtn href="#">Click</MDBBtn>
-                </MDBCardBody>
-              </MDBCard>
-            </div>
-          </div>
 
-          <MDBBtn
-            className="mx-auto"
-            style={{ width: '10rem' }}
-            gradient="purple"
-          >
-            مشاهده همه
-          </MDBBtn>
-        </div>
-      </div>
+      <WithUs />
+      <Assortment />
+      <OurServices />
       {/* section4 */}
       <div className="row">
         <div className="col-lg-6">

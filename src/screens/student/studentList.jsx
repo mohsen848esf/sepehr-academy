@@ -4,7 +4,9 @@ import http from "../../services/http-service.api";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 import Chip from "../../components/@vuexy/chips/ChipComponent";
-import { MDBDataTable, MDBBtn } from "mdbreact";
+import { MDBDataTable, MDBBtn } from "../../assets/css/mdbreact";
+import Modals from "../../components/layout/modal";
+
 import { Card, CardHeader, CardTitle, CardBody, Button } from "reactstrap";
 import {
   Edit,
@@ -13,14 +15,18 @@ import {
   Plus,
   Delete,
   User,
+  Trash2,
   // Check,
   // ChevronLeft,
   // ChevronRight
 } from "react-feather";
+import { Fragment } from "react";
 const API_URL = process.env.REACT_APP_PUBLIC_PATH;
 
 export const StudentsList = () => {
   const [students, setStudents] = useState([]);
+  const [Modal, setModal] = useState(false);
+  const [DeleteId, setDeleteId] = useState(null);
 
   const data = {
     columns: [
@@ -57,6 +63,11 @@ export const StudentsList = () => {
       {
         label: "پروفایل ",
         field: "editStudentInfo",
+        width: 100,
+      },
+      {
+        label: "حذف ",
+        field: "deleteStudent",
         width: 100,
       },
     ],
@@ -96,6 +107,17 @@ export const StudentsList = () => {
           </Button>
         </div>
       ),
+      deleteStudent: (
+        <div className="data-list-action">
+          <Button
+            className="add-new-btn"
+            color="danger"
+            onClick={() => handledeleteStudent(student._id)}
+          >
+            <Trash2 size={15} />
+          </Button>
+        </div>
+      ),
     })),
   };
   const history = useHistory();
@@ -107,20 +129,53 @@ export const StudentsList = () => {
   const handleEditStudent = (studentId) => {
     history.push(`/admin/studentProfile/${studentId}`);
   };
+  const handledeleteStudent = (studentId) => {
+    setModal(true);
+    setDeleteId(studentId);
+  };
+  const doDelete = async () => {
+    if (!DeleteId) {
+      return;
+    }
+    try {
+      const res = await http.delete(API_URL + `student/${DeleteId}`);
+      toast.success("دانشجو با موفقیت پاک شد ");
+      const allStudents = students.filter(
+        (student) => student._id !== DeleteId
+      );
+      setStudents(allStudents);
+    } catch (ex) {
+      if (ex.response && ex.response.status >= 400) {
+        toast.error("دوباره امتحان کنید ");
+      }
+    } finally {
+      setDeleteId(null);
+    }
+  };
 
   useEffect(() => {
     StudentsItems();
   }, []);
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle> لیست دانشجو ها </CardTitle>
-      </CardHeader>
+    <Fragment>
+      <Card>
+        <CardHeader>
+          <CardTitle> لیست دانشجو ها </CardTitle>
+        </CardHeader>
 
-      <CardBody>
-        <MDBDataTable striped bordered small data={data} />
-      </CardBody>
-    </Card>
+        <CardBody>
+          <MDBDataTable striped bordered small data={data} />
+        </CardBody>
+      </Card>
+      <Modals
+        modal={Modal}
+        setmodal={setModal}
+        setChange={doDelete}
+        title={"حذف دانشجو"}
+        message={"آیا مطمئنید؟"}
+        pic={"trach.png"}
+      />
+    </Fragment>
   );
 };
 export default StudentsList;

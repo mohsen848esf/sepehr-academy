@@ -1,13 +1,12 @@
 import React, { Component, useState, useEffect, Fragment } from "react";
 import {
-  getAllCoursesFromTerms as getCourses,
+  getAllCourses,
   getCourseById,
-  getAllTerms,
-  getTermById,
-} from "../../services/student.api";
+  addCourse,
+  UpdateCourse,
+  DeleteCourseById,
+} from "../../services/courses.api";
 import http from "../../services/http-service.api";
-import TermEdit from "./term/termEdit";
-import Sidebar from "./DataListSidebar";
 import Modals from "../../components/layout/modal";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
@@ -26,81 +25,78 @@ import {
 } from "react-feather";
 const API_URL = process.env.REACT_APP_PUBLIC_PATH;
 
-export const TermList = () => {
-  const [terms, setTerms] = useState([]);
+export const CoursesList = () => {
+  const [courses, setCourses] = useState([]);
   const [Modal, setModal] = useState(false);
   const [DeleteId, setDeleteId] = useState(null);
+  const topic = "";
   const data = {
     columns: [
-      {
-        label: "نام ترم",
-        field: "termName",
-        sort: "asc",
-        width: 150,
-      },
-      {
-        label: "استاد",
-        field: "teacherName",
-        sort: "asc",
-        width: 270,
-      },
       {
         label: "نام دوره",
         field: "courseName",
         sort: "asc",
+        width: 150,
+      },
+      {
+        label: "توضیحات",
+        field: "description",
+        sort: "asc",
+        width: 270,
+      },
+      {
+        label: " سرفصل ها",
+        field: "topics",
+        sort: "asc",
         width: 200,
       },
       {
-        label: "قیمت ترم",
-        field: "price",
-        sort: "asc",
-        width: 100,
-      },
-      {
-        label: "شروع ترم",
-        field: "startDate",
+        label: "زمان ایجاد دوره",
+        field: "createDate",
         sort: "asc",
         width: 150,
       },
       {
-        label: "پایان دوره",
-        field: "endDate",
+        label: "  ترم های ارائه شده",
+        field: "terms",
         sort: "asc",
-        width: 100,
+        width: 150,
       },
+
       {
         label: "",
         field: "position",
         width: 100,
       },
     ],
-    rows: terms.map((term) => ({
-      termName:
-        term.title.length >= 8 ? term.title.substr(0, 8) + "..." : term.title,
-      teacherName:
-        term.teacher.fullName.length >= 8
-          ? term.teacher.fullName.substr(0, 8) + "..."
-          : term.teacher.fullName,
+    rows: courses.map((course) => ({
       courseName:
-        term.course.courseName.length >= 10
-          ? term.course.courseName.substr(0, 10) + "..."
-          : term.course.courseName,
-      price: `تومان ${" " + term.cost}`,
-      startDate: term.startDate.split("T")[0].replaceAll("-", "/"),
-      endDate: term.endDate.split("T")[0].replaceAll("-", "/"),
+        course.courseName.length >= 10
+          ? course.courseName.substr(0, 10) + "..."
+          : course.courseName,
+      description:
+        course.description.length >= 15
+          ? course.description.substr(0, 15) + "..."
+          : course.description,
+      topics: course.topics.map((top) => top + " , "),
+      // course.topics.map((top) => (topic += " , " + top)) && topic.length > 15
+      //   ? topic.substr(0, 15) + "..."
+      //   : topic,
+      createDate: course.createDate.split("T")[0].replaceAll("-", "/"),
+      terms: course.terms.length,
       position: (
         <div className="data-list-action">
           <Button
             className="add-new-btn mr-1"
             color="primary"
-            onClick={() => handleEditTerm(term._id)}
+            onClick={() => handleEditCourse(course._id)}
           >
             <Edit size={15} className="cursor-pointer" />
           </Button>
           <Button
             className="add-new-btn"
             color="danger"
-            onClick={() => handleDeleteTerm(term._id)}
+            onClick={() => handleDeleteCourse(course._id)}
           >
             <Trash2 size={15} className="cursor-pointer" />
           </Button>
@@ -109,30 +105,30 @@ export const TermList = () => {
     })),
   };
   const history = useHistory();
-  const termItems = async () => {
-    const allCourses = await getAllTerms();
-    setTerms(allCourses);
+  const CoursesItems = async () => {
+    const allCourses = await getAllCourses();
+    setCourses(allCourses);
   };
-  const handleCreateTerm = () => {
-    history.push(`/admin/createTerm`);
+  const handleCreateCourse = () => {
+    history.push(`/admin/CreateCourse`);
   };
-  const handleEditTerm = (termId) => {
-    history.push(`/admin/editterm/${termId}`);
-    console.log(termId);
+  const handleEditCourse = (courseId) => {
+    history.push(`/admin/EditCourse/${courseId}`);
+    // console.log(courseId);
   };
-  const handleDeleteTerm = (termId) => {
+  const handleDeleteCourse = (courseId) => {
     setModal(true);
-    setDeleteId(termId);
+    setDeleteId(courseId);
   };
   const doDelete = async () => {
     if (!DeleteId) {
       return;
     }
     try {
-      const res = await http.delete(API_URL + `term/${DeleteId}`);
-      toast.success("ترم با موفقیت پاک شد ");
-      const newTerms = terms.filter((term) => term._id !== DeleteId);
-      setTerms(newTerms);
+      const res = await DeleteCourseById(DeleteId);
+      toast.success("دوره با موفقیت پاک شد ");
+      const newCourses = courses.filter((course) => course._id !== DeleteId);
+      setCourses(newCourses);
     } catch (ex) {
       if (ex.response && ex.response.status >= 400) {
         toast.error("دوباره امتحان کنید ");
@@ -143,23 +139,23 @@ export const TermList = () => {
   };
 
   useEffect(() => {
-    termItems();
+    CoursesItems();
   }, []);
   return (
     <Fragment>
       <Card>
         <CardHeader>
-          <CardTitle> لیست ترم ها</CardTitle>
+          <CardTitle> لیست دوره ها</CardTitle>
           <div className="data-list-header d-flex justify-content-between flex-wrap">
             <div className="actions-left d-flex flex-wrap">
               <Button
                 className="add-new-btn"
                 color="primary"
-                onClick={() => handleCreateTerm()}
+                onClick={() => handleCreateCourse()}
                 outline
               >
                 <Plus size={15} />
-                <span className="align-middle">اضافه کردن ترم</span>
+                <span className="align-middle">ایجاد دوره</span>
               </Button>
             </div>
           </div>
@@ -178,11 +174,11 @@ export const TermList = () => {
         modal={Modal}
         setmodal={setModal}
         setChange={doDelete}
-        title={"حذف ترم"}
+        title={"حذف دوره"}
         message={"آیا مطمئنید؟"}
         pic={"trach.png"}
       />
     </Fragment>
   );
 };
-export default TermList;
+export default CoursesList;

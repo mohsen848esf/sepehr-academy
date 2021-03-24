@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Fragment, useState } from 'react'
 import {
   NavItem,
   NavLink,
@@ -7,57 +7,89 @@ import {
   DropdownItem,
   DropdownToggle,
   Media,
-  Badge
-} from "reactstrap"
+  Badge,
+} from 'reactstrap'
 import { Link } from 'react-router-dom'
 
-import PerfectScrollbar from "react-perfect-scrollbar"
-import axios from "axios"
-import * as Icon from "react-feather"
-import classnames from "classnames"
-import Autocomplete from "../../../components/@vuexy/autoComplete/AutoCompleteComponent"
-import { history } from "../../../history"
+import PerfectScrollbar from 'react-perfect-scrollbar'
+import axios from 'axios'
+import * as Icon from 'react-feather'
+import classnames from 'classnames'
+import Autocomplete from '../../../components/@vuexy/autoComplete/AutoCompleteComponent'
+import { history } from '../../../history'
+import { removeItem } from '../../../services/storage/storage'
+import Modals from '../../../components/layout/modal'
 
-
-const UserDropdown = props => {
+const UserDropdown = (props) => {
+  const [Modal, setModal] = useState(false)
+  const handleLogout = () => {
+    setModal(true)
+  }
+  const logOut = () => {
+    removeItem('role')
+    removeItem('user')
+    removeItem('token')
+    window.location = '/logIn'
+  }
   return (
-    <DropdownMenu right>
-      <DropdownItem tag="a" >
-        <Icon.User size={14} className="mr-50" />
-        <Link to="/admin" className="align-middle" style={{ fontWeight:"bold" , color:"#626262" , textDecoration: "none"}}>پروفایل </Link>
-      </DropdownItem>
-      {/* <DropdownItem tag="a" href="#">
+    <Fragment>
+      <Modals
+        modal={Modal}
+        setmodal={setModal}
+        setChange={logOut}
+        title={'خارج شدن از حساب کاربری'}
+        message={'آیامطئنید؟'}
+      />
+      <DropdownMenu right>
+        <DropdownItem tag="a">
+          <Icon.User size={14} className="mr-50" />
+          <Link
+            to="/admin"
+            className="align-middle"
+            style={{
+              fontWeight: 'bold',
+              color: '#626262',
+              textDecoration: 'none',
+            }}
+          >
+            پروفایل{' '}
+          </Link>
+        </DropdownItem>
+        {/* <DropdownItem tag="a" href="#">
         <Icon.Mail size={14} className="mr-50" />
         <span className="align-middle">My Inbox</span>
       </DropdownItem> */}
-      {/* <DropdownItem tag="a" href="#">
+        {/* <DropdownItem tag="a" href="#">
         <Icon.CheckSquare size={14} className="mr-50" />
         <span className="align-middle">Tasks</span>
       </DropdownItem> */}
-      {/* <DropdownItem tag="a" href="#">
+        {/* <DropdownItem tag="a" href="#">
         <Icon.MessageSquare size={14} className="mr-50" />
         <span className="align-middle">Chats</span>
       </DropdownItem> */}
-      {/* <DropdownItem tag="a" href="#">
+        {/* <DropdownItem tag="a" href="#">
         <Icon.Heart size={14} className="mr-50" />
         <span className="align-middle">WishList</span>
       </DropdownItem>
       <DropdownItem divider /> */}
-      <DropdownItem
-        tag="a"
-        onClick={e => history.push("/pages/login")}
-      >
-        <Icon.Power size={14} className="mr-50" />
-        <span className="align-middle" style={{ fontWeight:"bold" , color:"#626262"}}>خروج</span>
-      </DropdownItem>
-    </DropdownMenu>
+        <DropdownItem tag="a" onClick={() => handleLogout()}>
+          <Icon.Power size={14} className="mr-50" />
+          <span
+            className="align-middle"
+            style={{ fontWeight: 'bold', color: '#626262' }}
+          >
+            خروج
+          </span>
+        </DropdownItem>
+      </DropdownMenu>
+    </Fragment>
   )
 }
 
 class NavbarUser extends React.PureComponent {
   state = {
     navbarSearch: false,
-    suggestions: []
+    suggestions: [],
   }
 
   componentDidMount() {
@@ -68,23 +100,21 @@ class NavbarUser extends React.PureComponent {
 
   handleNavbarSearch = () => {
     this.setState({
-      navbarSearch: !this.state.navbarSearch
+      navbarSearch: !this.state.navbarSearch,
     })
   }
-
 
   render() {
     return (
       <ul className="nav navbar-nav navbar-nav-user float-right">
-
-        <NavItem  className="nav-search " onClick={this.handleNavbarSearch}>
+        <NavItem className="nav-search " onClick={this.handleNavbarSearch}>
           <NavLink className="nav-link-search">
             <Icon.Search size={21} data-tour="search" />
           </NavLink>
           <div
-            className={classnames("search-input", {
+            className={classnames('search-input', {
               open: this.state.navbarSearch,
-              "d-none": this.state.navbarSearch === false
+              'd-none': this.state.navbarSearch === false,
             })}
           >
             <div className="search-input-icon">
@@ -99,15 +129,15 @@ class NavbarUser extends React.PureComponent {
               placeholder="Explore Vuexy..."
               autoFocus={true}
               clearInput={this.state.navbarSearch}
-              externalClick={e => {
-                this.setState({ navbarSearch : false })
+              externalClick={(e) => {
+                this.setState({ navbarSearch: false })
               }}
-              onKeyDown={e => {
+              onKeyDown={(e) => {
                 if (e.keyCode === 27 || e.keyCode === 13) {
                   this.setState({
-                    navbarSearch: false
+                    navbarSearch: false,
                   })
-                  this.props.handleAppOverlay("")
+                  this.props.handleAppOverlay('')
                 }
               }}
               customRender={(
@@ -116,24 +146,24 @@ class NavbarUser extends React.PureComponent {
                 filteredData,
                 activeSuggestion,
                 onSuggestionItemClick,
-                onSuggestionItemHover
+                onSuggestionItemHover,
               ) => {
-                const IconTag = Icon[item.icon ? item.icon : "X"]
+                const IconTag = Icon[item.icon ? item.icon : 'X']
                 return (
                   <li
-                    className={classnames("suggestion-item", {
-                      active: filteredData.indexOf(item) === activeSuggestion
+                    className={classnames('suggestion-item', {
+                      active: filteredData.indexOf(item) === activeSuggestion,
                     })}
                     key={i}
-                    onClick={e => onSuggestionItemClick(item.link, e)}
+                    onClick={(e) => onSuggestionItemClick(item.link, e)}
                     onMouseEnter={() =>
                       onSuggestionItemHover(filteredData.indexOf(item))
                     }
                   >
                     <div
                       className={classnames({
-                        "d-flex justify-content-between align-items-center":
-                          item.file || item.img
+                        'd-flex justify-content-between align-items-center':
+                          item.file || item.img,
                       })}
                     >
                       <div className="item-container d-flex">
@@ -183,7 +213,7 @@ class NavbarUser extends React.PureComponent {
                   </li>
                 )
               }}
-              onSuggestionsShown={userInput => {
+              onSuggestionsShown={(userInput) => {
                 if (this.state.navbarSearch) {
                   this.props.handleAppOverlay(userInput)
                 }
@@ -195,9 +225,9 @@ class NavbarUser extends React.PureComponent {
                 onClick={(e) => {
                   e.stopPropagation()
                   this.setState({
-                    navbarSearch: false
+                    navbarSearch: false,
                   })
-                  this.props.handleAppOverlay("")
+                  this.props.handleAppOverlay('')
                 }}
               />
             </div>

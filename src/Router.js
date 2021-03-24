@@ -6,11 +6,15 @@ import { history } from './history'
 import Spinner from './components/@vuexy/spinner/Loading-spinner'
 import { ContextLayout } from './core/utils/context/Layout'
 import VerticalLayout from './layouts/VerticalLayout'
+import { Fragment } from 'react'
 
 // Route-based code splitting
+const Header = lazy(() => import('./components/layout/header'))
+const Footer = lazy(() => import('./components/layout/Footer'))
 const Home = lazy(() => import('./components/pages/Landing/Landing'))
 const loginUser = lazy(() => import('./components/Authorization/loginForm'))
 const regUser = lazy(() => import('./components/Authorization/registerForm'))
+const logOut = lazy(() => import('./components/Authorization/logout'))
 
 const courses = lazy(() =>
   import('./components/pages/courses/allCourses/courses'),
@@ -21,7 +25,6 @@ const CourseInfo = lazy(() =>
 const NotFound = lazy(() => import('./components/pages/NotFound'))
 
 const login = lazy(() => import('./screens/login/Login'))
-const logOut = lazy(() => import('./screens/LogOut/logOut'))
 const register = lazy(() =>
   import('./screens/registerEmployee/registerEmployee'),
 )
@@ -31,11 +34,14 @@ const termList = lazy(() => import('./screens/termList/termList'))
 const createTerm = lazy(() => import('./screens/termList/term/CreateNewTerm'))
 const editTerm = lazy(() => import('./screens/termList/term/termEdit'))
 
-const CreateCourse = lazy(() => import('./screens/addCourse/courseForm'))
+const CreateCourse = lazy(() => import('./screens/Courses/courseForm'))
 const students = lazy(() => import('./screens/student/studentList'))
 const studentProfile = lazy(() => import('./screens/student/studentProfile'))
 
-const courseList = lazy(() => import('./screens/student/courseList'))
+const courseList = lazy(() => import('./screens/Courses/CoursesList'))
+const EditCourse = lazy(() => import('./screens/Courses/EditCourse'))
+
+const News = lazy(() => import('./screens/news/NewsForm'))
 
 // Set Layout and Component Using App Route
 const RouteConfig = ({
@@ -71,6 +77,24 @@ const RouteConfig = ({
 // }
 
 const AppRoute = RouteConfig
+const LandRoute = ({ component, path, footer = true }) => {
+  return (
+    <>
+      {footer === true ? (
+        <Fragment>
+          <Header />
+          <Route path={path} component={component} />
+          <Footer />
+        </Fragment>
+      ) : (
+        <Fragment>
+          <Header />
+          <Route path={path} component={component} />
+        </Fragment>
+      )}
+    </>
+  )
+}
 
 class AppRouter extends React.Component {
   render() {
@@ -91,24 +115,37 @@ class AppRouter extends React.Component {
           pauseOnHover
         />
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Redirect from="/langing" to="/" />
-          <Route path="/courses" component={courses} />
-          <Route path="/course/:courseID" component={CourseInfo} />
+          <LandRoute exact path="/" component={Home} />
+          <Redirect from="/landing" to="/" />
+
+          <LandRoute path="/courses" component={courses} />
+          <LandRoute path="/course/:courseID" component={CourseInfo} />
+          {/* <LandRoute path="/logIn" component={loginUser} footer={false} />
+          <LandRoute path="/register" component={regUser} footer={false} /> */}
+          <Route path="/logout" component={logOut} />
+          <Redirect from="/logIn" to="/logout" />
+          <Redirect from="/register" to="/logout" />
+          <Redirect from="/forgetPass" to="/logout" />
+          <Redirect from="/resetPass" to="/logout" />
+          <Redirect from="/userPanel" to="/logout" />
+
           <Route path="/admin/login" component={login} fullLayout />
-          <Route path="/admin/logOut" component={login} fullLayout />
           <Route path="/admin/register" component={register} fullLayout />
 
-          <Route path="/logIn" component={loginUser} fullLayout />
-          <Route path="/register" component={regUser} fullLayout />
+          <Redirect from="/admin/login" to="/logout" />
+          <Redirect from="/admin/register" to="/logout" />
 
           <AppRoute path="/admin/dashboard" component={Dashboard} />
           <AppRoute path="/admin/termList" component={termList} />
           <AppRoute path="/admin/createTerm" component={createTerm} />
           <AppRoute path="/admin/editterm/:termId" component={editTerm} />
 
-          <AppRoute path="/admin/addCourse" component={CreateCourse} />
-          <AppRoute path="/admin/courses/:studentId?" component={courseList} />
+          <AppRoute path="/admin/CreateCourse" component={CreateCourse} />
+          <AppRoute path="/admin/coursesList" component={courseList} />
+          <AppRoute path="/admin/EditCourse/:courseId" component={EditCourse} />
+
+          <AppRoute path="/admin/News/:pageName" component={News} />
+
           <AppRoute path="/admin/students" component={students} />
           <AppRoute
             path="/admin/studentProfile/:studentId"

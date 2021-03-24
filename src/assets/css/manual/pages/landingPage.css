@@ -10,7 +10,9 @@ html *{
 body{
     margin:0;
     padding:0;
-    
+        background: url('../../../images//pages//landingPage/back-landing.png') no-repeat ;
+    background-position: center;
+    background-size: auto;
     }
     
     
@@ -18,7 +20,11 @@ body{
 /* ************************************************** */
 /* ************************************************** */
 /* ************************************************** */
-
+/* .landing{
+    background: url('../../../images//pages//landingPage/back-landing.png') no-repeat ;
+    background-position: center;
+    background-size:100% 100%;
+} */
 
 
  .section1 > .container-fluid.bg{
