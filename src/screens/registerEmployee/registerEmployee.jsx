@@ -1,5 +1,4 @@
 import React from "react";
-import Joi from "joi-browser";
 import { toast } from "react-toastify";
 import {
   Button,
@@ -7,7 +6,6 @@ import {
   CardBody,
   Row,
   Col,
-  Form,
   FormGroup,
   Input,
   Label,
@@ -16,7 +14,7 @@ import { Mail, Lock, Check, Facebook, Twitter, GitHub } from "react-feather";
 import { history } from "../../history";
 import Checkbox from "../../components/@vuexy/checkbox/CheckboxesVuexy";
 
-import Forms from "../../components/layout/form";
+import { Form, Formik } from "formik";
 import { Link } from "react-router-dom";
 import { RegisterEmployee } from "../../core/api/admin.api";
 import { setItem, getItem } from "../../services/storage/storage";
@@ -26,47 +24,49 @@ import googleSvg from "../../assets/img/svg/google.svg";
 import loginImg from "../../assets/img/pages/login.png";
 import "../../assets/scss/pages/authentication.scss";
 
-class Login extends Forms {
-  state = {
-    activeTab: "1",
-    data: {
-      firstName: "",
-      lastName: "",
-      userName: "",
-      phoneNumber: "",
-      birthDate: "",
-      email: "",
-      nationalId: "",
-      password: "",
-      address: "",
-      role: "",
-    },
-    errors: {},
-  };
-  schema = {
-    firstName: Joi.string().required().label("نام "),
-    lastName: Joi.string().required().label("نام خانوادگی"),
-    userName: Joi.string().required().label("نام کاربری"),
-    phoneNumber: Joi.string().required().label("شماره همراه"),
-    birthDate: Joi.string().required().label("تاریخ تولد"),
-    email: Joi.string().required().label("ایمیل"),
-    nationalId: Joi.string().required().label("شماره ملی"),
-    password: Joi.string().required().label("رمز عبور"),
-    address: Joi.string().required().label("آدرس"),
-    role: Joi.string().required().label("نوع کاربر"),
-  };
-  toggle = (tab) => {
-    if (this.state.activeTab !== tab) {
-      this.setState({
-        activeTab: tab,
-      });
-    }
-  };
-  doSubmit = async () => {
+const Register = () => {
+  const yup = require("yup");
+  require("yup-password")(yup);
+
+  const Validate = yup.object().shape({
+    fullName: yup
+      .string()
+      .min(3, "نام کاربری حداقل باید 3 حرف باشد")
+      .required("فیلد را پر کنید"),
+    phoneNumber: yup
+      .string(" ورودی این فیلد باید عدد باشد")
+      .required(" فیلد را پر کنید")
+      .min(11, "شماره باید 11 رقم باشد"),
+    birthDate: yup
+      .string()
+      .required(" فیلد را پر کنید")
+      .min(10, "تاریخ وارد شده شما اشتباه است")
+      .max(10, "بیشتر از این نمیتوانید تاریخ راوارد کنید"),
+    email: yup
+      .string()
+      .min(13)
+      .email(" ایمیلی که وارد کرده اید اشتباه است")
+      .required(" فیلد را پر کنید"),
+    nationalId: yup
+      .string(" ورودی باید عدد باشد")
+      .required(" فیلد را پر کنید")
+      .min(10, "کد ملی که وارد کردید اشتباه است")
+      .max(10, "کد ملی که وارد کردید اشتباه است"),
+    password: yup
+      .string()
+      .password()
+      .min(8, "رمز عبور باید حدقال 8 کارکتر داشته باشد")
+      .required(" فیلد را پر کنید"),
+    address: yup
+      .string()
+      .required(" فیلدرا پرکنید ")
+      .max(50, "بیشتر از این نمیتوانید وارد کنید"),
+    role: yup.string().required("نقش خود را انتخاب کنید"),
+  });
+
+  const doSubmit = async (data) => {
     const {
-      firstName,
-      lastName,
-      userName,
+      fullName,
       phoneNumber,
       birthDate,
       email,
@@ -74,9 +74,9 @@ class Login extends Forms {
       password,
       address,
       role,
-    } = this.state.data;
+    } = data;
     const userData = {
-      fullName: firstName + "+" + lastName + "+" + userName,
+      fullName: fullName,
       phoneNumber: phoneNumber,
       birthDate: birthDate,
       email: email,
@@ -88,7 +88,7 @@ class Login extends Forms {
     try {
       const response = await RegisterEmployee(userData);
       toast.success(response.data.message[0].message);
-      this.props.history.replace("/admin/login");
+      // this.props.history.replace("/admin/login");
       //   setTimeout(() => {
       //     window.location.reload();
 
@@ -99,78 +99,284 @@ class Login extends Forms {
       }
     }
   };
-  render() {
-    return (
-      <Row className="m-0 justify-content-center">
-        <Col
-          sm="8"
-          xl="7"
-          lg="10"
-          md="8"
-          className="d-flex justify-content-center"
-        >
-          <Card className="bg-authentication login-card rounded-0 mb-0 w-100">
-            <Row className="m-0">
-              <Col lg="6" md="12" className="p-0">
-                <Card className="rounded-0 mb-0 px-2">
-                  <CardBody>
-                    <h4>قبت نام </h4>
-                    <p style={{ margin: "20px 0" }}>
-                      خوش امدید لطفا حساب کاربری بسازید
-                    </p>
-                    <Form onSubmit={this.handleSubmit}>
-                      {this.renderInput("firstName", "نام ")}
-                      {this.renderInput("lastName", "نام خانوادگی ")}
-                      {this.renderInput("userName", "نام کاربری ")}
-                      {this.renderInput(
-                        "phoneNumber",
-                        "شماره همراه",
-                        "tel",
-                        "09110001122"
-                      )}
-                      {this.renderInput(
-                        "birthDate",
-                        "تاریخ تولد",
-                        "text",
-                        "0000/00/00",
-                        "Mail"
-                      )}
-                      {this.renderInput(
-                        "email",
-                        "ایمیل",
-                        "email",
-                        "example@gmail.com"
-                      )}
-                      {this.renderInput("nationalId", "شماره ملی", "text")}
-                      {this.renderInput(
-                        "password",
-                        "رمز عبور",
-                        "password",
-                        "Lock"
-                      )}
-                      {this.renderInput("address", "آدرس ")}
-                      {this.renderInput("role", "نوع کاربر ")}
-                      {this.renderButton("ثبت نام")}
-                      <div className="d-flex justify-content-between">
-                        <Button.Ripple color="primary" outline>
-                          <Link to="/admin/login"> وارد شوید </Link>
-                        </Button.Ripple>
-                      </div>
+  return (
+    <Formik
+      initialValues={{
+        fullName: "",
+        phoneNumber: "",
+        birthDate: "",
+        email: "",
+        nationalId: "",
+        password: "",
+        address: "",
+        role: "",
+      }}
+      validationSchema={Validate}
+      enableReinitialize={true}
+      onSubmit={(value) => doSubmit(value)}
+    >
+      {({ values, errors, handleChange, touched, setFieldValue }) => (
+        <>
+          <Row className="m-0 justify-content-center my-lg-4">
+            <Col
+              sm="8"
+              xl="7"
+              lg="10"
+              md="8"
+              className="d-flex justify-content-center"
+            >
+              <Card className="  rounded-0 mb-0 w-100">
+                <Row className="m-0">
+                  <Col lg="12" md="12" className="p-0">
+                    <Form>
+                      <Card className="rounded-0 mb-0 px-2">
+                        <CardBody>
+                          <h4>ثبت نام </h4>
+                          <p style={{ margin: "20px 0" }}>
+                            خوش امدید لطفا حساب کاربری بسازید
+                          </p>
+                          <Row>
+                            <Col md="6" sm="12">
+                              <FormGroup>
+                                <Label for="fullName">نام کاربری </Label>
+                                <Input
+                                  type="text"
+                                  defaultValue=""
+                                  id="fullName"
+                                  name="fullName"
+                                  onChange={handleChange}
+                                  placeholder="نام کاربری ..."
+                                  className={`form-control ${
+                                    errors.fullName &&
+                                    touched.fullName &&
+                                    "is-invalid"
+                                  }`}
+                                />
+                                {errors.fullName && touched.fullName && (
+                                  <span
+                                    style={{ direction: "rtl" }}
+                                    className="redError mb-2 danger"
+                                  >
+                                    {errors.fullName}!
+                                  </span>
+                                )}
+                              </FormGroup>
+                            </Col>
+                            <Col md="6" sm="12">
+                              <FormGroup>
+                                <Label for="phoneNumber"> شماره همراه </Label>
+                                <Input
+                                  type="text"
+                                  defaultValue=""
+                                  id="phoneNumber"
+                                  name="phoneNumber"
+                                  onChange={handleChange}
+                                  placeholder="--------"
+                                  className={`form-control ${
+                                    errors.phoneNumber &&
+                                    touched.phoneNumber &&
+                                    "is-invalid"
+                                  }`}
+                                />
+                                {errors.phoneNumber && touched.phoneNumber && (
+                                  <span
+                                    style={{ direction: "rtl" }}
+                                    className="redError mb-2 danger"
+                                  >
+                                    {errors.phoneNumber}!
+                                  </span>
+                                )}
+                              </FormGroup>
+                            </Col>
+
+                            <Col md="6" sm="12">
+                              <FormGroup>
+                                <Label for="birthDate">تاریخ تولد </Label>
+                                <Input
+                                  type="text"
+                                  defaultValue=""
+                                  id="birthDate"
+                                  name="birthDate"
+                                  onChange={handleChange}
+                                  placeholder=" 1399/12/23"
+                                  className={`form-control ${
+                                    errors.birthDate &&
+                                    touched.birthDate &&
+                                    "is-invalid"
+                                  }`}
+                                />
+                                {errors.birthDate && touched.birthDate && (
+                                  <span
+                                    style={{ direction: "rtl" }}
+                                    className="redError mb-2 danger"
+                                  >
+                                    {errors.birthDate}!
+                                  </span>
+                                )}
+                              </FormGroup>
+                            </Col>
+                            <Col md="6" sm="12">
+                              <FormGroup>
+                                <Label for="email"> ایمیل </Label>
+                                <Input
+                                  type="email"
+                                  defaultValue=""
+                                  id="email"
+                                  name="email"
+                                  onChange={handleChange}
+                                  placeholder="email@email.com"
+                                  className={`form-control ${
+                                    errors.email &&
+                                    touched.email &&
+                                    "is-invalid"
+                                  }`}
+                                />
+                                {errors.email && touched.email && (
+                                  <span
+                                    style={{ direction: "rtl" }}
+                                    className="redError mb-2 danger danger"
+                                  >
+                                    {errors.email}!
+                                  </span>
+                                )}
+                              </FormGroup>
+                            </Col>
+                            <Col md="6" sm="12">
+                              <FormGroup>
+                                <Label for="password"> رمز عبور </Label>
+                                <Input
+                                  type="password"
+                                  defaultValue=""
+                                  id="password"
+                                  name="password"
+                                  onChange={handleChange}
+                                  placeholder="رمز عبور را وارد کنید ..."
+                                  className={`form-control ${
+                                    errors.password &&
+                                    touched.password &&
+                                    "is-invalid"
+                                  }`}
+                                />
+                                {errors.password && touched.password && (
+                                  <span
+                                    style={{ direction: "rtl" }}
+                                    className="redError mb-2 danger danger"
+                                  >
+                                    {errors.password}!
+                                  </span>
+                                )}
+                              </FormGroup>
+                            </Col>
+
+                            <Col md="6" sm="12">
+                              <FormGroup>
+                                <Label for="nationalId"> شماره ملی </Label>
+                                <Input
+                                  type="text"
+                                  defaultValue=""
+                                  id="nationalId"
+                                  name="nationalId"
+                                  onChange={handleChange}
+                                  placeholder="--------"
+                                  className={`form-control ${
+                                    errors.nationalId &&
+                                    touched.nationalId &&
+                                    "is-invalid"
+                                  }`}
+                                />
+                                {errors.nationalId && touched.nationalId && (
+                                  <span
+                                    style={{ direction: "rtl" }}
+                                    className="redError mb-2 danger danger"
+                                  >
+                                    {errors.nationalId}!
+                                  </span>
+                                )}
+                              </FormGroup>
+                            </Col>
+                            <Col md="6" sm="12">
+                              <FormGroup>
+                                <Label for="role">انتخاب نقش </Label>
+                                <Input
+                                  type="select"
+                                  search
+                                  selected=" استاد را انتخاب کنید "
+                                  name="role"
+                                  id="role"
+                                  onChange={(event) =>
+                                    setFieldValue("role", event.target.value)
+                                  }
+                                  className={`form-control ${
+                                    errors.role && touched.role && "is-invalid"
+                                  }`}
+                                >
+                                  <option>نقش را انتخاب کنید</option>
+                                  <option value="admin"> ادمین </option>
+                                  <option value="teacher"> استاد</option>
+                                  <option value="employee"> کارمند</option>
+                                </Input>
+                                {errors.role && touched.role && (
+                                  <span
+                                    style={{ direction: "rtl" }}
+                                    className="redError mb-2 danger"
+                                  >
+                                    {errors.role}!
+                                  </span>
+                                )}
+                              </FormGroup>
+                            </Col>
+                            <Col md="12" sm="12">
+                              <FormGroup>
+                                <Label for="address"> آدرس </Label>
+                                <Input
+                                  type="textarea"
+                                  defaultValue=""
+                                  id="address"
+                                  name="address"
+                                  onChange={handleChange}
+                                  placeholder="--------"
+                                  className={`form-control ${
+                                    errors.address &&
+                                    touched.address &&
+                                    "is-invalid"
+                                  }`}
+                                />
+                                {errors.address && touched.address && (
+                                  <span
+                                    style={{ direction: "rtl" }}
+                                    className="redError mb-2 danger danger"
+                                  >
+                                    {errors.address}!
+                                  </span>
+                                )}
+                              </FormGroup>
+                            </Col>
+                          </Row>
+                          <div className="d-flex justify-content-between">
+                            <Button.Ripple type="submit" color="success">
+                              ثبت نام
+                            </Button.Ripple>
+                            <Button.Ripple color="primary" outline>
+                              <Link to="/admin/login"> وارد شوید </Link>
+                            </Button.Ripple>
+                          </div>
+                        </CardBody>
+                      </Card>
                     </Form>
-                  </CardBody>
-                </Card>
-              </Col>
-              <Col
-                lg="6"
-                className="d-lg-block d-none text-center align-self-center px-1 py-0"
-              >
-                <img src={loginImg} alt="loginImg" />
-              </Col>
-            </Row>
-          </Card>
-        </Col>
-      </Row>
-    );
-  }
-}
-export default Login;
+                  </Col>
+                  {/* <Col
+                    lg="6"
+                    className="d-lg-block d-none text-center align-self-center px-1 py-0"
+                  >
+                    <img src={loginImg} alt="loginImg" />
+                  </Col> */}
+                </Row>
+              </Card>
+            </Col>
+          </Row>
+        </>
+      )}
+    </Formik>
+  );
+};
+export default Register;

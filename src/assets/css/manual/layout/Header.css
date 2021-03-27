@@ -1,12 +1,25 @@
 .header > .indigo > .header-navbar > .navbar-brand{
     cursor: pointer;
 }
-.navItem:hover{
+/* .navItem:hover{
     transition: 0.2s 0.2s ;
     border-bottom: 2px solid rgb(117, 66, 130);
 }
 .navItem.active{
     border-bottom: 2px solid rgb(117, 66, 130);
+} */
+.navItem > span{
+    display: block;
+    border-bottom:3px solid rgb(117, 93, 172) ;
+    width: 0;
+}
+.navItem:hover > span , .navItem.active > span{
+    transition: 0.3s;
+    width: 100%;
+}
+.navItem > a {
+    padding: 0 !important;
+
 }
 .navItem-img{
     padding: 0 !important;
@@ -25,9 +38,29 @@
 .navDropMenu.show{
     transition: 0.2s 0.2s;
 
-    transform: translate3d(-40px, 54px, 0px) !important;
+    transform: translate3d(60px, 60px, 0px) !important;
+}
+html[dir="rtl"] .header-navbar .dropdown.dropdown-user .dropdown-menu{
+        transition: 0.5s 0.2s;
+
+    transform: translate3d(-60px, 60px, 0px) !important;
 }
 .navDropMenu{
 
-    transform: translate3d(31px, 54px, 0px) !important;
+    transform: translate3d(87px, -60px, 0px) !important;
+}
+[dir] .navbar{
+    box-shadow: none !important;
+}
+.avatarStatus-online{
+    display: block;
+    background-color:#28c76f ;
+    width: 11px !important;
+    height: 11px;
+    border: 1px solid white;
+    border-radius: 100%;
+    position: absolute;
+    bottom: 22%;
+    right: 19%;
+
 }

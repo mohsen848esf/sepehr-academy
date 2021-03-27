@@ -73,12 +73,77 @@ text-align: center;
 }
 
 
-.itemCard-title{
+.Assortment-itemCard-title{
     text-align: center;
     font-weight: bolder !important;
     color: rgb(233, 124, 21) !important;
     
 }
+
+
+@media screen and (max-width: 990px){
+
+.Assortment-container > .Assortment-title > h2{
+    width: 30%;
+}
+.Assortment-container >.Assortment-title > span{
+    width: 30%;
+}
+
+}
+
+@media screen and (max-width: 768px){
+.Assortment-container > .Assortment-title > h2{
+    width: 35%;
+}
+.Assortment-container >.Assortment-title > span{
+    width: 35%;
+}
+
+}
+@media screen and (max-width: 450px){
+.Assortment-container > .Assortment-title > h2{
+    width: 80%;
+}
+.Assortment-container >.Assortment-title > span{
+    width: 80%;
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

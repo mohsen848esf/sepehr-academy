@@ -37,88 +37,86 @@ const OurServices = () => {
         <span> تمام آنچه شما نیاز دارید </span>
       </div>
       <hr />
-      <div className="container row mt-5 d-flex justify-content-center OurServices-row">
-        <div className="col-lg-6 ml-5 text-justify">
-          <div className="row mt-5 mb-4">
-            <div className="col-lg-6 col-md-6 col-sm-12">
-              <div className="col-lg-12 col-md-12 OurServices-item ">
-                <MDBCard className="OurServices-itemCard">
-                  <MDBCardImage
-                    className="OurServices-img img-fluid"
-                    src={
-                      require("../../../assets/images/pages/landingPage/Assortment/laptop.png")
-                        .default
-                    }
-                    waves
-                  />
-                  <MDBCardBody>
-                    <MDBCardTitle className="itemCard-title">
-                      امتحان
-                    </MDBCardTitle>
-                  </MDBCardBody>
-                </MDBCard>
-              </div>
-
-              <div className="col-lg-12 col-md-12 OurServices-item ">
-                <MDBCard className="OurServices-itemCard">
-                  <MDBCardImage
-                    className="OurServices-img img-fluid"
-                    src={
-                      require("../../../assets/images/pages/landingPage/Assortment/laptop.png")
-                        .default
-                    }
-                    waves
-                  />
-                  <MDBCardBody>
-                    <MDBCardTitle className="itemCard-title">
-                      مشاوره
-                    </MDBCardTitle>
-                  </MDBCardBody>
-                </MDBCard>
-              </div>
+      <div className="container row mt-5  OurServices-row">
+        <div className="col-lg-6 col-md-6 col-sm-10 col-xs-10 text-justify OurServices-rowCol">
+          <div className="row OurServices-itemsRow">
+            <div className="col-lg-6 col-md-6 col-sm-6 OurServices-item ">
+              <MDBCard className="OurServices-itemCard">
+                <MDBCardImage
+                  className="OurServices-itemCard-img  img-fluid"
+                  src={
+                    require("../../../assets/images/pages/landingPage/Assortment/laptop.png")
+                      .default
+                  }
+                  waves
+                />
+                <MDBCardBody>
+                  <MDBCardTitle className="OurServices-itemCard-title">
+                    امتحان
+                  </MDBCardTitle>
+                </MDBCardBody>
+              </MDBCard>
             </div>
 
-            <div className="col-lg-6 col-md-6 col-sm-12">
-              <div className="col-lg-12 col-md-12 OurServices-item ">
-                <MDBCard className="OurServices-itemCard">
-                  <MDBCardImage
-                    className="OurServices-img img-fluid"
-                    src={
-                      require("../../../assets/images/pages/landingPage/Assortment/laptop.png")
-                        .default
-                    }
-                    waves
-                  />
-                  <MDBCardBody>
-                    <MDBCardTitle className="itemCard-title">
-                      مدرک معتر
-                    </MDBCardTitle>
-                  </MDBCardBody>
-                </MDBCard>
-              </div>
+            <div className="col-lg-6 col-md-6 col-sm-6 OurServices-item ">
+              <MDBCard className="OurServices-itemCard">
+                <MDBCardImage
+                  className="OurServices-itemCard-img  img-fluid"
+                  src={
+                    require("../../../assets/images/pages/landingPage/Assortment/laptop.png")
+                      .default
+                  }
+                  waves
+                />
+                <MDBCardBody>
+                  <MDBCardTitle className="OurServices-itemCard-title">
+                    مشاوره
+                  </MDBCardTitle>
+                </MDBCardBody>
+              </MDBCard>
+            </div>
+          </div>
 
-              <div className="col-lg-12 col-md-12 OurServices-item ">
-                <MDBCard className="OurServices-itemCard">
-                  <MDBCardImage
-                    className="OurServices-img img-fluid"
-                    src={
-                      require("../../../assets/images/pages/landingPage/Assortment/laptop.png")
-                        .default
-                    }
-                    waves
-                  />
-                  <MDBCardBody>
-                    <MDBCardTitle className="itemCard-title">
-                      فرصت های شغلی
-                    </MDBCardTitle>
-                  </MDBCardBody>
-                </MDBCard>
-              </div>
+          <div className="row OurServices-itemsRow">
+            <div className="col-lg-6 col-md-6 OurServices-item ">
+              <MDBCard className="OurServices-itemCard">
+                <MDBCardImage
+                  className="OurServices-itemCard-img  img-fluid"
+                  src={
+                    require("../../../assets/images/pages/landingPage/Assortment/laptop.png")
+                      .default
+                  }
+                  waves
+                />
+                <MDBCardBody>
+                  <MDBCardTitle className="OurServices-itemCard-title">
+                    مدرک معتر
+                  </MDBCardTitle>
+                </MDBCardBody>
+              </MDBCard>
+            </div>
+
+            <div className="col-lg-6 col-md-6 OurServices-item ">
+              <MDBCard className="OurServices-itemCard">
+                <MDBCardImage
+                  className="OurServices-itemCard-img img-fluid"
+                  src={
+                    require("../../../assets/images/pages/landingPage/Assortment/laptop.png")
+                      .default
+                  }
+                  waves
+                />
+                <MDBCardBody>
+                  <MDBCardTitle className="OurServices-itemCard-title">
+                    فرصت های شغلی
+                  </MDBCardTitle>
+                </MDBCardBody>
+              </MDBCard>
             </div>
           </div>
         </div>
 
-        <div className="col-lg-5 ml-5 text-justify">
+        <div className="col-lg-5 col-md-6  text-justify OurServices-img">
           <img
             className=" img-fluid"
             src={

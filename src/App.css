@@ -22,8 +22,8 @@
   src: url("./assets/fonts/feather.woff");
 }
 * {
-  font-family: "yek", "Montserrat", Helvetica, Arial, serif !important;
+  font-family: "featherwoff", "Montserrat", Helvetica, Arial, serif !important;
 }
-a {
+/* a {
   color: #777777 !important;
-}
+} */

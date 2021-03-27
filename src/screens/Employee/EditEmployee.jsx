@@ -22,24 +22,24 @@ import {
 } from "reactstrap";
 import classnames from "classnames";
 
-import userImg from "../../../assets/images/pages/landingPage/62.jpg";
+import userImg from "../../assets/images/pages/landingPage/62.jpg";
 
 import { toast } from "react-toastify";
-import { UpdateStudent } from "../../../services/AuthService";
-import Checkbox from "../../../components/@vuexy/checkbox/CheckboxesVuexy";
+import { UpdateEmployeeInformation } from "../../services/Employee.api";
+import Checkbox from "../../components/@vuexy/checkbox/CheckboxesVuexy";
 import { Check, Lock, Mail, Facebook, Plus, Edit3 } from "react-feather";
 import { set } from "lodash";
 
 const ProfileForm = ({
-  studentInfo,
-  setStudentIfo,
+  employeeInfo,
+  setEmployeeInfo,
   openComponent,
   setOpenComponent,
 }) => {
   const [activeTab, setActiveTab] = useState("1");
 
   const [Data, setData] = useState({});
-  console.log(studentInfo);
+  //   console.log(employeeInfo);
 
   const yup = require("yup");
   require("yup-password")(yup);
@@ -48,6 +48,10 @@ const ProfileForm = ({
       .string()
       .required(" فیلدرا پرکنید ")
       .min(3, " نام کاربری باید بیشتر از ۳ حرف باشد"),
+    address: yup
+      .string()
+      .required(" فیلدرا پرکنید ")
+      .max(50, "بیشتر از این نمیتوانید وارد کنید"),
     phoneNumber: yup
       .string("فرمت ورودی این فیلد باید عدد باشد")
       .min(11)
@@ -64,32 +68,34 @@ const ProfileForm = ({
       .max(10)
       .required(" فیلدرا پرکنید "),
   });
-  const userData = {
-    fullName: studentInfo && studentInfo.fullName,
-    phoneNumber: studentInfo && studentInfo.phoneNumber,
-    birthDate: studentInfo && studentInfo.birthDate,
-    email: studentInfo && studentInfo.email,
-    nationalId: studentInfo && studentInfo.nationalId,
+  const employeeData = {
+    fullName: employeeInfo && employeeInfo.fullName,
+    phoneNumber: employeeInfo && employeeInfo.phoneNumber,
+    birthDate: employeeInfo && employeeInfo.birthDate,
+    email: employeeInfo && employeeInfo.email,
+    nationalId: employeeInfo && employeeInfo.nationalId,
+    address: employeeInfo && employeeInfo.address,
   };
   useEffect(() => {
-    setData(userData);
+    setData(employeeData);
   }, []);
   const doSubmit = async (data) => {
-    const studentData = {
+    const employeeData = {
       fullName: data.fullName,
       phoneNumber: data.phoneNumber,
       birthDate: data.birthDate,
       email: data.email,
       nationalId: data.nationalId,
+      address: data.address,
     };
     try {
-      const response = await UpdateStudent(studentInfo._id, studentData);
-      toast.success(response.data.message[0].message);
-      setStudentIfo(studentData);
+      const response = await UpdateEmployeeInformation(
+        employeeInfo._id,
+        employeeData
+      );
+      toast.success("اطلاعات کارمند با موفقیت ویرایش شد");
+      setEmployeeInfo(employeeData);
       setOpenComponent(!openComponent);
-      //   {
-      //     <Redirect to="/admin" />;
-      //   }
     } catch (ex) {
       if (ex.response && ex.response.status >= 400) {
         toast.error(ex.response.data.message["message"][0].message);
@@ -135,7 +141,7 @@ const ProfileForm = ({
                           <Label for="fullName">نام کاربری </Label>
                           <Input
                             type="text"
-                            defaultValue={userData.fullName}
+                            defaultValue={employeeData.fullName}
                             id="fullName"
                             name="fullName"
                             onChange={handleChange}
@@ -161,7 +167,7 @@ const ProfileForm = ({
                           <Label for="phoneNumber"> شماره همراه </Label>
                           <Input
                             type="text"
-                            defaultValue={userData.phoneNumber}
+                            defaultValue={employeeData.phoneNumber}
                             id="phoneNumber"
                             name="phoneNumber"
                             onChange={handleChange}
@@ -188,7 +194,7 @@ const ProfileForm = ({
                           <Label for="birthDate">تاریخ تولد </Label>
                           <Input
                             type="text"
-                            defaultValue={userData.birthDate}
+                            defaultValue={employeeData.birthDate}
                             id="birthDate"
                             name="birthDate"
                             onChange={handleChange}
@@ -214,7 +220,7 @@ const ProfileForm = ({
                           <Label for="email"> ایمیل </Label>
                           <Input
                             type="text"
-                            defaultValue={userData.email}
+                            defaultValue={employeeData.email}
                             id="email"
                             name="email"
                             onChange={handleChange}
@@ -239,7 +245,7 @@ const ProfileForm = ({
                           <Label for="nationalId"> شماره ملی </Label>
                           <Input
                             type="text"
-                            defaultValue={userData.nationalId}
+                            defaultValue={employeeData.nationalId}
                             id="nationalId"
                             name="nationalId"
                             onChange={handleChange}
@@ -260,30 +266,31 @@ const ProfileForm = ({
                           )}
                         </FormGroup>
                       </Col>
-
-                      {/* <Col
-                        className="d-flex justify-content-end flex-wrap mt-2"
-                        sm="12"
-                      >
-                        <Button.Ripple
-                          rounded
-                          type="submit"
-                          className="mr-1"
-                          color="primary"
-                        >
-                          ثبت دوره
-                        </Button.Ripple>
-                        <Button.Ripple color="flat-warning">
-                          {" "}
-                          <Link
-                            style={{ textDecoration: "none" }}
-                            to="/admin/termList"
-                          >
-                            لغو
-                          </Link>
-                        </Button.Ripple>
+                      <Col md="6" sm="12">
+                        <FormGroup>
+                          <Label for="address"> آدرس </Label>
+                          <Input
+                            type="textarea"
+                            defaultValue={employeeData.address}
+                            id="address"
+                            name="address"
+                            onChange={handleChange}
+                            placeholder="--------"
+                            className={`form-control ${
+                              errors.address && touched.address && "is-invalid"
+                            }`}
+                          />
+                          {errors.address && touched.address && (
+                            <span
+                              style={{ direction: "rtl" }}
+                              className="redError mb-2 danger danger"
+                            >
+                              {errors.address}!
+                            </span>
+                          )}
+                        </FormGroup>
                       </Col>
-                      */}
+
                       <Col
                         className="mt-1 pl-0 d-flex justify-content-lg-end"
                         sm="12"
@@ -323,7 +330,7 @@ const ProfileForm = ({
                                 type="text"
                                 id="fullName"
                                 name="fullName"
-                                defaultValue={userData.fullName}
+                                defaultValue={employeeData.fullName}
                                 onChange={handleChange}
                                 placeholder="نام کاربری  ..."
                               />
@@ -344,7 +351,7 @@ const ProfileForm = ({
                               <Label for="birthDate"> تاریخ تولد </Label>
                               <Input
                                 type="text"
-                                defaultValue={userData.birthDate}
+                                defaultValue={employeeData.birthDate}
                                 id="birthDate"
                                 name="birthDate"
                                 onChange={handleChange}

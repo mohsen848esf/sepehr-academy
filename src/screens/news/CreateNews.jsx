@@ -20,25 +20,25 @@ import { toast } from "react-toastify";
 import userImg from "../../assets/img/portrait/small/avatar-s-18.jpg";
 import Checkbox from "../../components/@vuexy/checkbox/CheckboxesVuexy";
 import { Check, Lock, Mail, Facebook } from "react-feather";
-import { addCourse } from "../../services/courses.api";
+import { addNews } from "../../services/News.api";
 
-export const AddCourse = () => {
+export const AddNews = () => {
   // const [data, setData] = useState({})
   // const [errors, setErrors] = useState({})
-  const [activeTab, setActiveTab] = useState("");
+  //   const [activeTab, setActiveTab] = useState("");
 
   const yup = require("yup");
   require("yup-password")(yup);
   const Validate = yup.object().shape({
-    courseName: yup
+    title: yup
       .string()
-      .min(3, "نام دوره باید بیشتر از ۳حرف باشد   ")
+      .min(3, "تیتر خبر باید بیشتر از ۳حرف باشد   ")
       .required(" فیلدرا پرکنید "),
-    topics: yup
+    category: yup
       .string()
       .required(" فیلدرا پرکنید ")
       .min(3, " دسته بندی باید بیشتر از ۳حرف باشد   "),
-    description: yup
+    text: yup
       .string()
       .required(" فیلدرا پرکنید ")
       .max(50, "بیشتر از این نمیتوانید وارد کنید"),
@@ -55,25 +55,24 @@ export const AddCourse = () => {
 
   // }, [])
 
-  const toggle = (tab) => {
-    if (activeTab !== tab) {
-      setActiveTab(tab);
-    }
-  };
+  //   const toggle = (tab) => {
+  //     if (activeTab !== tab) {
+  //       setActiveTab(tab);
+  //     }
+  //   };
   const doSubmit = async (data) => {
-    const courseData = {
-      courseName: data.courseName,
-      topics: data.topics,
-      // topics: data.topics.split("/"),
-      description: data.description,
+    const newsData = {
+      title: data.title,
+      category: data.category,
       image: data.image,
+      text: data.text,
     };
     try {
-      const response = await addCourse(courseData);
-      toast.success(response.data.message[0].message);
-      {
-        <Redirect to="/admin/coursesList" />;
-      }
+      const response = await addNews(newsData);
+      toast.success("خبر با موفقیت اضافه شد ");
+      //   {
+      //     <Redirect to="/admin/News/List" />;
+      //   }
     } catch (ex) {
       if (ex.response && ex.response.status >= 400) {
         toast.error(ex.response.data.message["message"][0].message);
@@ -83,10 +82,10 @@ export const AddCourse = () => {
   return (
     <Formik
       initialValues={{
-        courseName: "",
-        topics: "",
-        description: "",
+        title: "",
+        category: "",
         image: "",
+        text: "",
       }}
       validationSchema={Validate}
       enableReinitialize={true}
@@ -103,50 +102,48 @@ export const AddCourse = () => {
                 <Row>
                   <Col md="6" sm="12">
                     <FormGroup>
-                      <Label for="courseName">نام ترم </Label>
+                      <Label for="courseName"> تیتر خبر </Label>
                       <Input
                         type="text"
                         defaultValue=""
-                        id="courseName"
-                        name="courseName"
+                        id="title"
+                        name="title"
                         onChange={handleChange}
-                        placeholder="نام دوره ..."
+                        placeholder=" تیتر خبر ..."
                         className={`form-control ${
-                          errors.courseName &&
-                          touched.courseName &&
-                          "is-invalid"
+                          errors.title && touched.title && "is-invalid"
                         }`}
                       />
-                      {errors.courseName && touched.courseName && (
+                      {errors.title && touched.title && (
                         <span
                           style={{ direction: "rtl" }}
                           className="redError mb-2 danger"
                         >
-                          {errors.courseName}!
+                          {errors.title}!
                         </span>
                       )}
                     </FormGroup>
                   </Col>
                   <Col md="6" sm="12">
                     <FormGroup>
-                      <Label for="topics"> دسته بندی </Label>
+                      <Label for="category"> دسته بندی </Label>
                       <Input
                         type="text"
                         defaultValue=""
-                        id="topics"
-                        name="topics"
+                        id="category"
+                        name="category"
                         onChange={handleChange}
                         placeholder="--------"
                         className={`form-control ${
-                          errors.topics && touched.topics && "is-invalid"
+                          errors.category && touched.category && "is-invalid"
                         }`}
                       />
-                      {errors.topics && touched.topics && (
+                      {errors.category && touched.category && (
                         <span
                           style={{ direction: "rtl" }}
                           className="redError mb-2 danger"
                         >
-                          {errors.topics}!
+                          {errors.category}!
                         </span>
                       )}
                     </FormGroup>
@@ -154,33 +151,31 @@ export const AddCourse = () => {
 
                   <Col md="6" sm="12">
                     <FormGroup>
-                      <Label for="description">توضیحات </Label>
+                      <Label for="text">متن خبر </Label>
                       <Input
                         type="text"
                         defaultValue=""
-                        id="description"
-                        name="description"
+                        id="text"
+                        name="text"
                         onChange={handleChange}
-                        placeholder="توضیحات دوره..."
+                        placeholder=" متن خبر ..."
                         className={`form-control ${
-                          errors.description &&
-                          touched.description &&
-                          "is-invalid"
+                          errors.text && touched.text && "is-invalid"
                         }`}
                       />
-                      {errors.description && touched.description && (
+                      {errors.text && touched.text && (
                         <span
                           style={{ direction: "rtl" }}
                           className="redError mb-2 danger"
                         >
-                          {errors.description}!
+                          {errors.text}!
                         </span>
                       )}
                     </FormGroup>
                   </Col>
                   <Col md="6" sm="12">
                     <FormGroup>
-                      <Label for="image"> عکس دوره </Label>
+                      <Label for="image"> عکس خبر </Label>
                       <Input
                         type="text"
                         defaultValue=""
@@ -212,13 +207,13 @@ export const AddCourse = () => {
                       className="mr-1"
                       color="primary"
                     >
-                      ثبت دوره
+                      ثبت خبر
                     </Button.Ripple>
                     <Button.Ripple color="flat-warning">
                       {" "}
                       <Link
                         style={{ textDecoration: "none" }}
-                        to="/admin/CoursesList"
+                        to="/admin/News/List"
                       >
                         لغو
                       </Link>
@@ -234,4 +229,4 @@ export const AddCourse = () => {
   );
 };
 
-export default AddCourse;
+export default AddNews;

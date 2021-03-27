@@ -44,7 +44,7 @@ const UserDropdown = (props) => {
         <DropdownItem tag="a">
           <Icon.User size={14} className="mr-50" />
           <Link
-            to="/admin"
+            to="/admin/dashboard"
             className="align-middle"
             style={{
               fontWeight: 'bold',

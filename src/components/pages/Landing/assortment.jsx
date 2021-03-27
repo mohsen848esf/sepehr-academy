@@ -38,7 +38,7 @@ const Assortment = () => {
       </div>
       <hr />
       <div className="container row mt-5 d-flex justify-content-center Assortment-row">
-        <div className="col-lg-3 col-md-6 Assortment-item ">
+        <div className="col-lg-3 col-md-6  Assortment-item ">
           <MDBCard className="Assortment-itemCard">
             <MDBCardImage
               className="Assortment-img img-fluid"
@@ -49,7 +49,9 @@ const Assortment = () => {
               waves
             />
             <MDBCardBody>
-              <MDBCardTitle className="itemCard-title">کامپیوتر</MDBCardTitle>
+              <MDBCardTitle className="Assortment-itemCard-title">
+                کامپیوتر
+              </MDBCardTitle>
             </MDBCardBody>
           </MDBCard>
         </div>
@@ -65,7 +67,9 @@ const Assortment = () => {
               waves
             />
             <MDBCardBody>
-              <MDBCardTitle className="itemCard-title">حسابداری</MDBCardTitle>
+              <MDBCardTitle className="Assortment-itemCard-title">
+                حسابداری
+              </MDBCardTitle>
             </MDBCardBody>
           </MDBCard>
         </div>
@@ -81,7 +85,9 @@ const Assortment = () => {
               waves
             />
             <MDBCardBody>
-              <MDBCardTitle className="itemCard-title">طراحی</MDBCardTitle>
+              <MDBCardTitle className="Assortment-itemCard-title">
+                طراحی
+              </MDBCardTitle>
             </MDBCardBody>
           </MDBCard>
         </div>
@@ -97,7 +103,9 @@ const Assortment = () => {
               waves
             />
             <MDBCardBody>
-              <MDBCardTitle className="itemCard-title">برق</MDBCardTitle>
+              <MDBCardTitle className="Assortment-itemCard-title">
+                برق
+              </MDBCardTitle>
             </MDBCardBody>
           </MDBCard>
         </div>

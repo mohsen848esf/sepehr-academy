@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react'
+import React, { Suspense, lazy, useEffect, useState } from 'react'
 import { Router, Switch, Route, Redirect } from 'react-router-dom'
 import { ToastContainer, Zoom } from 'react-toastify'
 
@@ -10,6 +10,7 @@ import { Fragment } from 'react'
 
 // Route-based code splitting
 const Header = lazy(() => import('./components/layout/header'))
+// const Footer = lazy(() => import('./components/layout/Footer'))
 const Footer = lazy(() => import('./components/layout/Footer'))
 const Home = lazy(() => import('./components/pages/Landing/Landing'))
 const loginUser = lazy(() => import('./components/Authorization/loginForm'))
@@ -24,7 +25,7 @@ const CourseInfo = lazy(() =>
 )
 const NotFound = lazy(() => import('./components/pages/NotFound'))
 
-const login = lazy(() => import('./screens/login/Login'))
+const LodinEmployee = lazy(() => import('./screens/login/login'))
 const register = lazy(() =>
   import('./screens/registerEmployee/registerEmployee'),
 )
@@ -41,7 +42,12 @@ const studentProfile = lazy(() => import('./screens/student/studentProfile'))
 const courseList = lazy(() => import('./screens/Courses/CoursesList'))
 const EditCourse = lazy(() => import('./screens/Courses/EditCourse'))
 
-const News = lazy(() => import('./screens/news/NewsForm'))
+const NewsList = lazy(() => import('./screens/news/newsList'))
+const AddNews = lazy(() => import('./screens/news/NewsForm'))
+const EditNews = lazy(() => import('./screens/news/EditNews'))
+
+const EmployeeList = lazy(() => import('./screens/Employee/EmployeeList'))
+const EmployeeProfile = lazy(() => import('./screens/Employee/EmployeeProfile'))
 
 // Set Layout and Component Using App Route
 const RouteConfig = ({
@@ -78,6 +84,7 @@ const RouteConfig = ({
 
 const AppRoute = RouteConfig
 const LandRoute = ({ component, path, footer = true }) => {
+  const [navActive, setnavActive] = useState(false)
   return (
     <>
       {footer === true ? (
@@ -129,11 +136,21 @@ class AppRouter extends React.Component {
           <Redirect from="/resetPass" to="/logout" />
           <Redirect from="/userPanel" to="/logout" />
 
-          <Route path="/admin/login" component={login} fullLayout />
-          <Route path="/admin/register" component={register} fullLayout />
+          <LandRoute
+            path="/admin/login"
+            component={LodinEmployee}
+            fullLayout
+            footer={false}
+          />
+          <LandRoute
+            path="/admin/register"
+            component={register}
+            fullLayout
+            footer={false}
+          />
 
-          <Redirect from="/admin/login" to="/logout" />
-          <Redirect from="/admin/register" to="/logout" />
+          {/* <Redirect from="/admin/login" to="/logout" />
+          <Redirect from="/admin/register" to="/logout" /> */}
 
           <AppRoute path="/admin/dashboard" component={Dashboard} />
           <AppRoute path="/admin/termList" component={termList} />
@@ -144,13 +161,22 @@ class AppRouter extends React.Component {
           <AppRoute path="/admin/coursesList" component={courseList} />
           <AppRoute path="/admin/EditCourse/:courseId" component={EditCourse} />
 
-          <AppRoute path="/admin/News/:pageName" component={News} />
+          <AppRoute path="/admin/News/List" component={NewsList} />
+          <AppRoute path="/admin/News/createNews" component={AddNews} />
+          <AppRoute path="/admin/News/editNews/:newsId" component={EditNews} />
 
           <AppRoute path="/admin/students" component={students} />
           <AppRoute
             path="/admin/studentProfile/:studentId"
             component={studentProfile}
           />
+
+          <AppRoute path="/admin/Employee/List" component={EmployeeList} />
+          <AppRoute
+            path="/admin/Employee/EmployeeProfile/:employeetId"
+            component={EmployeeProfile}
+          />
+
           <AppRoute path="/not-found" component={NotFound} />
         </Switch>
       </Router>

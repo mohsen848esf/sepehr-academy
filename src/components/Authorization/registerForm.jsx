@@ -22,15 +22,7 @@ const RegisterForm = () => {
   require("yup-password")(yup);
 
   const Validate = yup.object().shape({
-    firstName: yup
-      .string()
-      .min(3, "نام حداقل باید 3 حرف باشد")
-      .required("فیلد را پر کنید"),
-    lastName: yup
-      .string()
-      .min(3, "نام خانوادگی حداقل باید 3 حرف باشد   ")
-      .required("فیلد را پر کنید"),
-    userName: yup
+    fullName: yup
       .string()
       .min(3, "نام کاربری حداقل باید 3 حرف باشد")
       .required("فیلد را پر کنید"),
@@ -66,9 +58,7 @@ const RegisterForm = () => {
     // const resp = await register(this.state.data);
     // console.log("success" , resp.data.success)
     const {
-      firstName,
-      lastName,
-      userName,
+      fullName,
       email,
       password,
       phoneNumber,
@@ -76,7 +66,7 @@ const RegisterForm = () => {
       nationalId,
     } = data;
     const userData = {
-      fullName: firstName + "+" + lastName + "+" + userName,
+      fullName: fullName,
       email: email,
       password: password,
       phoneNumber: phoneNumber,
@@ -87,8 +77,8 @@ const RegisterForm = () => {
       const response = await register(userData);
       toast.success(response.data.message[0].message);
       setTimeout(() => {
-        this.props.history.replace("/logIn");
-        window.location.reload();
+        // this.props.history.replace("/logIn");
+        // window.location.reload();
       }, 7000);
     } catch (ex) {
       if (ex.response && ex.response.status >= 400) {
@@ -104,9 +94,7 @@ const RegisterForm = () => {
   return (
     <Formik
       initialValues={{
-        firstName: "",
-        lastName: "",
-        userName: "",
+        fullName: "",
         PhoneNumber: "",
         birthday: "",
         email: "",
@@ -138,64 +126,23 @@ const RegisterForm = () => {
                     </div>
                     <Form>
                       <MDBInput
-                        label="نام"
-                        name="firstName"
-                        // placeholder=""
-                        onChange={handleChange}
-                        group
-                        type="text"
-                        validate
-                        labelClass="white-text"
-                        className={`form-control ${
-                          errors.firstName && touched.firstName && "is-invalid"
-                        }`}
-                      />{" "}
-                      {errors.firstName && touched.firstName && (
-                        <span
-                          style={{ direction: "rtl" }}
-                          className="redError mb-2 danger"
-                        >
-                          {errors.firstName}!
-                        </span>
-                      )}
-                      <MDBInput
-                        label="نام خانوادگی"
-                        name="lastName"
-                        onChange={handleChange}
-                        group
-                        type="text"
-                        validate
-                        labelClass="white-text"
-                        className={`form-control ${
-                          errors.lastName && touched.lastName && "is-invalid"
-                        }`}
-                      />{" "}
-                      {errors.lastName && touched.lastName && (
-                        <span
-                          style={{ direction: "rtl" }}
-                          className="redError mb-2 danger"
-                        >
-                          {errors.lastName}!
-                        </span>
-                      )}
-                      <MDBInput
                         label="نام کاربری "
-                        name="userName"
+                        name="fullName"
                         onChange={handleChange}
                         group
                         type="text"
                         validate
                         labelClass="white-text"
                         className={`form-control ${
-                          errors.userName && touched.userName && "is-invalid"
+                          errors.fullName && touched.fullName && "is-invalid"
                         }`}
                       />{" "}
-                      {errors.userName && touched.userName && (
+                      {errors.fullName && touched.fullName && (
                         <span
                           style={{ direction: "rtl" }}
                           className="redError mb-2 danger"
                         >
-                          {errors.userName}!
+                          {errors.fullName}!
                         </span>
                       )}
                       <MDBInput

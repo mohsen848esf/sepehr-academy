@@ -1,5 +1,8 @@
 import React, { Component, useState, useEffect, Fragment } from "react";
-import { getAllNews, DeleteNewsById } from "../../services/News.api";
+import {
+  getAllEmployees,
+  DeleteEmployeeById,
+} from "../../services/Employee.api";
 import Modals from "../../components/layout/modal";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
@@ -17,29 +20,39 @@ import {
   // ChevronLeft,
   // ChevronRight
 } from "react-feather";
-const API_URL = process.env.REACT_APP_PUBLIC_PATH;
-
-export const NewsList = () => {
-  const [newsData, setNewsData] = useState([]);
+export const EmployeeList = () => {
+  const [employeeData, setEmployeeData] = useState([]);
   const [Modal, setModal] = useState(false);
   const [DeleteId, setDeleteId] = useState(null);
   const data = {
     columns: [
       {
-        label: "تیتر خبر",
-        field: "title",
+        label: "نام کارمند",
+        field: "fullName",
         sort: "asc",
         width: 150,
       },
       {
-        label: "متن خبر",
-        field: "text",
+        label: "ایمیل کارمند",
+        field: "email",
         sort: "asc",
         width: 270,
       },
       {
-        label: " دسته بندی ",
-        field: "category",
+        label: " شماره همراه  ",
+        field: "phoneNumber",
+        sort: "asc",
+        width: 200,
+      },
+      {
+        label: " شماره ملی  ",
+        field: "nationalId",
+        sort: "asc",
+        width: 200,
+      },
+      {
+        label: " نقش کارمند  ",
+        field: "role",
         sort: "asc",
         width: 200,
       },
@@ -49,28 +62,31 @@ export const NewsList = () => {
         width: 100,
       },
     ],
-    rows: newsData.map((news) => ({
-      title:
-        news.title.length >= 15 ? news.title.substr(0, 15) + "..." : news.title,
-      text:
-        news.text.length >= 25 ? news.text.substr(0, 25) + "..." : news.text,
-      category:
-        news.category.length > 15
-          ? news.category.substr(0, 15) + "..."
-          : news.category,
+    rows: employeeData.map((employee) => ({
+      fullName:
+        employee.fullName.length >= 12
+          ? employee.fullName.substr(0, 12) + "..."
+          : employee.fullName,
+      email:
+        employee.email.length >= 15
+          ? "..." + employee.email.substr(0, 15)
+          : employee.email,
+      phoneNumber: employee.phoneNumber,
+      nationalId: employee.nationalId,
+      role: employee.role,
       position: (
         <div className="data-list-action">
           <Button
             className="add-new-btn mr-1"
             color="primary"
-            onClick={() => handleEditNews(news._id)}
+            onClick={() => handleEditEmployee(employee._id)}
           >
             <Edit2 size={15} className="cursor-pointer" />
           </Button>
           <Button
             className="add-new-btn"
             color="danger"
-            onClick={() => handleDeleteNews(news._id)}
+            onClick={() => handleDeleteEmployee(employee._id)}
           >
             <Trash2 size={15} className="cursor-pointer" />
           </Button>
@@ -79,29 +95,28 @@ export const NewsList = () => {
     })),
   };
   const history = useHistory();
-  const NewsItems = async () => {
-    const allNews = await getAllNews();
-    setNewsData(allNews);
+  const employeeItems = async () => {
+    const allEmployee = await getAllEmployees();
+    setEmployeeData(allEmployee);
   };
-  const handleCreateNews = () => {
-    history.push(`/admin/News/createNews`);
+  const handleEditEmployee = (employeeId) => {
+    history.push(`/admin/Employee/EmployeeProfile/${employeeId}`);
   };
-  const handleEditNews = (NewsId) => {
-    history.push(`/admin/News/editNews/${NewsId}`);
-  };
-  const handleDeleteNews = (NewsId) => {
+  const handleDeleteEmployee = (employeeId) => {
     setModal(true);
-    setDeleteId(NewsId);
+    setDeleteId(employeeId);
   };
   const doDelete = async () => {
     if (!DeleteId) {
       return;
     }
     try {
-      const res = await DeleteNewsById(DeleteId);
-      toast.success("خبر با موفقیت پاک شد ");
-      const newNews = newsData.filter((news) => news._id !== DeleteId);
-      setNewsData(newNews);
+      const res = await DeleteEmployeeById(DeleteId);
+      toast.success("کارمند با موفقیت پاک شد ");
+      const newemployee = employeeData.filter(
+        (employee) => employee._id !== DeleteId
+      );
+      setEmployeeData(newemployee);
     } catch (ex) {
       if (ex.response && ex.response.status >= 400) {
         toast.error("دوباره امتحان کنید ");
@@ -112,26 +127,13 @@ export const NewsList = () => {
   };
 
   useEffect(() => {
-    NewsItems();
+    employeeItems();
   }, []);
   return (
     <Fragment>
       <Card>
         <CardHeader>
-          <CardTitle> لیست اخبار و مقالات </CardTitle>
-          <div className="data-list-header d-flex justify-content-between flex-wrap">
-            <div className="actions-left d-flex flex-wrap">
-              <Button
-                className="add-new-btn"
-                color="primary"
-                onClick={() => handleCreateNews()}
-                outline
-              >
-                <Plus size={15} />
-                <span className="align-middle">ایجاد خبر</span>
-              </Button>
-            </div>
-          </div>
+          <CardTitle> لیست کارمندان </CardTitle>
         </CardHeader>
         <CardBody>
           <MDBDataTable
@@ -147,11 +149,11 @@ export const NewsList = () => {
         modal={Modal}
         setmodal={setModal}
         setChange={doDelete}
-        title={"حذف خبر"}
+        fullName={"حذف کارمند"}
         message={"آیا مطمئنید؟"}
         pic={"trach.png"}
       />
     </Fragment>
   );
 };
-export default NewsList;
+export default EmployeeList;

@@ -5,7 +5,6 @@ import jwtDecode from "jwt-decode";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getItem } from "../../services/storage/storage";
 // component layout
-import Footer from "../layout/Footer";
 // component authorization
 // import ForgetPass from '../Authorization/ForgetPass';
 import ForgetPassword from "../Authorization/forgetPaasword";
@@ -28,7 +27,7 @@ import SinglePost from "../pages/posts/singlePost/SinglePost";
 // component userPanle
 import Panel from "../user/panel/Panle";
 import IsLogged from "../../services/islogged";
-import adminLogIn from "../../screens/login/Login";
+import adminLogIn from "../../screens/login/login";
 
 import {
   BrowserRouter as Router,

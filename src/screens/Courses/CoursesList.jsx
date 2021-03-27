@@ -23,7 +23,7 @@ import {
   // ChevronLeft,
   // ChevronRight
 } from "react-feather";
-const API_URL = process.env.REACT_APP_PUBLIC_PATH;
+// const API_URL = process.env.REACT_APP_PUBLIC_PATH;
 
 export const CoursesList = () => {
   const [courses, setCourses] = useState([]);

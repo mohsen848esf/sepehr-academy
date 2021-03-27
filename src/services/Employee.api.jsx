@@ -4,40 +4,30 @@ import { toast } from "react-toastify";
 
 const API_URL = process.env.REACT_APP_PUBLIC_PATH;
 
-export const getAllNews = async () => {
+export const getAllEmployees = async () => {
   try {
-    const res = await http.get(API_URL + "news");
+    const res = await http.get(API_URL + "employee/getall");
     return res.data.result;
   } catch (error) {
     return [];
   }
 };
 
-export const getNewsById = async (newsId) => {
+export const getEmployeeById = async (employeeId) => {
   try {
-    const res = await http.get(API_URL + `news/${newsId}`);
+    const res = await http.get(API_URL + `employee/${employeeId}`);
     return res.data.result;
   } catch (error) {
     return [];
   }
 };
 
-export const addNews = async (newsData) => {
+export const UpdateEmployeeInformation = async (employeeId, employeeData) => {
   try {
-    const res = await http.post(API_URL + "news/", newsData);
-    // window.location("/admin/News/List");
-    return res.data.result;
-  } catch (error) {
-    if (error.response && error.response.status === 400) {
-      toast.error(error.data.message[0].message);
-    }
-    return [];
-  }
-};
-
-export const UpdateNews = async (newsId, newsData) => {
-  try {
-    const res = await http.put(API_URL + `news/${newsId}`, newsData);
+    const res = await http.put(
+      API_URL + `employee/${employeeId}`,
+      employeeData
+    );
     // window.location = "/admin//News/List";
     return res.data.result;
   } catch (error) {
@@ -48,9 +38,9 @@ export const UpdateNews = async (newsId, newsData) => {
   }
 };
 
-export const DeleteNewsById = async (NewsId) => {
+export const DeleteEmployeeById = async (employeeId) => {
   try {
-    const res = await http.delete(API_URL + `news/${NewsId}`);
+    const res = await http.delete(API_URL + `employee/${employeeId}`);
     return res.data.result;
   } catch (error) {
     if (error.response && error.response.status === 404) {

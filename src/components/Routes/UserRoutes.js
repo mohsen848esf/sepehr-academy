@@ -5,7 +5,6 @@ import jwtDecode from 'jwt-decode'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { getItem } from '../../services/storage/storage'
 // component layout
-import Footer from '../layout/Footer'
 // component authorization
 // import ForgetPass from '../Authorization/ForgetPass';
 import ForgetPassword from '../Authorization/forgetPaasword'
