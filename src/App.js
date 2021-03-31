@@ -7,6 +7,7 @@ import UserRoutes from './components/Routes/UserRoutes'
 import Routes from './components/Routes/Routes'
 import { ToastContainer, cssTransition, Zoom } from 'react-toastify'
 // import AdminRoute from './admin/Router'
+import './assets/css/manual/layout/Footer.css'
 import './App.css'
 import 'react-toastify/dist/ReactToastify.css'
 

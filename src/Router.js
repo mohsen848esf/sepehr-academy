@@ -49,6 +49,7 @@ const EditNews = lazy(() => import('./screens/news/EditNews'))
 const EmployeeList = lazy(() => import('./screens/Employee/EmployeeList'))
 const EmployeeProfile = lazy(() => import('./screens/Employee/EmployeeProfile'))
 
+const studentPanel = lazy(() => import('./components/user/userPanel/Panel'))
 // Set Layout and Component Using App Route
 const RouteConfig = ({
   component: Component,
@@ -125,16 +126,21 @@ class AppRouter extends React.Component {
           <LandRoute exact path="/" component={Home} />
           <Redirect from="/landing" to="/" />
 
+          <LandRoute
+            path="/student/dashboard"
+            component={studentPanel}
+            footer={false}
+          />
           <LandRoute path="/courses" component={courses} />
           <LandRoute path="/course/:courseID" component={CourseInfo} />
           {/* <LandRoute path="/logIn" component={loginUser} footer={false} />
           <LandRoute path="/register" component={regUser} footer={false} /> */}
           <Route path="/logout" component={logOut} />
-          <Redirect from="/logIn" to="/logout" />
+          {/* <Redirect from="/logIn" to="/logout" />
           <Redirect from="/register" to="/logout" />
           <Redirect from="/forgetPass" to="/logout" />
           <Redirect from="/resetPass" to="/logout" />
-          <Redirect from="/userPanel" to="/logout" />
+          <Redirect from="/userPanel" to="/logout" /> */}
 
           <LandRoute
             path="/admin/login"

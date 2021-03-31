@@ -3,6 +3,17 @@ import http from "./http-service.api";
 import { toast } from "react-toastify";
 
 const API_URL = process.env.REACT_APP_PUBLIC_PATH;
+export const getStudentById = async (studentId) => {
+  try {
+    const res = await http.get(API_URL + `student/${studentId}`);
+    return res.data.result;
+  } catch (error) {
+    return [];
+  }
+};
+export function UpdateStudent(userId, userdata) {
+  return http.put(API_URL + `student/${userId}`, userdata);
+}
 
 // export const getAllTerms =  () => {
 //     const res =  http.get(API_URL + "term/getall")
@@ -169,3 +180,32 @@ export const addCourse = async (props) => {
 // export const updateStudentInfo = ()=> {
 
 // }
+
+export const addStudentToTerm = async (studentId, termId) => {
+  try {
+    const res = await http.post(
+      API_URL + `term/addStudentToTerm/${studentId}`,
+      { termId: termId }
+    );
+    toast.success(res.data.message[0].message);
+
+    return res;
+  } catch (error) {
+    toast.warning(error.response.data.message[0].message);
+    return [];
+  }
+};
+export const removeStudentFromTerm = async (studentId, termId) => {
+  try {
+    const res = await http.post(
+      API_URL + `term/removeStudentFromTerm/${studentId}`,
+      { termId: termId }
+    );
+    toast.success("کاربر با موفقیت حذف شد");
+    return res;
+  } catch (error) {
+    toast.error(error.response.data.message[0].message);
+
+    return [];
+  }
+};

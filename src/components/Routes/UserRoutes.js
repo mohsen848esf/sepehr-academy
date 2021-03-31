@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component, Fragment, lazy } from 'react'
 import { ToastContainer, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import jwtDecode from 'jwt-decode'
@@ -7,6 +7,8 @@ import { getItem } from '../../services/storage/storage'
 // component layout
 // component authorization
 // import ForgetPass from '../Authorization/ForgetPass';
+// import Header from '../../components/layout/header'
+import Footer from '../../components/layout/Footer'
 import ForgetPassword from '../Authorization/forgetPaasword'
 import LogInForm from '../Authorization/loginForm'
 import LogOut from '../Authorization/logout'
@@ -26,6 +28,8 @@ import Arshive from '../pages/posts/arshive/Arshive'
 import SinglePost from '../pages/posts/singlePost/SinglePost'
 // component userPanle
 import Panel from '../user/panel/Panle'
+import StudentDashboard from '../user/userPanel/Panel'
+
 import IsLogged from '../../services/islogged'
 
 import {
@@ -34,7 +38,32 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom'
+const Header = lazy(() => import('../../components/layout/header'))
+const MinFooter = lazy(() => import('../../components/layout/minFooter'))
 
+const LandRoute = ({ component, path, footer = true }) => {
+  // const [navActive, setnavActive] = useState(false)
+  return (
+    <>
+      {footer === true ? (
+        <Fragment>
+          <Header />
+          <Route path={path} component={component} />
+          <footer className="page-footer font-small academy-footer pt-4">
+            <Footer />
+            <MinFooter />
+          </footer>
+        </Fragment>
+      ) : (
+        <Fragment>
+          <Header />
+          <Route path={path} component={component} />
+          <MinFooter />
+        </Fragment>
+      )}
+    </>
+  )
+}
 export class Routes extends Component {
   state = {}
   componentDidMount() {
@@ -63,26 +92,50 @@ export class Routes extends Component {
           />
           <Switch>
             {/* pages */}
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/aboutUs" component={AboutUs} />
-            <Route exact path="/contactUs" component={ContactUs} />
-            <Route exact path="/education" component={Education} />
-            <Route exact path="/courses" component={Courses} />
-            <Route exact path="/course/:courseID" component={CourseInfo} />
+            <LandRoute exact path="/" component={Landing} />
+            <LandRoute exact path="/aboutUs" component={AboutUs} />
+            <LandRoute exact path="/contactUs" component={ContactUs} />
+            <LandRoute exact path="/education" component={Education} />
+            <LandRoute exact path="/courses" component={Courses} />
+            <LandRoute exact path="/course/:courseID" component={CourseInfo} />
 
             {/* authorization */}
             {/* <Route exact path='/logIn' component={LogIn}/> */}
-            <Route exact path="/logIn" component={LogInForm} />
-            <Route exact path="/register" component={RegisterForm} />
+            <LandRoute
+              exact
+              path="/logIn"
+              component={LogInForm}
+              footer={false}
+            />
+            <LandRoute
+              exact
+              path="/register"
+              component={RegisterForm}
+              footer={false}
+            />
             {/* <Route exact path='/register' component={Register}/> */}
-            <Route exact path="/forgetPassword" component={ForgetPassword} />
-            <Route exact path="/resetpassword" component={ResetPass} />
+            <LandRoute
+              exact
+              path="/forgetPassword"
+              component={ForgetPassword}
+              footer={false}
+            />
+            <LandRoute
+              exact
+              path="/resetpassword"
+              component={ResetPass}
+              footer={false}
+            />
             {/* <Route exact path='/forgetPassword' component={ForgetPass}/> */}
-
+            <LandRoute
+              path="/student/dashboard"
+              component={StudentDashboard}
+              footer={false}
+            />
             {/* userPanle */}
             {IsLogged('/userPanel', Panel)}
             {/* {getItem("token") && <Route exact path='/userPanel' component={Panel}/>} */}
-            <Route path="/not-found" component={NotFound} />
+            <LandRoute path="/not-found" component={NotFound} footer={false} />
             <Redirect to="/not-found" />
           </Switch>
         </Router>

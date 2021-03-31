@@ -1,3 +1,4 @@
+import jwt_decode from 'jwt-decode'
 const setItem = (key, value) => {
   localStorage.setItem(key, JSON.stringify(value))
 }
@@ -22,8 +23,10 @@ const getCurrentUser = () => {
 }
 
 const getUserID = () => {
-  const user = getItem('user')
-  const userId = user._id
+  const jwtToken = getItem('token')
+  const decode = jwt_decode(jwtToken)
+
+  const userId = decode._id
   return userId
 }
 

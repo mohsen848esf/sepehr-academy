@@ -1,0 +1,71 @@
+.profile-header{
+    /* border: 1px solid red !important; */
+    
+}
+.studentProfile-images-box{
+    /* border: 1px solid red !important; */
+    z-index: 10;
+}
+.studentProfile-BigImg-box{
+
+    height: 220px !important;
+}
+.studentProfile-BigImg-box > img{
+    /* border: 1px solid red !important; */
+    height: 220px !important;
+}
+.studentProfile-SmallImg-box{
+    /* border: 1px solid red !important; */
+    width: 80%;
+    position: absolute;
+    top:75% !important;
+    left: 10% !important;
+}
+.studentProfile-SmallImg-box > img{
+    width: 100px !important;
+}
+.profile-header-nav{
+    /* border: 1px solid red ; */
+}
+.studentProfile-content{
+    height: 300px;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.studentProfile-contentCol{
+        padding: 0 !important;
+        height: 100% !important;
+}
+.studentProfile-contentCol-Card{
+    border: 1px solid transparent !important;
+                border-radius: 1px;
+
+        padding: 0 !important;
+        /* margin-top: 20px !important; */
+        height: 84% !important;
+        position: relative;
+        top:14%;
+}
+.studentProfile-BtnCol{
+}
+.studentProfile-Btn{
+    margin: auto;
+    height: 50% !important;
+    /* padding: 0 !important; */
+}
+.studentProfile-Btn > span{
+    margin: 0 !important;
+    font-size: 12px !important;
+}
+@media screen and (max-width: 576px){
+.studentProfile-content{
+    height: 500px;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.studentProfile-Btn{
+    margin: auto;
+    height: 100% !important;
+    /* padding: 0 !important; */
+}
+}

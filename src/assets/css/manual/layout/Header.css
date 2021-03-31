@@ -1,3 +1,6 @@
+/* .header{
+    z-index: 15;
+} */
 .header > .indigo > .header-navbar > .navbar-brand{
     cursor: pointer;
 }
@@ -13,9 +16,12 @@
     border-bottom:3px solid rgb(117, 93, 172) ;
     width: 0;
 }
-.navItem:hover > span , .navItem.active > span{
+.navItem:hover > span {
     transition: 0.3s;
     width: 100%;
+}
+.navItem >.Active{
+    border-bottom:2px solid red !important ;
 }
 .navItem > a {
     padding: 0 !important;

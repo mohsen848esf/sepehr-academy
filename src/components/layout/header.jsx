@@ -1,5 +1,5 @@
 import React, { Component, Fragment, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import {
   getItem,
   removeItem,
@@ -37,7 +37,6 @@ import {
 import {
   Nav,
   NavItem,
-  NavLink,
   Navbar,
   UncontrolledDropdown,
   Badge,
@@ -154,18 +153,6 @@ const Header = () => {
                   <MDBNavItem className=" mx-1 ">
                     <MDBNavLink to="/register">ثبت نام</MDBNavLink>
                   </MDBNavItem>
-                  {/* {Location !== "/admin/login" ||
-                    (Location !== "/logIn" && (
-                      <MDBNavItem className=" mx-1 ">
-                        <MDBNavLink to="/logIn">ورود</MDBNavLink>
-                      </MDBNavItem>
-                    ))}
-                  {Location !== "/admin/register" ||
-                    (Location !== "/register" && (
-                      <MDBNavItem className=" mx-1 ">
-                        <MDBNavLink to="/register">ثبت نام</MDBNavLink>
-                      </MDBNavItem>
-                    ))} */}
                 </>
               )}
               <div className="header-dropdon"></div>
@@ -173,27 +160,26 @@ const Header = () => {
           </MDBCollapse>
         </MDBNavbar>
       </div>
+
       <Navbar className="header-navbar navbar-expand-lg  navbar-with-menu   ">
         <div className="navbar-wrapper">
           <div className="navbar-container content">
             <div className="navbar-collapse" id="navbar-mobile">
               <div className="mr-auto float-left bookmark-wrapper d-flex align-items-center">
-                <ul className="navbar-nav d-xl-none">
+                {/* <ul className="navbar-nav d-xl-none">
                   <NavItem className="mobile-menu mr-auto">
                     <NavLink className="nav-menu-main menu-toggle hidden-xs is-active">
                       <Menu className="ficon" />
                     </NavLink>
                   </NavItem>
-                </ul>
+                </ul> */}
 
                 <ul className="nav navbar-nav bookmark-icons">
-                  <NavItem
-                    className="navItem nav-item mx-3 d-none d-lg-block"
-                    active={true}
-                  >
-                    <NavLink to="/" id="appTodo">
+                  <NavItem className="navItem nav-item mx-3 d-none d-lg-block">
+                    <NavLink to="/" activeClassName="Active">
                       {/* <Home size={21} /> */}
                       <h4>خانه</h4>
+                      <span></span>
                     </NavLink>
                     <span></span>
 
@@ -216,7 +202,7 @@ const Header = () => {
                     <span></span>
                   </NavItem>
                   <NavItem className="navItem nav-item mx-3 d-none d-lg-block">
-                    <NavLink to="/courses" id="appCalendar">
+                    <NavLink to="/courses" activeClassName="Active">
                       {/* <Calendar size={21} /> */}
                       <h4>دوره ها</h4>
                     </NavLink>
@@ -238,7 +224,7 @@ const Header = () => {
                   </NavItem>
                 </ul>
               </div>
-              {isLogged === true && role === "admin" ? (
+              {isLogged === true && role === "student" ? (
                 <ul className="nav navbar-nav float-right">
                   <UncontrolledDropdown
                     tag="li"
@@ -270,7 +256,7 @@ const Header = () => {
                       </span>
                     </DropdownToggle>
                     <DropdownMenu className="navDropMenu" right>
-                      <DropdownItem tag="a" href="#">
+                      <DropdownItem tag="a" href="/student/dashboard">
                         <User size={14} className="mr-50" />
                         <span className="align-bottom"> پنل دانشجو</span>
                       </DropdownItem>

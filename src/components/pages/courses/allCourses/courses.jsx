@@ -51,8 +51,6 @@ class Courses extends Component {
   async componentDidMount() {
     const allCourses = await getCourses();
     this.setState({ courses: allCourses });
-    console.log("==================================");
-    console.log(this.state.courses);
   }
   handleSearch = (query) => {
     this.setState({ searchQuery: query, currentPage: 1 });
@@ -72,9 +70,16 @@ class Courses extends Component {
     if (searchQuery) {
       filtered = allCourses.filter(
         (c) =>
-          c.teacher.fullName.startsWith(searchQuery) ||
-          c.course.courseName.startsWith(searchQuery) ||
-          c.course.topics.find((t) => t.startsWith(searchQuery))
+          c.teacher.fullName
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase()) ||
+          c.course.courseName
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase()) ||
+          c.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          c.course.topics.find((t) =>
+            t.toLowerCase().includes(searchQuery.toLowerCase())
+          )
       );
     }
     const sorted = _.orderBy(filtered);
@@ -94,26 +99,33 @@ class Courses extends Component {
           <h1>دوره ها</h1>
           <hr />
         </div>
-        <div className="row">
-          {courses.map((course) => (
+        {/* {courses.map((course) => (
             <CourseItem {...course} />
-          ))}
-          {/* <SearchBox
-                value={this.state.searchQuery}
-                onChange={this.handleSearch}
-              />
-              <div className="row courses">
-                {courses.map((course) => (
-                  <CourseItem {...course} />
-                ))}
-              </div>
-            </div>
+          ))} */}
+        <div className="row " style={{ width: "50%", margin: "0 auto" }}>
+          <SearchBox
+            value={this.state.searchQuery}
+            onChange={this.handleSearch}
+          />
+        </div>
+        <div className="row my-5 courses">
+          {courses.length === 0 ? (
+            <p className="d-flex justify-content-center">
+              دوره مورد نظر یافت نشد
+            </p>
+          ) : (
+            courses.map((course) => <CourseItem {...course} />)
+          )}
+        </div>
+        <div className=" my-5 d-flex justify-content-center">
+          <div>
             <Pagination
               itemsCount={totalCount}
               pageSize={this.state.pageSize}
               currentPage={this.state.currentPage}
               onPageChange={this.handlePagechange}
-            /> */}
+            />
+          </div>
         </div>
       </div>
     );

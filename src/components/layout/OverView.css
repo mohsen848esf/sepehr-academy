@@ -1,0 +1,12 @@
+.OverViewCard{
+    transition: 0.5s;
+    border:1px solid transparent !important;
+    margin: 0 !important;
+}
+.OverViewCardHeader{
+    border-radius: 0 !important;
+    
+}
+.OverViewBody , .OverViewText{
+    transition: 0.5s;
+}
