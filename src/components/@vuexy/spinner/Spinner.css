@@ -1,0 +1,66 @@
+.coustom-spinner-Box{
+    border: 1px solid red !important;
+    position: relative;
+        perspective: 200px;
+
+
+}
+.coustom-spinner-shape1{
+        border: 1px solid red !important;
+        width: 160px;
+position: absolute;
+top: 42%;
+left: 45%;
+    animation:Era 12s ease-in-out linear;
+	transform-style:preserve-3d;
+}    
+.coustom-spinner-shape2{
+            border: 1px solid red !important;
+        width: 150px;
+            animation:ReverseEra 6s infinite linear;
+	transform-style:preserve-3d;
+position: absolute;
+top: 38%;
+left: 45%;
+opacity: 0.6;
+}
+.coustom-spinner-M{
+            border: 1px solid red !important;
+        width: 40px;
+position: absolute;
+top: 46%;
+left: 49%;
+
+
+}
+
+@keyframes Era{
+
+	0%{
+    
+		transform:rotate(-5deg);
+	}
+    50%{
+    
+		transform:rotate(265deg)
+    }
+	100%{
+        
+		transform:rotate(-5deg)
+	}
+}
+@keyframes ReverseEra{
+
+	0%{
+    
+		transform:rotate(0deg)
+	}
+    50%{
+    
+		transform:rotate(-90deg)
+    }
+	100%{
+        
+		transform:rotate(0deg)
+	}
+}

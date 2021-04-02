@@ -1,0 +1,292 @@
+.TeachersContainer{
+                position: relative;
+    perspective: 200px;
+}
+.TeachersContainer > .TeachersContainer-title > h2{
+    margin:0 auto;
+    margin-top:10px ;
+    width: 20%;
+    font-weight: bold;
+    text-align: center;
+    border-top: 1px solid #7873f5 !important;
+    padding: 5px;
+    border-radius: 10px;
+    z-index: 3;
+
+}
+
+.TeachersContainer >.TeachersContainer-title > span{
+    margin: 0 auto;
+    width: 20%;
+    display: block;
+        padding: 5px;
+text-align: center;
+    border-bottom: 1px solid #ff6ec4 !important;
+        border-radius: 10px;
+
+}
+.TeachersContainer > hr{
+    width:100%;
+    color: red;
+    margin: 30px auto;
+    margin-bottom: 0;
+    padding: 3px;
+    border-radius: 18px;
+}
+.TeachersCard{
+
+}
+.bigTeacherItem{
+    height: 400px;
+    width: 25%;
+    position: relative;
+    perspective: 200px;
+}
+
+.bigTeacherItemBody{
+
+
+    width: 100%;
+    position: absolute;
+    top: 30%;
+    animation:beat 6s infinite linear;
+	transform-style:preserve-3d;
+    cursor: pointer;
+
+}
+.bigTeacherItemBody:hover{
+    transition: 1s;
+        animation-play-state: paused;
+            transform-style:preserve-3d;
+
+
+
+}
+
+
+.bigTeacherItemImage-Box{
+    width: 80%;
+    height: 30%;
+    margin: auto;
+    
+}
+.bigTeacherItem-description{
+    /* border: 1px solid red; */
+        width: 80%;
+    height: 15%;
+    margin: auto;
+}
+.bigTeacherItem-name{
+    /* text-align: center; */
+}
+.bigTeacherItem-Expertise{
+    display: block;
+    text-align: center;
+}
+
+
+.smallTeacherItem{
+        border: 1px solid transparent;
+    padding: 0 5px;
+    height: 400px;
+    width: 15%;
+    position: relative;
+    perspective: 200px;
+}
+
+.smallTeacherItemBody{
+    width: 100%;
+    position: absolute;
+    cursor: pointer;
+    transform: scale(1);
+    
+}
+.smallTeacherItemBody.TopToBottom{
+    transition: 0.6 0.8;
+    top: 5%;
+    animation:topToBottom 40s infinite linear;
+    transform-style:preserve-3d;
+
+}
+.smallTeacherItemBody.BottomToTop{
+    transition: 0.6 0.6;
+    top: 5%;
+    animation:BottomToTop 40s infinite linear;
+    transform-style:preserve-3d;
+
+}
+.smallTeacherItemBody.CenterToTop{
+    transition: 0.6 0.4;
+    top: 5%;
+    animation:CenterToTop 40s infinite linear;
+    transform-style:preserve-3d;
+
+}
+.smallTeacherItemBody.CenterToBottom{
+    transition: 0.6 0.2;
+    top: 5%;
+    animation:CenterToBottom 40s infinite linear;
+    transform-style:preserve-3d;
+
+}
+
+
+.smallTeacherItemBody:hover {
+    /* background-color: rgb(218, 217, 217); */
+    transition: 1s;
+        animation-play-state: paused;
+            transform-style:preserve-3d;
+
+}
+
+
+.smallTeacherItemImage-Box{
+    width: 95%;
+    height: 30%;
+    margin: auto;
+    
+}
+.smallTeacherItem-description{
+    /* border: 1px solid red; */
+        width: 95%;
+    height: 15%;
+    margin: auto;
+}
+.smallTeacherItem-name{
+    /* text-align: center; */
+}
+.smallTeacherItem-Expertise{
+    display: block;
+    text-align: center;
+}
+
+@media screen and (max-width: 768px){
+.TeachersContainer > .TeachersContainer-title > h2{
+     width: 35%;
+}
+.TeachersContainer > .TeachersContainer-title > span{
+     width: 35%;
+}
+}
+
+
+@media screen and (max-width: 576px) {
+ .TeachersCard{
+    height: 750px;
+}
+.bigTeacherItem{
+        height: 300px;
+    width: 380px !important;
+    position: absolute;
+    top: 10%;
+    perspective: 200px;
+}
+.smallTeacherItem{
+    height: 400px;
+    width: 180px !important;
+    position: relative;
+    top: 43%;
+    perspective: 200px;
+}
+
+}
+
+@media screen and (max-width: 375px){
+.TeachersContainer > .TeachersContainer-title > h2{
+     width: 80%;
+}
+.TeachersContainer > .TeachersContainer-title > span{
+     width: 80%;
+}
+}
+
+
+
+
+
+
+
+
+@keyframes beat{
+
+	0%{
+    
+		transform:scale(0.9);
+	}
+    50%{
+    
+		transform:scale(1.1);
+    }
+	100%{
+        
+		transform:scale(0.9);
+	}
+}
+@keyframes stopBeat{
+	100%{
+        
+		transform:scale(1);
+	}
+}
+
+
+@keyframes topToBottom{
+
+	0%{
+    
+		transform:translateY(0);
+	}
+    50%{
+    
+		transform:translateY(200px)
+    }
+	100%{
+        
+		transform:translateY(0)
+	}
+}
+@keyframes BottomToTop{
+
+	0%{
+    
+		transform:translateY(220px);
+	}
+    50%{
+    
+		transform:translateY(0px)
+    }
+	100%{
+        
+		transform:translateY(220px)
+	}
+}
+@keyframes CenterToTop{
+
+	0%{
+    
+		transform:translateY(110px);
+	}
+    50%{
+    
+		transform:translateY(0px)
+    }
+	100%{
+        
+		transform:translateY(110px)
+	}
+}
+@keyframes CenterToBottom{
+
+	0%{
+    
+		transform:translateY(110px);
+	}
+    50%{
+    
+		transform:translateY(220px)
+    }
+	100%{
+        
+		transform:translateY(110px)
+	}
+}

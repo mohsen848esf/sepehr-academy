@@ -35,6 +35,7 @@ import Assortment from './assortment'
 import OurServices from './ourServices'
 import Courses from './courses'
 import TopProfessors from './TopProfessors'
+import TopTeacher from './teacherItem'
 import CourseSlider from './slider/CourseSlider'
 import 'swiper/css/swiper.css'
 import '../../../assets/scss/plugins/extensions/swiper.scss'
@@ -64,8 +65,8 @@ const Landing = () => {
         <OurServices />
         <Courses />
         <CourseSlider />
-        <TopProfessors />
-
+        {/* <TopProfessors /> */}
+        <TopTeacher />
         {/* section4 */}
 
         {/* <footer className="page-footer font-small blue pt-4">

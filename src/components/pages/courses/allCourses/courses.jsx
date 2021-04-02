@@ -116,11 +116,11 @@ class Courses extends Component {
               دوره مورد نظر یافت نشد
             </p>
           ) : (
-            <Col lg="4" md="6" sm="6">
-              {courses.map((course) => (
+            courses.map((course) => (
+              <Col lg="4" md="6" sm="6">
                 <CourseItem {...course} />
-              ))}
-            </Col>
+              </Col>
+            ))
           )}
         </div>
         <div className=" my-5 d-flex justify-content-center">

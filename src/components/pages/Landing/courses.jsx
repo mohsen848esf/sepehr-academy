@@ -129,7 +129,13 @@ const Courses = () => {
             ))}
           </div>
 
-          <MDBBtn className="Courses-moreItem mx-auto"> بیشتر </MDBBtn>
+          <MDBBtn
+            className="Courses-moreItem mx-auto"
+            onClick={() => history.push("/courses")}
+          >
+            {" "}
+            بیشتر{" "}
+          </MDBBtn>
         </div>
         {/* <Col md="6" sm="10" className="CourseSliderCol-box">
           <CourseSlider />

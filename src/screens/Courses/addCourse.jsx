@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
 import Joi from "joi-browser";
-import { Form, Formik } from "formik";
+import { Form, Formik, Field } from "formik";
 import { Link } from "react-router-dom";
 
 import { useHistory, Redirect } from "react-router-dom";
@@ -19,12 +19,17 @@ import {
 import { toast } from "react-toastify";
 import userImg from "../../assets/img/portrait/small/avatar-s-18.jpg";
 import Checkbox from "../../components/@vuexy/checkbox/CheckboxesVuexy";
-import { Check, Lock, Mail, Facebook } from "react-feather";
+import { Check, Lock, Mail, Facebook, Trash } from "react-feather";
 import { addCourse } from "../../services/courses.api";
-
+import Chip from "./Chip";
 export const AddCourse = () => {
-  // const [data, setData] = useState({})
-  // const [errors, setErrors] = useState({})
+  const [Course, setCours] = useState({
+    courseName: "",
+    topics: [],
+    description: "",
+    image: "",
+  });
+  const [Disable, setDisable] = useState(false);
   const [activeTab, setActiveTab] = useState("");
 
   const yup = require("yup");
@@ -54,7 +59,7 @@ export const AddCourse = () => {
   //     NewCourse()
 
   // }, [])
-
+  const history = useHistory();
   const toggle = (tab) => {
     if (activeTab !== tab) {
       setActiveTab(tab);
@@ -70,24 +75,27 @@ export const AddCourse = () => {
     };
     try {
       const response = await addCourse(courseData);
+      setCours(courseData);
       toast.success(response.data.message[0].message);
-      {
-        <Redirect to="/admin/coursesList" />;
-      }
+      history.replace("/admin/coursesList");
     } catch (ex) {
       if (ex.response && ex.response.status >= 400) {
         toast.error(ex.response.data.message["message"][0].message);
       }
     }
   };
+  const makeChip = (e, value) => {
+    if (e.key === "Enter" && Course.topics.length <= 4) {
+      let new_topic = Course.topics;
+      new_topic.push(value);
+      setCours((old) => ({ ...old, topics: new_topic }));
+    } else if (Course.topics.length > 4) {
+      // toast.error("محدودیت تاپیک فقط  5 تا است");
+    }
+  };
   return (
     <Formik
-      initialValues={{
-        courseName: "",
-        topics: "",
-        description: "",
-        image: "",
-      }}
+      initialValues={Course}
       validationSchema={Validate}
       enableReinitialize={true}
       onSubmit={(value) => doSubmit(value)}
@@ -135,12 +143,24 @@ export const AddCourse = () => {
                         defaultValue=""
                         id="topics"
                         name="topics"
-                        onChange={handleChange}
+                        onKeyPress={(event) => {
+                          !errors.topics && makeChip(event, event.target.value);
+                        }}
                         placeholder="--------"
                         className={`form-control ${
                           errors.topics && touched.topics && "is-invalid"
                         }`}
                       />
+                      {!errors.topics &&
+                        Course.topics.map((item) => (
+                          <Chip
+                            className="mr-1"
+                            text={item}
+                            closableIcon={<Trash />}
+                            closable
+                            onClick
+                          />
+                        ))}
                       {errors.topics && touched.topics && (
                         <span
                           style={{ direction: "rtl" }}
