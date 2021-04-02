@@ -1,4 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import {
+  getAllCoursesFromTerms as getCourses,
+  getCourseById,
+  getAllTerms,
+} from "../../../services/student.api";
 import {
   MDBNavbar,
   MDBNavbarBrand,
@@ -37,12 +42,24 @@ import {
   Button,
   Progress,
 } from "reactstrap";
+import CourseSlider from "./slider/CourseSlider";
 import img1 from "../../../assets/img/pages/content-img-1.jpg";
 import img2 from "../../../assets/img/pages/content-img-2.jpg";
 import img3 from "../../../assets/img/pages/content-img-3.jpg";
+import img4 from "../../../assets/img/pages/content-img-2.jpg";
 import "../../../assets/css/manual/pages/Courses.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 const Courses = () => {
+  const [AllCourses, setAllCourses] = useState([]);
+  const getAllCourses = async () => {
+    const allCourses = await getCourses();
+    setAllCourses(allCourses);
+  };
+  useEffect(() => {
+    getAllCourses();
+  }, []);
+  const history = useHistory();
+  const image = [img1, img2, img3, img4];
   return (
     <div className="container my-4 mb-4 Courses-container">
       <div className="Courses-title">
@@ -63,97 +80,60 @@ const Courses = () => {
         </div>
         <div className="col-lg-6  col-md-7 col-sm-10 text-justify Courses-rowCol">
           <div className="row Courses-itemsRow">
-            <div className="col-lg-6 col-md-5 Courses-item ">
-              <MDBCard className="Courses-itemCard">
-                <div className="Courses-itemCard-imageBox">
-                  <MDBCardImage
-                    className="Courses-itemCard-img  img-fluid"
-                    src={
-                      require("../../../assets/images/pages/landingPage/Assortment/laptop.png")
-                        .default
-                    }
-                    waves
-                  />
-                </div>
-                <MDBCardBody>
-                  <div className="Courses-itemCard-title">
-                    <h4> امتحان</h4>
-                    <span>مدرس</span>
-                  </div>
-                </MDBCardBody>
-              </MDBCard>
-            </div>
-
-            <div className="col-lg-6 col-md-5 Courses-item ">
-              <NavLink style={{ textDecoration: "none" }} to="/courses">
-                <MDBCard className="Courses-itemCard">
+            {AllCourses.slice(0, 2).map((course, i) => (
+              <div className="col-lg-6 col-md-5 Courses-item ">
+                <MDBCard
+                  className="Courses-itemCard"
+                  onClick={() => history.push(`/course/${course.course._id}`)}
+                >
                   <div className="Courses-itemCard-imageBox">
                     <MDBCardImage
-                      className="Courses-itemCard-img  img-fluid"
-                      src={img3}
+                      className="Courses-itemCard-img  img-fluid box-shadow-1"
+                      src={image[i]}
                       waves
                     />
                   </div>
-
                   <MDBCardBody>
                     <div className="Courses-itemCard-title">
-                      <h4> مشاوره</h4>
-                      <span>مدرس</span>
+                      <h4> {course.course.courseName}</h4>
+                      <span>{course.teacher.fullName}</span>
                     </div>
                   </MDBCardBody>
                 </MDBCard>
-              </NavLink>
-            </div>
+              </div>
+            ))}
           </div>
 
           <div className="row Courses-itemsRow">
-            <div className="col-lg-6 col-md-5 Courses-item ">
-              <MDBCard className="Courses-itemCard">
-                <div className="Courses-itemCard-imageBox">
-                  <MDBCardImage
-                    className="Courses-itemCard-img  img-fluid"
-                    src={
-                      require("../../../assets/images/pages/landingPage/Assortment/laptop.png")
-                        .default
-                    }
-                    waves
-                  />
-                </div>
-
-                <MDBCardBody>
-                  <div className="Courses-itemCard-title">
-                    <h4> مدرک معتر</h4>
-                    <span>مدرس</span>
+            {AllCourses.slice(2, 4).map((course, i) => (
+              <div className="col-lg-6 col-md-5 Courses-item ">
+                <MDBCard
+                  className="Courses-itemCard"
+                  onClick={() => history.push(`/course/${course.course._id}`)}
+                >
+                  <div className="Courses-itemCard-imageBox">
+                    <MDBCardImage
+                      className="Courses-itemCard-img  img-fluid box-shadow-1"
+                      src={image[i + 2]}
+                      waves
+                    />
                   </div>
-                </MDBCardBody>
-              </MDBCard>
-            </div>
-
-            <div className="col-lg-6 col-md-5 Courses-item ">
-              <MDBCard className="Courses-itemCard">
-                <div className="Courses-itemCard-imageBox">
-                  <MDBCardImage
-                    className="Courses-itemCard-img img-fluid"
-                    src={
-                      require("../../../assets/images/pages/landingPage/Assortment/laptop.png")
-                        .default
-                    }
-                    waves
-                  />
-                </div>
-
-                <MDBCardBody>
-                  <div className="Courses-itemCard-title">
-                    <h4>فرصت های شغلی</h4>
-                    <span>مدرس</span>
-                  </div>
-                </MDBCardBody>
-              </MDBCard>
-            </div>
+                  <MDBCardBody>
+                    <div className="Courses-itemCard-title">
+                      <h4> {course.course.courseName}</h4>
+                      <span>{course.teacher.fullName}</span>
+                    </div>
+                  </MDBCardBody>
+                </MDBCard>
+              </div>
+            ))}
           </div>
 
           <MDBBtn className="Courses-moreItem mx-auto"> بیشتر </MDBBtn>
         </div>
+        {/* <Col md="6" sm="10" className="CourseSliderCol-box">
+          <CourseSlider />
+        </Col> */}
       </div>
     </div>
   );

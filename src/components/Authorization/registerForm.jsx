@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import Joi from "joi-browser";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 // import Form from "../layout/form";
 import { register } from "../../services/AuthService";
@@ -18,6 +18,7 @@ import { Formik, Form } from "formik";
 import "../../assets/css/manual/pages/Register.css";
 
 const RegisterForm = () => {
+  const history = useHistory();
   const yup = require("yup");
   require("yup-password")(yup);
 
@@ -53,10 +54,6 @@ const RegisterForm = () => {
   });
 
   const doSubmit = async (data) => {
-    // Call the server
-
-    // const resp = await register(this.state.data);
-    // console.log("success" , resp.data.success)
     const {
       fullName,
       email,
@@ -76,17 +73,9 @@ const RegisterForm = () => {
     try {
       const response = await register(userData);
       toast.success(response.data.message[0].message);
-      setTimeout(() => {
-        // this.props.history.replace("/logIn");
-        // window.location.reload();
-      }, 7000);
+      history.push("/login");
     } catch (ex) {
       if (ex.response && ex.response.status >= 400) {
-        // const errors = { ...this.state.errors };
-        // errors.fullName = ex.response.data.message[0].message;
-        toast.error(ex.response.data.message[0].message);
-        // this.setState({ errors });
-        // console.log("messageError" , ex.response.datadata["message"][0]["message"])
       }
     }
   };
@@ -107,20 +96,20 @@ const RegisterForm = () => {
     >
       {({ errors, handleChange, touched }) => {
         return (
-          <MDBContainer>
-            <div className="row mt-5">
-              <div className="col-lg-4">
+          <MDBContainer className="d-flex justify-content-center">
+            <div className="d-flex bg-white justify-content-between mt-5 register_Form">
+              <div className="ml-4 mt-4">
                 <MDBCard
-                  className="card-image"
+                  className="card-image register-FormCard "
                   style={{
-                    backgroundImage:
-                      "url(https://mdbcdn.b-cdn.net/img/Photos/Others/pricing-table7.jpg)",
+                    // backgroundImage:
+                    //   "url(https://mdbcdn.b-cdn.net/img/Photos/Others/pricing-table7.jpg)",
                     width: "28rem",
                   }}
                 >
-                  <div className="text-white rgba-stylish-strong py-5 px-5 z-depth-4">
+                  <div className="text-white register-textBox py-5 px-5 box-shadow-1">
                     <div className="text-center">
-                      <h3 className="white-text mb-5 mt-4 font-weight-bold">
+                      <h3 className="white-text mb-3 mt-2 font-weight-bold">
                         <strong>ثبت نام</strong>
                       </h3>
                     </div>
@@ -133,7 +122,7 @@ const RegisterForm = () => {
                         type="text"
                         validate
                         labelClass="white-text"
-                        className={`form-control ${
+                        className={`white-text form-control ${
                           errors.fullName && touched.fullName && "is-invalid"
                         }`}
                       />{" "}
@@ -154,7 +143,7 @@ const RegisterForm = () => {
                         type="email"
                         validate
                         labelClass="white-text"
-                        className={`form-control ${
+                        className={`white-text form-control ${
                           errors.email && touched.email && "is-invalid"
                         }`}
                       />{" "}
@@ -175,7 +164,7 @@ const RegisterForm = () => {
                         type="text"
                         validate
                         labelClass="white-text"
-                        className={`form-control ${
+                        className={`white-text form-control ${
                           errors.PhoneNumber &&
                           touched.PhoneNumber &&
                           "is-invalid"
@@ -197,7 +186,7 @@ const RegisterForm = () => {
                         type="password"
                         validate
                         labelClass="white-text"
-                        className={`form-control ${
+                        className={`white-text form-control ${
                           errors.password && touched.password && "is-invalid"
                         }`}
                       />{" "}
@@ -217,7 +206,7 @@ const RegisterForm = () => {
                         type="text"
                         validate
                         labelClass="white-text"
-                        className={`form-control ${
+                        className={`white-text form-control ${
                           errors.nationalId &&
                           touched.nationalId &&
                           "is-invalid"
@@ -240,7 +229,7 @@ const RegisterForm = () => {
                         type="text"
                         validate
                         labelClass="white-text"
-                        className={`form-control ${
+                        className={`white-text form-control ${
                           errors.birthday && touched.birthday && "is-invalid"
                         }`}
                       />{" "}
@@ -252,8 +241,8 @@ const RegisterForm = () => {
                           {errors.birthday}!
                         </span>
                       )}
-                      <MDBRow className="d-flex align-items-center mb-4">
-                        <div className="text-center mb-3 col-md-12">
+                      <MDBRow className="d-flex align-items-center mb-3">
+                        <div className="text-center mb-2 col-md-12">
                           <MDBBtn
                             color="success"
                             rounded
@@ -276,8 +265,13 @@ const RegisterForm = () => {
                   </div>
                 </MDBCard>
               </div>
-              <div className="col-lg-8">
-                <img />
+              <div className="mr-4 register-FormImge">
+                <img
+                  src={
+                    require("../../assets/images/pages/landingPage/sign-up/Mobilelogin.gif")
+                      .default
+                  }
+                />
               </div>
             </div>
           </MDBContainer>

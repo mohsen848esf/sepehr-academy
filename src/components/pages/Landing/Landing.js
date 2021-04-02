@@ -35,8 +35,11 @@ import Assortment from './assortment'
 import OurServices from './ourServices'
 import Courses from './courses'
 import TopProfessors from './TopProfessors'
-
+import CourseSlider from './slider/CourseSlider'
+import 'swiper/css/swiper.css'
+import '../../../assets/scss/plugins/extensions/swiper.scss'
 import '../../../assets/css/manual/pages/landingPage.css'
+import { Row, Col } from 'reactstrap'
 const Landing = () => {
   const [state, setState] = useState(false)
   const [flipped1, setFlipped1] = useState(false)
@@ -49,20 +52,23 @@ const Landing = () => {
     setState(!state)
   }
   return (
-    <section className="landing">
-      {/* <Navar /> */}
-      {/* header */}
+    <>
+      <section className="landing">
+        {/* <Navar /> */}
+        {/* header */}
 
-      {/* content */}
+        {/* content */}
 
-      <WithUs />
-      <Assortment />
-      <OurServices />
-      <Courses />
-      <TopProfessors />
-      {/* section4 */}
+        <WithUs />
+        <Assortment />
+        <OurServices />
+        <Courses />
+        <CourseSlider />
+        <TopProfessors />
 
-      {/* <footer className="page-footer font-small blue pt-4">
+        {/* section4 */}
+
+        {/* <footer className="page-footer font-small blue pt-4">
         <div className="container container-fluid text-center text-md-left">
           <div className="row">
             <div className="col-md-6 mt-md-0 mt-3">
@@ -119,7 +125,8 @@ const Landing = () => {
         </div>
       </footer>
      */}
-    </section>
+      </section>
+    </>
   )
 }
 export default Landing

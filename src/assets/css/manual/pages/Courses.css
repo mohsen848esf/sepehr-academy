@@ -211,6 +211,22 @@ text-align: center;
 
 
 
+.CourseSliderCard{
+    margin-top: 80px;
+    border: 1px solid transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
 
+
+[dir] .swiper-button-prev, [dir] .swiper-button-next{
+    background-color: rgba(220, 219, 219, 0.35) !important;
+    border-radius: 10px !important;
+}
+.CourseSliderItems{
+    /* border: 1px solid red !important; */
+    height: auto !important;
+
+}
 
 

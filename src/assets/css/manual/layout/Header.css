@@ -70,3 +70,55 @@ html[dir="rtl"] .header-navbar .dropdown.dropdown-user .dropdown-menu{
     right: 19%;
 
 }
+.[dir] .nav.nav-tabs .NavItemLink.nav-link.active {
+    background-color: transparent !important;
+}
+
+@media screen and (max-width: 768px){
+    .navDropMenu.show{
+    transition: 0.2s 0.2s;
+
+    transform: translate3d(580px, 60px, 0px) !important;
+}
+html[dir="rtl"] .header-navbar .dropdown.dropdown-user .dropdown-menu{
+        transition: 0.5s 0.2s;
+
+    transform: translate3d(-600px, 60px, 0px) !important;
+}
+.navDropMenu{
+
+    transform: translate3d(87px, -60px, 0px) !important;
+}
+}
+@media screen and (max-width: 576px){
+    .navDropMenu.show{
+    transition: 0.2s 0.2s;
+
+    transform: translate3d(370px, 60px, 0px) !important;
+}
+html[dir="rtl"] .header-navbar .dropdown.dropdown-user .dropdown-menu{
+        transition: 0.5s 0.2s;
+
+    transform: translate3d(-600px, 60px, 0px) !important;
+}
+.navDropMenu{
+
+    transform: translate3d(87px, -60px, 0px) !important;
+}
+}
+@media screen and (max-width: 375px){
+    .navDropMenu.show{
+    transition: 0.2s 0.2s;
+
+    transform: translate3d(200px, 60px, 0px) !important;
+}
+html[dir="rtl"] .header-navbar .dropdown.dropdown-user .dropdown-menu{
+        transition: 0.5s 0.2s;
+
+    transform: translate3d(-600px, 60px, 0px) !important;
+}
+.navDropMenu{
+
+    transform: translate3d(87px, -60px, 0px) !important;
+}
+}

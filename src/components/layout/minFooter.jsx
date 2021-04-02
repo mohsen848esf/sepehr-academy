@@ -3,7 +3,7 @@ const MinFooter = () => {
   return (
     <>
       <div className="footer-copyright text-center py-3">
-        {"© 2020 Copyright:" + " "}
+        {"© 2021 Copyright:" + " "}
         <a href="#">SepehrAcademy</a>
       </div>
     </>

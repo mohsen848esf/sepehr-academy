@@ -2,8 +2,7 @@ import React, { Fragment, useState, UseEffect } from "react";
 import Joi from "joi-browser";
 import jwt_decode from "jwt-decode";
 
-// import Form from "../layout/form";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { login } from "../../services/AuthService";
 import { setItem, getItem } from "../../services/storage/storage";
 import { toast } from "react-toastify";
@@ -17,12 +16,12 @@ import {
 } from "../../assets/css/mdbreact";
 import { Formik, Form } from "formik";
 
-// import '../../assets/css/manual/pages/LogIn.css';
+import "../../assets/css/manual/pages/LogIn.css";
 // import '../../assets/css/manual/pages/LogIn.css';
 
 const LoginForm = () => {
   // const [data, setData] = useState({})
-
+  const history = useHistory();
   const yup = require("yup");
   require("yup-password")(yup);
 
@@ -43,30 +42,16 @@ const LoginForm = () => {
     try {
       const response = await login(UserData);
       toast.success(response.data.message[0].message);
-      // const user =  response.data.result.studentModel
-      // این قسمت دیشب  15 اسفند تغییر دادی
       setItem("token", response.data.result.jwtToken);
       const decode = jwt_decode(response.data.result.jwtToken);
       setItem("role", decode.role);
       const userData = response.data.result.studentModel;
       console.log(userData);
       setItem("user", userData);
-
-      window.location = "/userPanel";
-      setTimeout(() => {
-        window.location.reload();
-      }, 7000);
-      //
+      history.replace("/student/dashboard");
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
-        // const errors = { ...this.state.errors };
-        // errors.email = ex.response.data.message["message"][0].message;
-        // if (ex.response.data.message[0].message) {
-        //   toast.error(ex.response.data.message[0].message)
-        // } else {
-        toast.error(ex.response.data.message["message"][0].message);
       }
-      toast.error(ex.response.data.message["message"][0].message);
     }
   };
 
@@ -79,18 +64,18 @@ const LoginForm = () => {
     >
       {({ errors, handleChange, touched }) => {
         return (
-          <MDBContainer>
-            <div className="row mt-5 bg bg-white">
-              <div className="col-lg-4">
+          <MDBContainer className="d-flex justify-content-center">
+            <div className="d-flex mt-5 bg bg-white justify-content-between login-Form">
+              <div className="ml-4 mt-4">
                 <MDBCard
-                  className="card-image"
+                  className="card-image login-FormCard"
                   style={{
-                    backgroundImage:
-                      "url(https://mdbcdn.b-cdn.net/img/Photos/Others/pricing-table7.jpg)",
+                    // backgroundImage:
+                    //   "url(https://mdbcdn.b-cdn.net/img/Photos/Others/pricing-table7.jpg)",
                     width: "28rem",
                   }}
                 >
-                  <div className="text-white rgba-stylish-strong py-5 px-5 z-depth-4">
+                  <div className="text-white  py-5 px-5 login-FormText-Box box-shadow-1">
                     <div className="text-center">
                       <h3 className="white-text mb-5 mt-4 font-weight-bold">
                         <strong>ورود</strong>
@@ -106,7 +91,7 @@ const LoginForm = () => {
                         type="text"
                         validate
                         labelClass="white-text"
-                        className={`form-control ${
+                        className={`white-text form-control ${
                           errors.email && touched.email && "is-invalid"
                         }`}
                       />{" "}
@@ -126,7 +111,7 @@ const LoginForm = () => {
                         type="password"
                         validate
                         labelClass="white-text"
-                        className={`form-control ${
+                        className={`white-text  form-control ${
                           errors.password && touched.password && "is-invalid"
                         }`}
                       />{" "}
@@ -138,24 +123,22 @@ const LoginForm = () => {
                           {errors.password}!
                         </span>
                       )}
-                      {/* <div className="md-form pb-3">
-                        <MDBInput
-                          label={
-                            <>
-                              Accept the&nbsp;
-                              <a
-                                href="#!"
-                                className="green-text font-weight-bold"
-                              >
-                                Terms and Conditions
-                              </a>
-                            </>
-                          }
-                          type="checkbox"
-                          id="checkbox1"
-                          labelClass="white-text"
-                        />
-                      </div> */}
+                      {/* <MDBInput
+                        label={
+                          <>
+                            Accept the&nbsp;
+                            <a
+                              href="#!"
+                              className="green-text font-weight-bold"
+                            >
+                              Terms and Conditions
+                            </a>
+                          </>
+                        }
+                        type="checkbox"
+                        id="checkbox1"
+                        labelClass="white-text"
+                      /> */}
                       <MDBRow className="d-flex align-items-center mb-4">
                         <div className="text-center mb-3 col-md-12">
                           <MDBBtn
@@ -169,6 +152,7 @@ const LoginForm = () => {
                         </div>
                       </MDBRow>
                     </Form>
+
                     <MDBCol md="12">
                       {/* <p className="font-small white-text d-flex justify-content-end"> */}
                       <Link
@@ -180,10 +164,11 @@ const LoginForm = () => {
                       </Link>
                       {/* </p> */}
                     </MDBCol>
+
                     <MDBCol md="12">
                       {/* <p className="font-small white-text d-flex justify-content-end"> */}
                       <Link
-                        to="/forgetPass"
+                        to="/forgetPassword"
                         className="green-text ml-1 font-weight-bolder"
                         style={{ textDecoration: "none" }}
                       >
@@ -194,7 +179,7 @@ const LoginForm = () => {
                   </div>
                 </MDBCard>
               </div>
-              <div className="col-lg-8">
+              <div className="mr-4 login-FormImage">
                 <img
                   src={
                     require("../../assets/images/pages/landingPage/login/Login2.gif")

@@ -54,3 +54,6 @@ h1,h2,h3,h4,h5 {
 .progress-bar{
   background: linear-gradient(-30deg, #7367f0 0%, #ce9ffc 100%) !important;
 }
+body{
+  overflow-x: hidden !important;
+}

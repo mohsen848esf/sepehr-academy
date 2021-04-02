@@ -224,8 +224,8 @@ const RightInfo = ({ courseInformation, handleCourseBuy, Bought }) => {
                 className="w-75 box-shadow-1 mt-2"
                 onClick={() => handleCourseBuy(termId)}
               >
-                ثبت نام
-                <ShoppingCart size={15} className="ml-2 " />
+                {Bought ? "دوره اخذ شده" : "ثبت نام"}
+                {!Bought && <ShoppingCart size={15} className="ml-2 " />}
               </Button>
             </div>
             <hr className="my-4" />

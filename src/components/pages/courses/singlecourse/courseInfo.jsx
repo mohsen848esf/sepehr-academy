@@ -1,19 +1,26 @@
 import React, { useEffect, useState, Fragment } from "react";
+import { useHistory } from "react-router-dom";
+
 import {
   getCourseById,
   addStudentToTerm,
 } from "../../../../services/student.api";
 import RightInformation from "./rightInfo";
 import CenterInformation from "./centerInfo";
-import { getUserID } from "../../../../services/storage/storage";
+import {
+  getUserID,
+  getItem,
+  removeItem,
+} from "../../../../services/storage/storage";
 import Modals from "../../../layout/modal";
 import "../../../../assets/css/manual/pages/course-info.css";
 const CourseInfo = ({ match }) => {
   const [Course, setCourse] = useState(null);
   const [ModalAddTerm, setModalAddTerm] = useState(false);
+  const [ModalLogged, setModalLogged] = useState(false);
   const [AddTermId, setAddTermId] = useState(null);
   const [Bought, setBought] = useState(false);
-
+  const history = useHistory();
   const courseData = async () => {
     const studentId = getUserID();
     const res = await getCourseById(match.params.courseID);
@@ -27,8 +34,22 @@ const CourseInfo = ({ match }) => {
     courseData();
   }, []);
   const AddStudentToTerm = (termId) => {
+    const IsLogged = getItem("role");
+    if (!IsLogged && IsLogged !== "student") {
+      setModalLogged(true);
+    }
     setModalAddTerm(true);
     setAddTermId(termId);
+  };
+  const ClearStorage = () => {
+    removeItem("role");
+    removeItem("user");
+    removeItem("token");
+  };
+  const GotToTheLoginPage = () => {
+    ClearStorage();
+    history.push("/logIn");
+    setModalLogged(false);
   };
   const doAddTerm = async () => {
     if (!AddTermId) {
@@ -48,7 +69,23 @@ const CourseInfo = ({ match }) => {
   return (
     <Fragment>
       {" "}
-      <section class="container-fluid course-body">
+      <Modals
+        modal={ModalAddTerm}
+        setmodal={setModalAddTerm}
+        setChange={doAddTerm}
+        title={"خرید دوره"}
+        message={"آیا مطمئنید؟"}
+        pic={"trach.png"}
+      />
+      <Modals
+        modal={ModalLogged}
+        setmodal={setModalLogged}
+        setChange={GotToTheLoginPage}
+        title={"  "}
+        message={"شما نیاز دارید وارد حساب خود شوید"}
+        pic={"trach.png"}
+      />
+      <section class="container-fluid course-body my-5">
         <div class="course-style   justify-content-center row">
           {/* <h5>{Course["course"].courseName}</h5> */}
           {Course && (
@@ -70,14 +107,6 @@ const CourseInfo = ({ match }) => {
           )}
         </div>
       </section>
-      <Modals
-        modal={ModalAddTerm}
-        setmodal={setModalAddTerm}
-        setChange={doAddTerm}
-        title={"خرید دوره"}
-        message={"آیا مطمئنید؟"}
-        pic={"trach.png"}
-      />
     </Fragment>
   );
 };

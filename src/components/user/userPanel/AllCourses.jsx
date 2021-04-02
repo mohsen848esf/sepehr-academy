@@ -25,7 +25,7 @@ const AllCoursesList = ({ Data, setData, AllDataCount }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(4);
 
-  console.log("object data", Data);
+  // console.log("object data", Data);
   const AddStudentToTerm = (termId) => {
     setModalAddTerm(true);
     setAddTermId(termId);

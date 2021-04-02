@@ -74,7 +74,7 @@ const Panel = (props) => {
   };
   useEffect(() => {
     getAllCourses();
-  }, []);
+  }, [activeTab]);
   useEffect(() => {
     if (windowWidth !== undefined) {
       updateWidth();

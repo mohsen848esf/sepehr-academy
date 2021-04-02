@@ -10,6 +10,8 @@ import { getItem } from '../../services/storage/storage'
 // import Header from '../../components/layout/header'
 import Footer from '../../components/layout/Footer'
 import ForgetPassword from '../Authorization/forgetPaasword'
+import ForgetPas from '../Authorization/WizardForms/wizard'
+
 import LogInForm from '../Authorization/loginForm'
 import LogOut from '../Authorization/logout'
 import ResetPass from '../Authorization/resetpass'
@@ -29,7 +31,8 @@ import SinglePost from '../pages/posts/singlePost/SinglePost'
 // component userPanle
 import Panel from '../user/panel/Panle'
 import StudentDashboard from '../user/userPanel/Panel'
-
+import Blogs from '../pages/posts/arshive/Arshive'
+import Blog from '../pages/posts/singlePost/SinglePost'
 import IsLogged from '../../services/islogged'
 
 import {
@@ -57,8 +60,12 @@ const LandRoute = ({ component, path, footer = true }) => {
       ) : (
         <Fragment>
           <Header />
-          <Route path={path} component={component} />
-          <MinFooter />
+          <div style={{ minHeight: '487px' }}>
+            <Route path={path} component={component} />
+          </div>
+          <footer className="page-footer font-small academy-footer mt-5">
+            <MinFooter />
+          </footer>
         </Fragment>
       )}
     </>
@@ -98,7 +105,8 @@ export class Routes extends Component {
             <LandRoute exact path="/education" component={Education} />
             <LandRoute exact path="/courses" component={Courses} />
             <LandRoute exact path="/course/:courseID" component={CourseInfo} />
-
+            <LandRoute exact path="/Blogs" component={Blogs} />
+            <LandRoute exact path="/Blog/:BlogId" component={Blog} />
             {/* authorization */}
             {/* <Route exact path='/logIn' component={LogIn}/> */}
             <LandRoute
@@ -117,7 +125,7 @@ export class Routes extends Component {
             <LandRoute
               exact
               path="/forgetPassword"
-              component={ForgetPassword}
+              component={ForgetPas}
               footer={false}
             />
             <LandRoute

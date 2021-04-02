@@ -58,65 +58,63 @@ const CourseItem = (course) => {
   const index = course.capacity % 3;
   return (
     <Fragment>
-      <Col lg="4" md="6" sm="6">
-        <Card>
-          <CardBody>
-            <CardImg
-              className="img-fluid mb-2"
-              src={image[index]}
-              alt="card image cap"
-            />{" "}
-            <div className="d-flex justify-content-start mt-1">
-              <span className="float-left font-weight-bold mb-25 ">
-                {" "}
-                نام دوره :{" "}
-              </span>
-              <span className="mx-2" title={course.course.courseName}>
-                {" "}
-                {course.course.courseName.length > 20
-                  ? course.course.courseName.substr(0, 20) + "..."
-                  : course.course.courseName}
-              </span>
-            </div>
-            <div className="d-flex justify-content-start mt-1">
-              <span className="float-left font-weight-bold mb-25 ">
-                {" "}
-                نام استاد :{" "}
-              </span>
-              <span className="mx-2">{course.teacher.fullName}</span>
-            </div>
-            <div className="d-flex justify-content-between mt-1">
-              <small className="float-left font-weight-bold mb-25 ">
-                {" "}
-                ظرفیت{" "}
-              </small>
-              {/* <small className="float-left font-weight-bold mb-25">
+      <Card>
+        <CardBody>
+          <CardImg
+            className="img-fluid mb-2"
+            src={image[index]}
+            alt="card image cap"
+          />{" "}
+          <div className="d-flex justify-content-start mt-1">
+            <span className="float-left font-weight-bold mb-25 ">
+              {" "}
+              نام دوره :{" "}
+            </span>
+            <span className="mx-2" title={course.course.courseName}>
+              {" "}
+              {course.course.courseName.length > 20
+                ? course.course.courseName.substr(0, 20) + "..."
+                : course.course.courseName}
+            </span>
+          </div>
+          <div className="d-flex justify-content-start mt-1">
+            <span className="float-left font-weight-bold mb-25 ">
+              {" "}
+              نام استاد :{" "}
+            </span>
+            <span className="mx-2">{course.teacher.fullName}</span>
+          </div>
+          <div className="d-flex justify-content-between mt-1">
+            <small className="float-left font-weight-bold mb-25 ">
+              {" "}
+              ظرفیت{" "}
+            </small>
+            {/* <small className="float-left font-weight-bold mb-25">
                 {course.students.length}
               </small>
               <small className="float-left font-weight-bold mb-25">
                 {maxCapacity}
               </small> */}
-            </div>
-            <Progress className=" " value={percent}>
-              {percent + "%"}
-            </Progress>
-            <div className="card-btns d-flex justify-content-between mt-2">
-              <Button.Ripple
-                className="gradient-light-primary text-white"
-                style={{ boxShadow: "none" }}
+          </div>
+          <Progress className=" " value={percent}>
+            {percent + "%"}
+          </Progress>
+          <div className="card-btns d-flex justify-content-between mt-2">
+            <Button.Ripple
+              className="gradient-light-primary text-white"
+              style={{ boxShadow: "none" }}
+            >
+              {" "}
+              <Link
+                to={`/course/${course.course._id}`}
+                style={{ textDecoration: "none", color: "white" }}
               >
-                {" "}
-                <Link
-                  to={`/course/${course.course._id}`}
-                  style={{ textDecoration: "none", color: "white" }}
-                >
-                  بیشتر
-                </Link>
-              </Button.Ripple>
-            </div>
-          </CardBody>
-        </Card>
-      </Col>
+                بیشتر
+              </Link>
+            </Button.Ripple>
+          </div>
+        </CardBody>
+      </Card>
 
       <div className="col-lg-4 col-md-6 my-2" style={{ display: "none" }}>
         <MDBCard className="h-100 " style={{ width: "20rem" }}>

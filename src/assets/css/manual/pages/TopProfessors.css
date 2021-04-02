@@ -59,7 +59,7 @@ text-align: center;
 }
 .TopProfessors-img{
     transition: 0.7s;
-    /* border: 1px solid red; */
+    border: 1px solid red;
     width: 180px;
     height: 180px;
         transform: rotateY(0deg);
@@ -71,7 +71,9 @@ text-align: center;
 }
 .TopProfessors-Management:hover > .TopProfessors-img{
     transition: 0.7s;
-    transform: rotateY(180deg);
+    	transform-style:preserve-3d;
+
+    transform: transform(180deg);
 }
 .TopProfessors-bgImage{
     /* transition: 0.7s; */

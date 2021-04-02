@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from "react";
 import "../../assets/css/manual/pages/ForgetPass.css";
-// import { isEmail } from "validator";
-import Joi from "joi-browser";
-// import Form from "../layout/form";
+
+import { Check } from "react-feather";
 import { Link } from "react-router-dom";
 import { forgetpass } from "../../services/AuthService";
 import { setItem, getItem } from "../../services/storage/storage";
@@ -62,17 +61,17 @@ const ForgetPass = () => {
       {({ errors, handleChange, touched }) => {
         return (
           <MDBContainer>
-            <div className="row mt-5 bg bg-white">
-              <div className="col-lg-4">
+            <div className="d-flex justify-content-center mt-5 bg bg-white">
+              <div className="">
                 <MDBCard
-                  className="card-image"
+                  className="card-image ForgetPassCard"
                   style={{
-                    backgroundImage:
-                      "url(https://mdbcdn.b-cdn.net/img/Photos/Others/pricing-table7.jpg)",
+                    // backgroundImage:
+                    //   "url(https://mdbcdn.b-cdn.net/img/Photos/Others/pricing-table7.jpg)",
                     width: "28rem",
                   }}
                 >
-                  <div className="text-white rgba-stylish-strong py-5 px-5 z-depth-4">
+                  <div className="text-white ForgetPassText-Box py-5 px-5 box-shadow-1">
                     <div className="text-center">
                       <h3 className="white-text mb-5 mt-4 font-weight-bold">
                         <strong>فراموشی رمز</strong>
@@ -100,7 +99,7 @@ const ForgetPass = () => {
                           {errors.email}!
                         </span>
                       )}
-                      <MDBRow className="d-flex align-items-center mb-4">
+                      {/* <MDBRow className="d-flex align-items-center mb-4">
                         <div className="text-center mb-3 col-md-12">
                           <MDBBtn
                             color="success"
@@ -111,18 +110,10 @@ const ForgetPass = () => {
                             ارسال
                           </MDBBtn>
                         </div>
-                      </MDBRow>
+                      </MDBRow> */}
                     </Form>
                   </div>
                 </MDBCard>
-              </div>
-              <div className="col-lg-8">
-                <img
-                  src={
-                    require("../../assets/images/pages/landingPage/login/Login2.gif")
-                      .default
-                  }
-                />
               </div>
             </div>
           </MDBContainer>

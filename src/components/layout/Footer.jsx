@@ -241,7 +241,7 @@ const Footer = () => {
               </Row>
             </Row>
           </div>
-          <Map center={position} zoom={18}>
+          <Map center={position} zoom={18} style={{ display: "none" }}>
             <TileLayer
               attribution='&ampcopy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
@@ -257,7 +257,7 @@ const Footer = () => {
               </Tooltip>
             </Marker>
           </Map>
-          <Map center={position} zoom={18} style={{ display: "none" }}>
+          <Map center={position} zoom={18}>
             <LayersControl position="topright">
               <BaseLayer checked name="OpenStreetMap.Mapnik">
                 <TileLayer

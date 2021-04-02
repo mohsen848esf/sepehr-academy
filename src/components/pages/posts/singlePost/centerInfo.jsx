@@ -60,7 +60,7 @@ import "../../../../assets/scss/pages/app-ecommerce-shop.scss";
 import "../../../../assets/scss/pages/app-chat.scss";
 
 const colors = ["success", "danger", "primary", "warning", "info"];
-const CenterInfo = ({ courseInfo }) => {
+const BlogInfo = ({ BlogInfo }) => {
   const [activeTab, setActiveTab] = useState("1");
   const [active, setActive] = useState("1");
   const [StudentInfo, setStudentInfo] = useState({});
@@ -89,38 +89,13 @@ const CenterInfo = ({ courseInfo }) => {
     removeItem("token");
     history.push("/logIn");
   };
-  const { topics, courseName, description, image } = courseInfo;
+  const { title, text, category } = BlogInfo;
   const { role, email, fullName } = StudentInfo;
   console.log("++++++++++++++++++++++++");
-  // console.log(courseInfo['courseName'])
+  // console.log(BlogInfo['BlogName'])
 
   return (
     <Fragment>
-      <div style={{ display: "none" }}>
-        <div class="col-md-11 col-sm-10 col-xs-12 course-view">
-          <img
-            class="courseImage"
-            src={
-              require("../../../../assets/images/pages/courses/22.png").default
-            }
-            alt=""
-          />
-        </div>
-        <div class="col-md-11 col-sm-11 col-xs-12 course-description">
-          <div class="col-md-10 col-sm-11 col-xs-11  description-title">
-            <h4>{courseInfo.courseName}</h4>
-          </div>{" "}
-          <div class="col-md-10 col-sm-11 col-xs-11  description-text">
-            <p>{description}</p>
-            <h4>سرفصل های دوره</h4>
-            <ul>
-              {topics.map((top) => (
-                <li key={top}>{top}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
       <div className="container-fluid CourseInfo-Center">
         <Card className="overflow-hidden ">
           <CardBody className="pb-0">
@@ -129,7 +104,7 @@ const CenterInfo = ({ courseInfo }) => {
             </div>
             <Card>
               <CardHeader className="d-flex  justify-content-center">
-                <h3 className="text-center">{courseName}</h3>
+                <h3 className="text-center">{title}</h3>
               </CardHeader>
               <CardBody>
                 <Nav tabs className="justify-content-start ">
@@ -176,20 +151,15 @@ const CenterInfo = ({ courseInfo }) => {
                 </Nav>
                 <TabContent className="py-50 mt-4" activeTab={active}>
                   <TabPane tabId="1">
-                    <p>{description}</p>
+                    <p>{text}</p>
                     <hr className="my-5" />
                     <h4 classNam="mb-3 text-bold-600">دسته بندی</h4>
 
-                    {topics.length > 0 ? (
-                      topics.map((topic, index) => (
-                        <p className={`ml-3 my-2 round text-${colors[index]}`}>
-                          <Feather className="mr-2" size={18} />
-                          {topic}
-                        </p>
-                      ))
-                    ) : (
-                      <span>...</span>
-                    )}
+                    <p className={`ml-3 my-2 round text-info`}>
+                      <Feather className="mr-2" size={18} />
+                      {category}
+                    </p>
+
                     <div className="mt-4 d-flex flex-wrap">
                       <div className="ratings border-left ml-1 pl-1">
                         <Star size={20} fill="#ff9f43" stroke="#ff9f43" />
@@ -449,4 +419,4 @@ const CenterInfo = ({ courseInfo }) => {
   );
 };
 
-export default CenterInfo;
+export default BlogInfo;

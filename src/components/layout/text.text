@@ -1,0 +1,138 @@
+    <section className="header">
+      <Navbar className="header-navbar navbar-expand-lg  navbar-with-menu   ">
+        <div className="navbar-wrapper">
+          <div className="navbar-container content">
+            <div className="navbar-collapse" id="navbar-mobile">
+              <div className="mr-auto float-left bookmark-wrapper d-flex align-items-center">
+                {/* <ul className="navbar-nav d-xl-none">
+                  <NavItem className="mobile-menu mr-auto">
+                    <NavLink className="nav-menu-main menu-toggle hidden-xs is-active">
+                      <Menu className="ficon" />
+                    </NavLink>
+                  </NavItem>
+                </ul> */}
+
+                <ul className="nav navbar-nav bookmark-icons">
+                  <NavItem className="navItem nav-item mx-3 d-none d-lg-block">
+                    <NavLink to="/" activeClassName="Active">
+                      {/* <Home size={21} /> */}
+                      <h4>خانه</h4>
+                      <span></span>
+                    </NavLink>
+                    <span></span>
+
+                    {/* <UncontrolledTooltip placement="bottom" target="appTodo">
+                      Todo
+                    </UncontrolledTooltip> */}
+                  </NavItem>
+                  <NavItem className="navItem nav-item mx-3 d-none d-lg-block">
+                    <NavLink to="/" id="appChat">
+                      {/* <MessageSquare size={21} /> */}
+                      <h4>آموزش</h4>
+                    </NavLink>
+                    <span></span>
+                  </NavItem>
+                  <NavItem className="navItem nav-item mx-3 d-none d-lg-block">
+                    <NavLink to="/" id="appMail">
+                      {/* <Mail size={21} /> */}
+                      <h4>مالی</h4>
+                    </NavLink>
+                    <span></span>
+                  </NavItem>
+                  <NavItem className="navItem nav-item mx-3 d-none d-lg-block">
+                    <NavLink to="/courses" activeClassName="Active">
+                      {/* <Calendar size={21} /> */}
+                      <h4>دوره ها</h4>
+                    </NavLink>
+                    <span></span>
+
+                    {/* <UncontrolledTooltip
+                      placement="bottom"
+                      target="appCalendar"
+                    >
+                      Calendar
+                    </UncontrolledTooltip> */}
+                  </NavItem>
+                  <NavItem className="navItem nav-item mx-3 d-none d-lg-block">
+                    <NavLink to="/Blogs" activeClassName="Active">
+                      {/* <Calendar size={21} /> */}
+                      <h4> بلاگ</h4>
+                    </NavLink>
+                    <span></span>
+
+                    {/* <UncontrolledTooltip
+                      placement="bottom"
+                      target="appCalendar"
+                    >
+                      Calendar
+                    </UncontrolledTooltip> */}
+                  </NavItem>
+                  <NavItem className="navItem nav-item mx-3 d-none d-lg-block">
+                    <NavLink to="/">
+                      {/* <Star className="text-warning" size={21} /> */}
+                      <h4>تماس با ما</h4>
+                    </NavLink>
+                    <span></span>
+                  </NavItem>
+                </ul>
+              </div>
+              {isLogged === true && role === "student" ? (
+                <ul className="nav navbar-nav float-right">
+                  <UncontrolledDropdown
+                    tag="li"
+                    className="dropdown-user nav-item"
+                  >
+                    <DropdownToggle
+                      tag="a"
+                      data-toggle="dropdown"
+                      className=" nav-link dropdown-user-link"
+                    >
+                      <div className="user-nav d-sm-flex d-none">
+                        <span className="user-name text-bold-600">
+                          mohsen esfandiari{" "}
+                        </span>
+                        {/* <span className="user-status"></span> */}
+                      </div>
+                      <span>
+                        <img
+                          src={
+                            require("../../assets/img/profile/pages/page-01.jpg")
+                              .default
+                          }
+                          className="round"
+                          height="40"
+                          width="40"
+                          alt="avatar"
+                        />
+                        <span className="avatarStatus-online"></span>
+                      </span>
+                    </DropdownToggle>
+                    <DropdownMenu className="navDropMenu" right>
+                      <DropdownItem tag="a" href="/student/dashboard">
+                        <User size={14} className="mr-50" />
+                        <span className="align-bottom"> پنل دانشجو</span>
+                      </DropdownItem>
+
+                      <DropdownItem divider />
+                      <DropdownItem tag="a" href="#">
+                        <Power size={14} className="mr-50" />
+                        <span> خروج</span>
+                      </DropdownItem>
+                    </DropdownMenu>
+                  </UncontrolledDropdown>
+                </ul>
+              ) : (
+                <>
+                  <NavItem className="nav-item mx-1 d-none d-lg-block ">
+                    <NavLink to="/logIn">ورود</NavLink>
+                  </NavItem>{" "}
+                  <NavItem className="nav-item mx-1 d-none d-lg-block">
+                    <NavLink to="/register">ثبت نام</NavLink>
+                  </NavItem>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      </Navbar>
+    </section>

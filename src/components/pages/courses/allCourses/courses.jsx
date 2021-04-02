@@ -40,6 +40,7 @@ import {
   MDBRotatingCard,
   MDBSelect,
 } from "../../../../assets/css/mdbreact";
+import { Col } from "reactstrap";
 
 class Courses extends Component {
   state = {
@@ -102,6 +103,7 @@ class Courses extends Component {
         {/* {courses.map((course) => (
             <CourseItem {...course} />
           ))} */}
+
         <div className="row " style={{ width: "50%", margin: "0 auto" }}>
           <SearchBox
             value={this.state.searchQuery}
@@ -114,7 +116,11 @@ class Courses extends Component {
               دوره مورد نظر یافت نشد
             </p>
           ) : (
-            courses.map((course) => <CourseItem {...course} />)
+            <Col lg="4" md="6" sm="6">
+              {courses.map((course) => (
+                <CourseItem {...course} />
+              ))}
+            </Col>
           )}
         </div>
         <div className=" my-5 d-flex justify-content-center">

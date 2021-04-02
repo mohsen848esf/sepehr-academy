@@ -1,123 +1,16 @@
-
-
- .container-fluid.forgetpass{
-  background: url("../../../images/pages/landingPage/forgetPass/forgetpassEmail.gif") no-repeat;
-  background-position: 18% 15%;
-  background-size: 45%;
-  /* height: 1000px; */
-  min-height: 700px;
-  font-family: est;
-  perspective: 500px;
-}
-.forgetpass >.forgetpassForm{
-    margin-top: 150px;
-    /* padding-left: 10px;
-    padding-right: 10px; */
-    width: 35%;
-    position: absolute;
-    right:5%;
-    min-height: 300px;
-    /* border-radius: 100%; */
-    /* background-color: rgb(119, 178, 226); */
-}
-
-.forgetpass >.forgetpassForm > .form-group > label{
-    font-size: large;
-    margin-right: 3px;
-}
-/* .forgetpass >.forgetpassForm > .form-group > label[for= email]{
-    margin-right: 10%;
-} */
-.forgetpass >.forgetpassForm > .form-group > input{
-     border-radius: 5px;
-     text-align: left;
-     margin-bottom: 2px;
-}
-
-/* .forgetpass >.forgetpassForm > .form-group > input[name=email]{
-    margin:2px auto;
-    width: 95%;
-} */
-
-.forgetpass >.forgetpassForm > button{
-  margin: 6% auto;
-  border-radius: 5px;
-  padding: 7px ;
-  width: 70%;
-  box-shadow: 0px 0px 10px #a5a0a0;
-  display: block;
-  font-size: large;
-}
-.forgetpass >.forgetpassForm > a{  
-    display: block;
-    margin: 5px auto;
-    text-align: center;
-    color: #0442b4;
-    font-weight: 800;
-    text-decoration: none;
-}
-
-@media screen and (max-width: 990px) {
-.forgetpass >.forgetpassForm{
-    width: 35%;
-}
-}
-@media screen and (max-width: 768px) {
-
-    .forgetpass >.forgetpassForm{
-        margin-top: 100px;
-    
-        width: 35%;
+.ForgetPassText-Box{
+        background: #c4c4c4;
+        
     }
-    
-}
-@media screen and (max-width: 578px) {
- .container-fluid.forgetpass{
-    /* background-size:110% 80%; */
-    background-position:  center left top;
-    border: 1px solid red;
-}
-.forgetpass >.forgetpassForm{
-    margin-top: 60px;
-
-    width: 42%;
-    
-}
-.forgetpass >.forgetpassForm > .title{
-    font-size:x-large;
-}
-
-}
+    .ForgetPassCard{
+        margin-top: 20px;
+    border-radius: 8px !important;
+    overflow: hidden;
 
 
-
+}
 @media screen and (max-width: 375px) {
- .container-fluid.forgetpass{
-    background: transparent;
-
+    .ForgetPassCard{
+        width: 20rem !important;
+    }
 }
-.forgetpass >.forgetpassForm{
-    margin-top: 80px;
-    padding: 0;
-    padding-left: 5px;
-    padding-right: 5px;
-    background: rgb(221, 206, 178);
-    width: 90%;
-}
-.forgetpass >.forgetpassForm > .title{
-    color: rgb(252, 252, 252);
-    font-size: large;
-    /* background-color: #e75252; */
-    width: 100%;
-    border-radius: 20px;
-    margin: 25px auto;
-    margin-bottom: 0;
-}
-.forgetpass >.forgetpassForm > .form-group > label{
-    color: #fff;
-    margin: 0;
-    margin-right: 10px;
-}
-
-}
-

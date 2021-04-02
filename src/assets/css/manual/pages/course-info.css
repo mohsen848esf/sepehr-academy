@@ -2,13 +2,14 @@
     /* border: 1px solid red; */
     width: 100%;
     /* height: 560px; */
-    margin-top: 7%;
+    margin-top: 10% !important;
+    margin-bottom: 15% !important;
     padding: 0;
     position: relative;
 }
 .course-style{
 
-    border: 1px solid red;
+    /* border: 1px solid red; */
     width: 85%;
     margin: 0 auto;
 }
@@ -29,11 +30,11 @@
 
 
 .CourseInfo-Center{
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     /* background: white; */
 }
 .CourseInfo-imageBox{
-    border: 1px solid red;
+    /* border: 1px solid red; */
     height: 300px;
     overflow: hidden;
 }
@@ -71,7 +72,7 @@
 .CourseInfo-teacherImage-box{
     /* border: 1px solid red; */
     width: 100%;
-    background: rgb(221, 221, 221);
+    background: rgb(221, 221, 221) ;
     border-radius: 20px;
 }
 .CourseInfo-teacherInfo{
@@ -80,6 +81,11 @@
     /* border: 1px solid red; */
 }
 
+.CommentTab{
+    max-height: 600px !important;
+    overflow: hidden scroll !important;
+    scrollbar-width: none;
+}
 
 .commentsCard{
     border: 1px solid transparent !important;
@@ -99,9 +105,43 @@
     border: 1px solid red !important;
 } */
 
+
+
+.Blog-left-style{
+        background: #fff;
+        border-radius: 10px;  
+        height: 620px !important;
+        overflow: hidden;
+        padding: 5px 20px;
+    }
+    
+    .BlogsItem-RightItemCol{
+        max-height: 600px !important;
+        
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: hidden scroll !important;
+        scrollbar-width: none;
+    }
+    .‌BlogsItemsCard{
+        border-radius: 10px;
+    box-shadow:inset 0px 0px 3px rgba(0,0,0,.1) !important;
+            border: 1px solid transparent !important;
+    margin: 0 !important;
+
+
+}
+.BlogsItems-box{
+        /* width: 100%;
+    background: rgb(221, 221, 221) ;
+    border-radius: 20px; */
+}
+
+
+
 @media screen and (max-width: 990px){
 .right-style,.left-style{
-    border: 1px solid red;
+    /* border: 1px solid red; */
     margin: 0 0px;
 }
 .CourseNameCard{

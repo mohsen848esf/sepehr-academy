@@ -1,0 +1,21 @@
+.SideNavHeader{
+    transition: 1s;
+    height: 660px;
+    /* border: 1px solid red; */
+    width: 20%;
+    background: white;
+    z-index: 3000;
+    position:  fixed;
+}
+@media screen and (max-width: 576px) {
+    .SideNavHeader{
+    width: 30%;
+
+}
+}
+@media screen and (max-width: 375px) {
+    .SideNavHeader{
+    width: 40%;
+
+}
+}

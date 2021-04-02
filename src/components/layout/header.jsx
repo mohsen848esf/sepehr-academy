@@ -1,46 +1,32 @@
 import React, { Component, Fragment, useState, useEffect } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import Sidebar from "react-sidebar";
+import Modals from "./modal";
+
 import {
   getItem,
   removeItem,
   clearStorage,
 } from "../../services/storage/storage";
 import {
-  MDBNavbar,
-  MDBNavbarBrand,
-  MDBNavbarNav,
-  MDBNavItem,
-  MDBNavLink,
-  MDBNavbarToggler,
-  MDBCollapse,
-  MDBFormInline,
-  MDBDropdown,
-  MDBDropdownToggle,
-  MDBDropdownMenu,
-  MDBDropdownItem,
-  MDBBtn,
-  MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBCardTitle,
-  MDBCardText,
-  MDBCol,
   MDBContainer,
-  MDBRow,
-  MDBFooter,
-  MDBIcon,
-  MDBSideNavCat,
-  MDBSideNavNav,
-  MDBSideNav,
-  MDBSideNavLink,
+  MDBBtn,
+  MDBModal,
+  MDBModalBody,
+  MDBModalHeader,
+  MDBModalFooter,
 } from "../../assets/css/mdbreact";
+
 import {
   Nav,
+  NavLink,
   NavItem,
   Navbar,
   UncontrolledDropdown,
   Badge,
   Media,
+  TabContent,
+  TabPane,
   UncontrolledTooltip,
   DropdownToggle,
   DropdownMenu,
@@ -71,20 +57,71 @@ import {
   User,
   Heart,
   Home,
+  List,
+  AlignJustify,
 } from "react-feather";
+import classnames from "classnames";
+import TodoSidebar from "./Sidebar/Sidebar";
+import "../../assets/scss/pages/app-todo.scss";
+
 import "../../assets/css/manual/layout/Header.css";
 const Header = () => {
+  const [windowWidth, setwindowWidth] = useState(null);
+
+  const [active, setActive] = useState("1");
+  const [activeTab, setActiveTab] = useState(false);
   const [state, setstate] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [sideNavLeft, setSideNavLeft] = useState(false);
   const [isLogged, setIslogged] = useState(false);
+  const [Display, setDisplay] = useState(true);
+  const [Modal, setModal] = useState(false);
+
   const jwtToken = getItem("token") ? true : false;
   const role = getItem("role");
+  const history = useHistory();
+  const Location = useLocation();
+  const updateWidth = () => {
+    setwindowWidth(window.innerWidth);
+    // const Display = windowWidth >= 769 ? false : true;
+    // setDisplay(Display);
+  };
+  useEffect(() => {
+    if (windowWidth !== undefined) {
+      updateWidth();
+      window.addEventListener("resize", updateWidth);
+    }
+  }, []);
+  const handleLocation = () => {
+    setActive(Location.pathname.toLowerCase());
+  };
+  useEffect(() => {
+    handleLocation();
+  }, []);
+  const handleLogout = () => {
+    setModal(true);
+  };
+  const logOut = () => {
+    removeItem("role");
+    removeItem("user");
+    removeItem("token");
+    history.push = "/logIn";
+  };
   // const Location = "pathname";
   // console.log("pass", props.location.pathname);
   useEffect(() => {
     setIslogged(jwtToken);
   }, [isLogged]);
+  const toggle = (tab, ulr) => {
+    if (active !== tab) {
+      setActive(tab);
+      history.push(ulr);
+    }
+  };
+  const toggleTab = () => {
+    setActiveTab(!activeTab);
+    setDisplay(!Display);
+  };
   const toggleCollapse = () => {
     setstate(!state);
   };
@@ -95,195 +132,200 @@ const Header = () => {
     setSideNavLeft(!sideNavLeft);
   };
   return (
-    <section className="header">
-      <div style={{ display: "none" }} className="">
-        <MDBNavbar className="header-navbar" expand="md">
-          <MDBNavbarBrand className="img-fluid navbar-brand">
-            <Link to="/">
-              <img
-                src={
-                  require("../../assets/images/logo/logo-primary.png").default
-                }
-              ></img>
-            </Link>
-          </MDBNavbarBrand>
-          <MDBNavbarToggler onClick={toggleCollapse} />
-          <MDBCollapse
-            id="navbarCollapse3"
-            className="navbar-collaps"
-            isOpen={state}
-            navbar
-          >
-            <MDBNavbarNav className="navbarNav-left" left>
-              <MDBNavItem className="navItem mx-2 " active>
-                <MDBNavLink to="/">خانه</MDBNavLink>
-              </MDBNavItem>
-              <MDBNavItem className="navItem mx-2 ">
-                <MDBNavLink to="/courses">دوره ها</MDBNavLink>
-              </MDBNavItem>
-              <MDBNavItem className="navItem mx-2 ">
-                <MDBNavLink to="/news">اخبار</MDBNavLink>
-              </MDBNavItem>
-            </MDBNavbarNav>
-            <MDBNavbarNav className="mr-3" right>
-              {isLogged === true && role === "student" ? (
-                <MDBNavItem className="">
-                  <MDBDropdown>
-                    <MDBDropdownToggle
-                      className="navItem-img mx-1 img-circle"
-                      nav
-                      caret
-                    >
-                      <img
-                        src={
-                          require("../../assets/images/pages/landingPage/62.jpg")
-                            .default
-                        }
-                      ></img>
-                    </MDBDropdownToggle>
-                    <MDBDropdownMenu className="dropdown-menu dropdown-menu-right dropdown-default  navDropMenu"></MDBDropdownMenu>
-                  </MDBDropdown>
-                </MDBNavItem>
-              ) : (
-                <>
-                  {" "}
-                  <MDBNavItem className=" mx-1 ">
-                    <MDBNavLink to="/logIn">ورود</MDBNavLink>
-                  </MDBNavItem>{" "}
-                  <MDBNavItem className=" mx-1 ">
-                    <MDBNavLink to="/register">ثبت نام</MDBNavLink>
-                  </MDBNavItem>
-                </>
-              )}
-              <div className="header-dropdon"></div>
-            </MDBNavbarNav>
-          </MDBCollapse>
-        </MDBNavbar>
-      </div>
-
-      <Navbar className="header-navbar navbar-expand-lg  navbar-with-menu   ">
-        <div className="navbar-wrapper">
-          <div className="navbar-container content">
-            <div className="navbar-collapse" id="navbar-mobile">
-              <div className="mr-auto float-left bookmark-wrapper d-flex align-items-center">
-                {/* <ul className="navbar-nav d-xl-none">
-                  <NavItem className="mobile-menu mr-auto">
-                    <NavLink className="nav-menu-main menu-toggle hidden-xs is-active">
-                      <Menu className="ficon" />
-                    </NavLink>
-                  </NavItem>
-                </ul> */}
-
-                <ul className="nav navbar-nav bookmark-icons">
-                  <NavItem className="navItem nav-item mx-3 d-none d-lg-block">
-                    <NavLink to="/" activeClassName="Active">
-                      {/* <Home size={21} /> */}
-                      <h4>خانه</h4>
-                      <span></span>
-                    </NavLink>
-                    <span></span>
-
-                    {/* <UncontrolledTooltip placement="bottom" target="appTodo">
-                      Todo
-                    </UncontrolledTooltip> */}
-                  </NavItem>
-                  <NavItem className="navItem nav-item mx-3 d-none d-lg-block">
-                    <NavLink to="/" id="appChat">
-                      {/* <MessageSquare size={21} /> */}
-                      <h4>آموزش</h4>
-                    </NavLink>
-                    <span></span>
-                  </NavItem>
-                  <NavItem className="navItem nav-item mx-3 d-none d-lg-block">
-                    <NavLink to="/" id="appMail">
-                      {/* <Mail size={21} /> */}
-                      <h4>مالی</h4>
-                    </NavLink>
-                    <span></span>
-                  </NavItem>
-                  <NavItem className="navItem nav-item mx-3 d-none d-lg-block">
-                    <NavLink to="/courses" activeClassName="Active">
-                      {/* <Calendar size={21} /> */}
-                      <h4>دوره ها</h4>
-                    </NavLink>
-                    <span></span>
-
-                    {/* <UncontrolledTooltip
-                      placement="bottom"
-                      target="appCalendar"
-                    >
-                      Calendar
-                    </UncontrolledTooltip> */}
-                  </NavItem>
-                  <NavItem className="navItem nav-item mx-3 d-none d-lg-block">
-                    <NavLink to="/">
-                      {/* <Star className="text-warning" size={21} /> */}
-                      <h4>تماس با ما</h4>
-                    </NavLink>
-                    <span></span>
-                  </NavItem>
-                </ul>
-              </div>
-              {isLogged === true && role === "student" ? (
-                <ul className="nav navbar-nav float-right">
-                  <UncontrolledDropdown
-                    tag="li"
-                    className="dropdown-user nav-item"
+    <Fragment>
+      <Modals
+        modal={Modal}
+        setmodal={setModal}
+        setChange={logOut}
+        title={"خارج شدن از حساب کاربری"}
+        message={"آیامطئنید؟"}
+      />
+      {activeTab && windowWidth <= 768 && (
+        <>
+          <TodoSidebar
+            active={active}
+            handleToggle={toggle}
+            avtiveTab={activeTab}
+            setActiveTab={setActiveTab}
+            handleChange={toggleTab}
+          />
+        </>
+      )}
+      <section className="header">
+        <Navbar className="header-navbar navbar-expand-lg  navbar-with-menu   ">
+          <div className="navbar-wrapper">
+            <div className="navbar-container content">
+              <div className="navbar-collapse" id="navbar-mobile">
+                <div className="mr-auto float-left bookmark-wrapper d-flex align-items-center">
+                  <Nav
+                    tabs
+                    className="justify-content-center HeaderNav box-shadow-0"
                   >
-                    <DropdownToggle
-                      tag="a"
-                      data-toggle="dropdown"
-                      className=" nav-link dropdown-user-link"
+                    {windowWidth <= 768 ? (
+                      <NavItem>
+                        <NavLink
+                          className={`bg-transparent ${classnames({
+                            active: activeTab,
+                          })}
+                      `}
+                          style={{ display: `${Display ? "block" : "none"}` }}
+                          onClick={() => {
+                            toggleTab();
+                          }}
+                        >
+                          <Menu className="ficon" />
+                        </NavLink>
+                      </NavItem>
+                    ) : (
+                      <Fragment>
+                        <NavItem className="mx-2">
+                          <NavLink
+                            className={`bg-transparent ${classnames({
+                              active: active === "/",
+                            })}
+                        
+                      `}
+                            onClick={() => {
+                              toggle("/", "/");
+                            }}
+                          >
+                            خانه
+                          </NavLink>
+                        </NavItem>
+                        <NavItem className="mx-2">
+                          <NavLink
+                            className={`bg-transparent ${classnames({
+                              active: active === "/courses",
+                            })}
+                        
+                      `}
+                            onClick={() => {
+                              toggle("/courses", "/courses");
+                            }}
+                          >
+                            آموزش
+                          </NavLink>
+                        </NavItem>
+                        <NavItem className="mx-2">
+                          <NavLink
+                            className={`bg-transparent ${classnames({
+                              active: active === "/blogs",
+                            })}
+                        
+                      `}
+                            onClick={() => {
+                              toggle("/blogs", "/Blogs");
+                            }}
+                          >
+                            بلاگ ها
+                          </NavLink>
+                        </NavItem>
+                        <NavItem className="mx-2">
+                          <NavLink
+                            className={`bg-transparent ${classnames({
+                              active: active === "m",
+                            })}
+                        
+                      `}
+                            onClick={() => {
+                              toggle("m", "/");
+                            }}
+                          >
+                            مالی
+                          </NavLink>
+                        </NavItem>
+                        <NavItem className="mx-2">
+                          <NavLink
+                            className={`bg-transparent ${classnames({
+                              active: active === "t",
+                            })}
+                        
+                      `}
+                            onClick={() => {
+                              toggle("t", "/");
+                            }}
+                          >
+                            تماس با ما
+                          </NavLink>
+                        </NavItem>
+                        {/* <NavItem className="mx-2">
+                    <NavLink
+                      className={classnames({
+                        active: active === "5",
+                      })}
+                      onClick={() => {
+                        toggle("5", "others");
+                      }}
                     >
-                      <div className="user-nav d-sm-flex d-none">
-                        <span className="user-name text-bold-600">
-                          mohsen esfandiari{" "}
+                      دیگر
+                    </NavLink>
+                  </NavItem> */}
+                      </Fragment>
+                    )}
+                  </Nav>
+                  <TabContent activeTab={active} />
+                </div>
+                {isLogged === true && role === "student" ? (
+                  <ul className="nav navbar-nav float-right">
+                    <UncontrolledDropdown
+                      tag="li"
+                      className="dropdown-userborder"
+                    >
+                      <DropdownToggle
+                        tag="a"
+                        data-toggle="dropdown"
+                        className=" nav-link dropdown-user-link"
+                      >
+                        <div className="user-nav d-sm-flex ">
+                          <span className="user-name text-bold-600">
+                            mohsen esfandiari{" "}
+                          </span>
+                          {/* <span className="user-status"></span> */}
+                        </div>
+                        <span>
+                          <img
+                            src={
+                              require("../../assets/img/profile/pages/page-01.jpg")
+                                .default
+                            }
+                            className="round"
+                            height="40"
+                            width="40"
+                            alt="avatar"
+                          />
+                          {/* <span className="avatarStatus-online"></span> */}
                         </span>
-                        {/* <span className="user-status"></span> */}
-                      </div>
-                      <span>
-                        <img
-                          src={
-                            require("../../assets/img/profile/pages/page-01.jpg")
-                              .default
-                          }
-                          className="round"
-                          height="40"
-                          width="40"
-                          alt="avatar"
-                        />
-                        <span className="avatarStatus-online"></span>
-                      </span>
-                    </DropdownToggle>
-                    <DropdownMenu className="navDropMenu" right>
-                      <DropdownItem tag="a" href="/student/dashboard">
-                        <User size={14} className="mr-50" />
-                        <span className="align-bottom"> پنل دانشجو</span>
-                      </DropdownItem>
+                      </DropdownToggle>
+                      <DropdownMenu className="navDropMenu" right>
+                        <DropdownItem tag="a" href="/student/dashboard">
+                          <User size={14} className="mr-50" />
+                          <span className="align-bottom"> پنل دانشجو</span>
+                        </DropdownItem>
 
-                      <DropdownItem divider />
-                      <DropdownItem tag="a" href="#">
-                        <Power size={14} className="mr-50" />
-                        <span> خروج</span>
-                      </DropdownItem>
-                    </DropdownMenu>
-                  </UncontrolledDropdown>
-                </ul>
-              ) : (
-                <>
-                  <NavItem className="nav-item mx-1 d-none d-lg-block ">
-                    <NavLink to="/logIn">ورود</NavLink>
-                  </NavItem>{" "}
-                  <NavItem className="nav-item mx-1 d-none d-lg-block">
-                    <NavLink to="/register">ثبت نام</NavLink>
-                  </NavItem>
-                </>
-              )}
+                        <DropdownItem divider />
+                        <DropdownItem tag="a" onClick={() => handleLogout()}>
+                          <Power size={14} className="mr-50" />
+                          <span> خروج</span>
+                        </DropdownItem>
+                      </DropdownMenu>
+                    </UncontrolledDropdown>
+                  </ul>
+                ) : (
+                  <>
+                    <NavItem className="nav-item mx-1 d-none d-lg-block ">
+                      <Link to="/logIn">ورود</Link>
+                    </NavItem>{" "}
+                    <NavItem className="nav-item mx-1 d-none d-lg-block">
+                      <Link to="/register">ثبت نام</Link>
+                    </NavItem>
+                  </>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      </Navbar>
-    </section>
+        </Navbar>
+      </section>
+    </Fragment>
   );
 };
 
