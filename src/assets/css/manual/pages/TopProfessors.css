@@ -1,0 +1,406 @@
+.TopProfessors-container{
+    margin:100px auto !important;
+    margin-top: 150px !important;
+    border-top: 1px solid transparent;
+}
+.TopProfessors-container > .TopProfessors-title > h2{
+    margin:0 auto;
+    margin-top:10px ;
+    width: 20%;
+    font-weight: bold;
+    text-align: center;
+    border-top: 1px solid #7873f5 !important;
+    padding: 5px;
+    border-radius: 10px;
+    z-index: 3;
+}
+
+.TopProfessors-container >.TopProfessors-title > span{
+    margin: 0 auto;
+    width: 20%;
+    display: block;
+        padding: 5px;
+text-align: center;
+    border-bottom: 1px solid #ff6ec4 !important;
+        border-radius: 10px;
+
+}
+.TopProfessors-container > hr{
+    width:100%;
+    color: red;
+    margin: 30px auto;
+    margin-bottom: 0;
+    padding: 3px;
+    border-radius: 18px;
+}
+.TopProfessorsRow{
+    border: 1px solid red;
+    margin: 0 auto ;
+    margin-top: 150px;
+    padding: 0 !important;
+
+}
+.TopProfessorsRowCol{
+    border: 1px solid red;
+    margin-left: 30px;
+    /* padding: 0 !important; */
+    
+}
+.TopProfessors-Management{
+    border: 1px solid red;
+    border-radius: 10px;
+    background: linear-gradient(20deg, #6787d3 0,#a841cadb ) !important;
+    box-shadow:2px 1px 24px #ccc;
+    height: 400px;
+    width: 90%;
+    margin-top: 20%;
+    position: relative;
+    perspective: 200px;
+}
+.TopProfessors-img{
+    transition: 0.7s;
+    border: 1px solid red;
+    width: 180px;
+    height: 180px;
+        transform: rotateY(0deg);
+
+    position: relative;
+    top: -30%;
+    left: 25%;
+
+}
+.TopProfessors-Management:hover > .TopProfessors-img{
+    transition: 0.7s;
+    	transform-style:preserve-3d;
+
+    transform: transform(180deg);
+}
+.TopProfessors-bgImage{
+    /* transition: 0.7s; */
+    background: white;
+        border-bottom: 5px solid rgba(44, 221, 159, 0.775);
+        border-right: 5px solid rgba(44, 221, 159, 0.775);
+        border-left: 5px solid rgba(54, 106, 237, 0.768);
+        border-top: 5px solid rgba(54, 106, 237, 0.768);
+        border-radius: 10px;
+    width: 190px;
+    height: 190px;
+    transform: rotateZ(45deg);
+    position: absolute;
+    top: -31%;
+    left: 24%;
+}
+.TopProfessors-Management:hover > .TopProfessors-bgImage{
+    transition: 1.2s;
+            border-bottom: 5px solid rgba(44, 221, 159, 0.775);
+        border-right: 4px solid rgba(44, 221, 159, 0.775);
+        border-left: 4px solid rgba(54, 106, 237, 0.768);
+        border-top: 5px solid rgba(54, 106, 237, 0.768);
+	animation:anim1 2s infinite linear;
+	transform-style:preserve-3d;
+    transform: rotateZ(1125deg);
+    border-radius:100px;
+    
+}
+.TopProfessorsManagement-Des{
+    border: 1px solid red;
+    height: 60%;
+    position: absolute;
+    top: 35%;
+}
+.TopProfessorsManagement-Des > h2{
+    border:1px solid red;
+        width: 90%;
+    margin: 10px auto;
+    font-weight: bolder;
+    color: white;
+
+}
+.TopProfessorsManagement-Des > span{
+    border:1px solid red;
+    display: block;
+    width: 90%;
+    margin: 10px auto;
+    color: white;
+    font-weight: bolder;
+    font-size: large;
+
+}
+.TopProfessorsManagement-Des > p{
+    border:1px solid red;
+    width: 70%;
+    margin: 10px auto;
+    color: white;
+    font-weight: bolder;
+    font-size: medium;
+
+}
+.TopProfessors-teacherRow{
+    padding: 0 !important;
+    margin: 0 !important;
+    margin-top: 3% !important;
+}
+.TopProfessors-teacher{
+    border: 1px solid black;
+    margin: 0 !important;
+    padding: 0 !important;
+
+}
+.TopProfessors-teacherItem{
+    border: 1px solid red;
+        border-radius: 10px;
+    background: white !important;
+    box-shadow:2px 1px 24px #ccc;
+    height: 160px;
+    width: 70%;
+    margin:15% auto;
+    position: relative;
+    perspective: 200px;
+}
+.TopProfessors-teacher-img{
+    transition: 0.7s;
+    /* border: 1px solid red; */
+    width: 100px;
+    height: 100px;
+        transform: rotateY(0deg);
+
+    position: relative;
+    top: -40%;
+    left: 22%;
+
+}
+.TopProfessors-teacherItem:hover > .TopProfessors-teacher-img{
+    transition: 0.7s;
+    transform: rotateY(180deg);
+}
+.TopProfessors-teacher-bgImage{
+        background: white;
+        border-bottom: 5px solid rgba(44, 221, 159, 0.775);
+        border-right: 5px solid rgba(44, 221, 159, 0.775);
+        border-left: 5px solid rgba(54, 106, 237, 0.768);
+        border-top: 5px solid rgba(54, 106, 237, 0.768);
+        border-radius: 100%;
+    width: 107px;
+    height: 107px;
+    transform: rotateZ(-1125deg);
+    position: absolute;
+    top: -42%;
+    left: 20.5%;
+}
+.TopProfessors-teacherItem:hover > .TopProfessors-teacher-bgImage{
+    transition: 1s;
+            /* border-bottom: 5px solid rgba(44, 221, 159, 0.775);
+        border-right: 4px solid rgba(44, 221, 159, 0.775);
+        border-left: 4px solid rgba(54, 106, 237, 0.768);
+        border-top: 5px solid rgba(54, 106, 237, 0.768); */
+	animation:anim1 2s infinite linear;
+	transform-style:preserve-3d;
+    transform: rotateZ(45deg);
+    border-radius:100%;
+    
+}
+
+.TopProfessorsTeacher-Des{
+    border: 1px solid black;
+    height: 60%;
+    width: 90%;
+    position: absolute;
+    top: 35%;
+    left: 5%;
+}
+.TopProfessorsTeacher-Des > h4{
+    border:1px solid red;
+        width: 90%;
+    margin: 10px auto;
+    /* font-weight: bolder; */
+    color: rgb(104, 104, 104);
+
+}
+
+.TopProfessorsTeacher-Des > p{
+    border:1px solid red;
+    width: 90%;
+    margin: 10px auto;
+    color: rgb(104, 104, 104);
+    font-weight: bolder;
+    font-size: medium;
+
+}
+
+
+
+
+
+
+@media screen and (max-width: 990px){
+    .TopProfessorsRowCol{
+    margin-left: 0px;
+}
+.TopProfessors-Management{
+    height: 350px;
+    width: 98%;
+}
+.TopProfessors-img{
+    width: 120px;
+    height: 120px;
+    top: -25%;
+    left: 25%;
+}
+.TopProfessors-bgImage{
+    width: 132px;
+    height: 132px;
+    top: -27%;
+    left: 23%;
+}
+.TopProfessorsManagement-Des > h2{
+    font-weight: 100;
+    font-size: x-large;
+
+}
+.TopProfessorsManagement-Des > span{
+    font-weight: 600;
+    font-size: medium;
+
+}
+/* .TopProfessorsManagement-Des > p{
+    font-weight: bolder;
+    font-size: medium;
+
+} */
+.TopProfessors-teacherItem{
+    height: 140px;
+    width: 70%;
+    margin:15% auto;
+}
+.TopProfessors-teacher-img{
+    width: 80px;
+    height: 80px;
+    top: -38%;
+    left: 21.5%;
+}
+.TopProfessors-teacher-bgImage{
+    width: 88px;
+    height: 88px;
+    top: -41%;
+    left: 19%;
+}
+
+.TopProfessorsTeacher-Des > h4{
+font-size: large;
+
+}
+
+.TopProfessorsTeacher-Des > p{
+
+    margin: 10px auto;
+    color: rgb(104, 104, 104);
+    font-weight: bolder;
+    font-size: small;
+
+}
+
+}
+@media screen and (max-width: 768px){
+.TopProfessors-container > .TopProfessors-title > h2{
+     width: 35%;
+}
+.TopProfessors-container > .TopProfessors-title > span{
+     width: 35%;
+}
+          
+/* .TopProfessorsRowCol{
+    margin-top: 10%;
+} */
+.TopProfessors-img{
+    top: -25%;
+    left: 35%;
+}
+.TopProfessors-bgImage{
+    top: -27%;
+    left: 34%;
+}
+.TopProfessorsManagement-Des > h2{
+    font-weight: 100;
+    font-size: x-large;
+}
+.TopProfessorsManagement-Des > span{
+    font-weight: 600;
+    font-size: medium;
+}
+/* .TopProfessorsManagement-Des > p{
+    font-weight: bolder;
+    font-size: medium;
+
+} */
+.TopProfessors-teacherRow{
+    margin-top: 20% !important;
+}
+.TopProfessors-teacher-img{
+    top: -38%;
+    left: 24%;
+}
+.TopProfessors-teacher-bgImage{
+    top: -41%;
+    left: 22%;
+}
+
+
+}
+@media screen and (max-width: 375px){
+.TopProfessors-container > .TopProfessors-title > h2{
+     width: 80%;
+}
+.TopProfessors-container > .TopProfessors-title > span{
+     width: 80%;
+}
+
+.TopProfessors-img{
+    top: -25%;
+    left: 30%;
+}
+.TopProfessors-bgImage{
+    top: -27%;
+    left: 28%;
+}
+.TopProfessorsManagement-Des > h2{
+    font-weight: 100;
+    font-size: x-large;
+}
+.TopProfessorsManagement-Des > span{
+    font-weight: 600;
+    font-size: medium;
+}
+/* .TopProfessorsManagement-Des > p{
+    font-weight: bolder;
+    font-size: medium;
+
+} */
+.TopProfessors-teacherItem{
+    height: 140px;
+    width: 80%;
+    margin:15% auto;
+}
+.TopProfessors-teacher-img{
+    width: 70px;
+    height: 70px;
+    top: -38%;
+    left: 23%;
+}
+.TopProfessors-teacher-bgImage{
+    width: 80px;
+    height: 80px;
+    top: -41%;
+    left: 19%;
+}
+}
+
+
+
+@keyframes anim1{
+	0%{
+		transform:rotateZ(45deg);	
+	}
+	100%{
+		transform:rotateZ(1125deg);
+	}
+}

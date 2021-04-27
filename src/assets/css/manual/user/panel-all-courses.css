@@ -1,0 +1,25 @@
+
+  .table {
+    width: 90%;
+    margin: auto;
+    /* font-size: 20px; */
+  }
+  .text-responsive {
+    font-size: calc(1% + 1vw + 1vh);
+  }
+
+  .table td, .table th, .table tr {
+    vertical-align: baseline;
+    border:none;
+    text-align: center;
+  }
+  .table tbody > tr > td > img{
+    width: 35px;
+  }  
+  .table tbody > tr > td:first-child{
+    width: 10%;
+  }
+
+  .container > .row > h2 {
+    margin: 20px auto 30px;
+  }

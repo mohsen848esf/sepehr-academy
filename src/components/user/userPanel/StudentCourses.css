@@ -1,0 +1,33 @@
+.StuddentCourses-container{
+    /* border: 1px solid red !important; */
+    height: 470px;
+    width: 95%;
+    margin:20px auto !important;
+    padding: 0 !important;
+}
+.StuddentCourses-Header{
+    /* border: 1px solid red */
+}
+.StuddentCourses-Title{
+    /* border: 1px solid red; */
+}
+.StuddentCourses-Title > span {
+    /* border:  1px solid red; */
+    font-weight: bold;
+    position: relative;
+    top: 30%;
+}
+.StuddentCourses-Title > small {
+    /* border:  1px solid red; */
+    position: relative;
+    top: 30%;
+}
+.StuddentCourses-TableBox{
+    /* border: 1px solid black; */
+    margin-top: 20px;
+    height: 70%;    
+    border-radius: 15px !important;
+}
+.StuddentCourses-SearchBox > div > div.searchBox{
+    top:-5% !important;
+}

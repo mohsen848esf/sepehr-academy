@@ -1,0 +1,61 @@
+.all-courses{
+    direction: rtl;
+    background: url("../../../images/pages/landingPage/shape6.jpg") no-repeat;
+    background-size: 70%;
+    background-position: -5% 70%;
+    color: rgb(112, 112, 112);
+
+}
+.all-courses .toz.card {
+    flex-direction: row;
+    border-radius: 50px;
+    border: none;
+}
+.all-courses .toz.card > .card-body {
+    text-align: right;
+    width: 40%;
+    font-size: 20px;
+    padding: 40px;
+    color: grey;
+}
+.all-courses .toz.card > .card-img {
+    width: 40%;
+}
+.all-courses .toz.card > .card-img > img {
+    width: 90%;
+}
+.all-courses .courses .card{
+    border: none; 
+    border-radius: 40px;
+    margin: 40px;
+}
+.all-courses .courses .card-img{
+    width: 50%;
+    margin: auto;   
+}
+
+.all-courses .courses > .card > .card-body{
+    text-align: center;
+}
+
+.all-courses .courses img{
+    width: 100%;
+}
+.all-courses .courses > .card .table td, .table th {
+    border-top:none;
+    color: rgb(112, 112, 112);
+    padding: 0;
+
+    }
+.all-courses .courses > .card .table td {
+    text-align: right;
+}
+    
+.all-courses .courses a.btn{
+    display: block;
+    width: 144px;
+    margin: auto;
+    border-radius: 30px;
+}
+
+

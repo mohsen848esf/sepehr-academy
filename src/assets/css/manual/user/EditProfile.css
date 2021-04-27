@@ -1,0 +1,16 @@
+.tab-pane.fade.editProfile-panel{
+    border: 1px solid blue;
+    padding: 0;
+    height: 100%;
+    /* overflow: hidden; */
+}
+
+.editProfileFporm{
+    border: 1px solid red;
+    height: 100%;
+}
+.editProfileFporm > .row{
+    border: 1px solid brown;
+    height: 100%;
+    
+}

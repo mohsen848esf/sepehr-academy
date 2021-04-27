@@ -1,0 +1,59 @@
+@font-face {
+  font-family: "yek";
+  src: url("./assets/fonts/yek.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "yekan_bakh";
+  src: url("./assets/fonts/YekanBakh_Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "feather";
+  src: url("./assets/fonts/feather.eot");
+}
+
+@font-face {
+  font-family: "featherttf";
+  src: url("./assets/fonts/feather.ttf");
+}
+
+@font-face {
+  font-family: "featherwoff";
+  src: url("./assets/fonts/feather.woff");
+}
+@font-face {
+  font-family: "vazir";
+  src: url("./assets/fonts/vazir-font-v16.1.0/Vazir.ttf") format("truetype");
+}
+@font-face {
+  font-family: "vazirLight";
+  src: url("./assets/fonts/vazir-font-v16.1.0/Vazir-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: "vazirBold";
+  src: url("./assets/fonts/vazir-font-v16.1.0/Vazir-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "IRANSansWeb";
+  src: url("./assets/fonts/IRANSansWeb.ttf") format("truetype");
+}
+
+
+div , button, ul,li,span,img {
+  font-family: "IRANSansWeb", "Montserrat", Helvetica, Arial, serif !important;
+}
+p,span , a {
+  font-family: "vazirLight", "Montserrat", Helvetica, Arial, serif !important;
+}
+h1,h2,h3,h4,h5 {
+  font-family: "vazir", "Montserrat", Helvetica, Arial, serif !important;
+}
+/* a {
+  color: #777777 !important;
+} */
+.progress-bar{
+  background: linear-gradient(-30deg, #7367f0 0%, #ce9ffc 100%) !important;
+}
+body{
+  overflow-x: hidden !important;
+}

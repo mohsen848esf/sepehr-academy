@@ -1,0 +1,8 @@
+.modalTitle > h4{
+    text-align: center !important;
+    font-weight: bold !important;
+    margin: 0 auto !important;
+}
+.modalTitle > button{
+    display: none !important;
+}

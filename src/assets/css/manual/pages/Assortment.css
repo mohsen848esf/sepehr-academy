@@ -1,0 +1,211 @@
+.Assortment-container{
+    margin:100px auto !important;
+    margin-top: 150px !important;
+    /* height: 800px !important; */
+    border-top: 1px solid transparent;
+}
+.Assortment-container > .Assortment-title{
+     /* border-bottom: 1px solid #ff6ec4 !important;
+    border-left: 1px solid transparent !important;
+    border-top: 1px solid #7873f5 !important;
+    border-right: 1px solid transparent !important;    */
+}
+.Assortment-container > .Assortment-title > h2{
+    margin:0 auto;
+    margin-top:10px ;
+    width: 20%;
+    font-weight: bold;
+    text-align: center;
+    /* border-bottom: 1px solid #ff6ec4 !important; */
+    /* border-left: 1px solid transparent !important; */
+    border-top: 1px solid #7873f5 !important;
+    /* border-right: 1px solid transparent !important; */
+    padding: 5px;
+    border-radius: 10px;
+    z-index: 3;
+
+}
+
+.Assortment-container >.Assortment-title > span{
+    margin: 0 auto;
+    width: 20%;
+    display: block;
+        padding: 5px;
+text-align: center;
+    border-bottom: 1px solid #ff6ec4 !important;
+        border-radius: 10px;
+
+}
+.Assortment-container > hr{
+    /* display: none !important; */
+    width:100%;
+    color: red;
+    margin: 30px auto;
+    margin-bottom: 0;
+    padding: 3px;
+    border-radius: 18px;
+}
+.Assortment-row{
+    /* display: none !important; */
+    margin: 0 auto;
+}
+.Assortment-item{
+    max-width: 16rem !important;
+}
+.Assortment-itemCard{
+    transition: 0.5s;
+    border-radius: 15px;
+    border: 1px solid white;
+    height: 180px !important;
+      box-shadow: 2px 1px 24px #ccc;
+      cursor: pointer;
+
+}
+.Assortment-itemCard:hover{
+    transition: 0.5s;
+    background-color: rgb(164, 221, 164);
+    border: 1px solid rgb(141, 208, 141);
+}
+.Assortment-img{
+    width: 90px;
+    margin: 30px auto;
+    margin-bottom: 5px;
+}
+
+
+.Assortment-itemCard-title{
+    text-align: center;
+    font-weight: bolder !important;
+    color: rgb(233, 124, 21) !important;
+    
+}
+
+
+@media screen and (max-width: 990px){
+
+.Assortment-container > .Assortment-title > h2{
+    width: 30%;
+}
+.Assortment-container >.Assortment-title > span{
+    width: 30%;
+}
+
+}
+
+@media screen and (max-width: 768px){
+.Assortment-container > .Assortment-title > h2{
+    width: 35%;
+}
+.Assortment-container >.Assortment-title > span{
+    width: 35%;
+}
+
+}
+@media screen and (max-width: 450px){
+.Assortment-container > .Assortment-title > h2{
+    width: 80%;
+}
+.Assortment-container >.Assortment-title > span{
+    width: 80%;
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.Assortment-circle{
+    display: none !important;
+    width: 19%;
+    height: 200px !important;
+    border-radius: 100%;
+        border-bottom: 1px solid #ff6ec4 !important;
+    border-left: 1px solid #ff6ec4 !important;
+    border-top: 1px solid #7873f5 !important;
+    border-right: 1px solid #7873f5 !important;
+    perspective: 500;
+    position: relative;
+    top: 30%;
+    left: 40%;
+}
+.Assortment-circle{
+    display: none !important;
+}
+/* .Assortment-circle > h2{
+    border: 1px solid red;
+    font-weight: bold;
+    position: absolute;
+    top: 40%;
+    right: 19%;
+}
+.circle-borderBox > .circle-border{
+    border:1px solid red ;
+    width:6%;
+    transform:  rotateZ(-90deg);
+    position: absolute;
+    left: 46.5%;
+} */
+.circle-items{
+    display:none !important;
+    position: relative;
+}
+/* .circle-items > .circle-item{
+    background-color: #fff;
+    width: 130px;
+    height: 130px !important;
+    border-radius: 8px;
+    position: relative;
+    left: 45%;
+    bottom:60px;
+}
+.circle-items > .circle-item > img{
+    width: 60px;
+    height: 50px !important;
+    position: relative;
+    left: 28%;
+    top:20px;
+}
+.circle-items > .circle-item > h5{
+    padding: 5px 0;
+    text-align: center;
+    font-weight: bold;
+    color: rgb(135, 135, 135);
+    position: relative;
+    top:35px;
+} */
+
+
+

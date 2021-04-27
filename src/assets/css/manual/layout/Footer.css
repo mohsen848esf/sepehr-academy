@@ -1,0 +1,138 @@
+/* <---------- footer ----------> */
+.academy-footer{
+    background: linear-gradient(45deg,#7367f0  0,#c267f0 );
+}
+.academy-footerMap{
+    overflow: hidden;
+    border-radius:8px ;
+    width: 98%;
+    margin: auto;
+}
+.academy-footerMap-contactUs{
+    height: 430px;
+    width: 430px;
+    background: transparent ;
+    /* background-size:  100%; */
+    position: absolute;
+    top:10%;
+    right: 65%;
+    z-index: 5;
+}
+.academy-footerMap-contactUsItemsBox{
+    width: 80%;
+    margin: 50px auto;
+    padding: 30px 10px;
+    border-radius: 8px;
+    background: linear-gradient(120deg,#fccb90ab 0,#d57eeb 100%);
+    /* background: rgba(255, 255, 255, 0.844); */
+}
+.academy-footerMap-contactUs-Item{
+    padding: 0 !important;
+    margin: 15px 0 !important;
+}
+.academy-footerMap-contactUs-Item-title > h5{
+    margin: 4% auto;
+    color:rgb(64, 75, 155) ;
+
+}
+.academy-footerMap-contactUs-Item-title > span{
+    display: block;
+    margin: 4% auto;
+    font-size: 14px;
+        font-weight:bolder ;
+
+    color:rgb(64, 75, 155) ;
+
+}
+.contactUsItemsBox-dashed{
+    width: 90%;
+    margin: auto;
+    /* border: 5px dashed red; */
+    border-radius: 20px;
+    height: 5px;
+    background: linear-gradient(40deg,#ff6ec4,#7873f5) !important;
+}
+.academy-footerMap-contactUs-Item.Bottom > .contactUs-ItemBottomCol{
+    margin: 0 10px;
+}
+.academy-footerMap-contactUs-xs{
+    display: none;
+}
+
+@media screen and (max-width: 1200px){
+    .academy-footerMap-contactUs{
+    right:62%;
+}
+
+}
+
+@media screen and (max-width: 990px){
+    .academy-footerMap-contactUs{
+    height:400px;
+    width: 400px;
+    right:58%;
+}
+
+}
+@media screen and (max-width: 768px){
+    .academy-footerMap-contactUs{
+    height:350px;
+    width: 350px;
+    top: 20%;
+    right:53%;
+}
+.academy-footerMap-contactUsItemsBox{
+    width: 90%;
+    margin: 30px auto;
+
+}
+
+}
+@media screen and (max-width: 576px){
+    .academy-footerMap-contactUs{
+    height:80px;
+    width: 100%;
+    top: 84%;
+    right:0%;
+    
+}
+.academy-footerMap-contactUsItemsBox{
+    width: 92%;
+    margin:0px auto;
+    padding: 0px 10px;
+    background: linear-gradient(120deg,#fccb90 0,#d57eeb 100%);
+}
+.academy-footerMap-contactUs-Item{
+    display: none;
+}
+.contactUsItemsBox-dashed{
+    display: none;
+}
+.academy-footerMap-contactUs-xs{
+    display: flex;
+    padding: 0 !important;
+    padding-top: 15px !important;
+    margin: 0 !important;
+    background: transparent;
+    height: 80px;
+    width: 100%;
+    position: relative;
+    top: 0px;
+}
+
+
+}
+@media screen and (max-width:375px){
+        .academy-footerMap-contactUs{
+    top: 88%;
+    right:0%;
+    
+}
+
+.academy-footerMap-contactUs-xs{
+    padding-top:22px !important;
+    height: 60px;
+    width: 100%;
+}
+    
+}

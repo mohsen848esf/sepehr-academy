@@ -1,0 +1,191 @@
+.course-body{
+    /* border: 1px solid red; */
+    width: 100%;
+    /* height: 560px; */
+    margin-top: 10% !important;
+    margin-bottom: 15% !important;
+    padding: 0;
+    position: relative;
+}
+.course-style{
+
+    /* border: 1px solid red; */
+    width: 85%;
+    margin: 0 auto;
+}
+.right-style,.left-style{
+    /* border: 1px solid red; */
+    margin: 0 0px;
+    padding: 0;
+    
+}
+.left-style{
+    background: #fff;
+    box-shadow: 0 5px 20px rgba(0,0,0,.1);
+    border-radius: 10px;  
+    overflow: hidden;
+    padding: 0 20px;
+}
+
+
+
+.CourseInfo-Center{
+    /* border: 1px solid blue; */
+    /* background: white; */
+}
+.CourseInfo-imageBox{
+    /* border: 1px solid red; */
+    height: 300px;
+    overflow: hidden;
+}
+.CourseInfo-imageBox > img{
+    border: 5px solid rgb(221, 221, 221);
+    border-radius: 5px;
+    max-width: 60%;
+    max-height: 95%;
+}
+
+
+
+
+
+
+.CourseInformation-RightItemCol{
+    
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.CourseNameCard{
+    border: 1px solid transparent !important;
+    margin: 0 !important;
+}
+.CourseNameCardBody{
+    padding: 10px 20px !important;
+}
+.CourseNameCardTitle{
+    font-size: medium;
+}
+.CoursePriceCard{
+        border: 1px solid transparent !important;
+    margin: 0 !important;
+}
+.CourseInfo-teacherImage-box{
+    /* border: 1px solid red; */
+    width: 100%;
+    background: rgb(221, 221, 221) ;
+    border-radius: 20px;
+}
+.CourseInfo-teacherInfo{
+    float: right;
+    width: 80%;
+    /* border: 1px solid red; */
+}
+
+.CommentTab{
+    max-height: 600px !important;
+    overflow: hidden scroll !important;
+    scrollbar-width: none;
+}
+
+.commentsCard{
+    border: 1px solid transparent !important;
+    
+}
+
+.comments-UserImageBox{
+    /* border: 1px solid red; */
+    border-radius: 100px !important;
+    padding: 0 !important;
+}
+.comments-UserImage{
+    margin-right: 20px;
+    border: 2px solid #7367f0 ;
+}
+/* .timeline-info.mb-2{
+    border: 1px solid red !important;
+} */
+
+
+
+.Blog-left-style{
+        background: #fff;
+        border-radius: 10px;  
+        height: 620px !important;
+        overflow: hidden;
+        padding: 5px 20px;
+    }
+    
+    .BlogsItem-RightItemCol{
+        max-height: 600px !important;
+        
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: hidden scroll !important;
+        scrollbar-width: none;
+    }
+    .‌BlogsItemsCard{
+        border-radius: 10px;
+    box-shadow:inset 0px 0px 3px rgba(0,0,0,.1) !important;
+            border: 1px solid transparent !important;
+    margin: 0 !important;
+
+
+}
+.BlogsItems-box{
+        /* width: 100%;
+    background: rgb(221, 221, 221) ;
+    border-radius: 20px; */
+}
+
+
+
+@media screen and (max-width: 990px){
+.right-style,.left-style{
+    /* border: 1px solid red; */
+    margin: 0 0px;
+}
+.CourseNameCard{
+    height: 286px;
+    border: 1px solid #ccc !important;
+}
+.CourseInfo-teacherInfo{
+    width: 70%;
+}
+.CourseInfo-teacherInfo > p , .CourseInfo-teacherInfo > span{
+    font-size: small !important;
+
+}
+
+}
+
+
+@media screen and (max-width: 768px){
+ /* <---------- course-body / course-style ----------> */
+
+ .CourseInfo-teacherImage-box{
+    /* border: 1px solid red; */
+    width:100%;
+    background: rgb(221, 221, 221);
+    border-radius: 20px;
+}
+ .CourseInfo-teacherInfo{
+    width: 90%;
+}
+
+} 
+
+@media screen and (max-width: 576px){
+     .CourseInfo-teacherImage-box{
+    width: 100%;
+}
+ .CourseInfo-teacherInfo{
+    width: 85%;
+}
+}
+
+@media screen and (max-width: 375px){
+ .CourseInfo-teacherInfo{
+    width: 75%;
+}
+
+}

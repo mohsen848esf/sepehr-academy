@@ -1,0 +1,79 @@
+.userPanel{
+    /* border:1px solid red; */
+}
+.userPanel-Container{
+    /* border:1px solid red; */
+}
+.userPanel-rightSide{
+    border-radius: 5px !important;
+    height: 515px !important;
+    background: white !important;
+    width: 15% !important;
+}
+.userPanel-rightSide-imageBox{
+    /* border: 1px solid red !important; */
+    margin: 15% 0;
+}
+.userPanel-rightSide-img{
+    margin: 0 auto;
+}
+.userPanel-rightSide-opstion{
+    /* border: 1px solid red !important; */
+    padding-left: 5%;
+    margin-bottom: 5% !important;
+}
+.nav.nav-tabs > .nav-item > .nav-link.active{
+    color: #7367f0 !important ;
+}
+[dir="rtl"] .nav.nav-tabs .nav-item .nav-link.active::after {
+    background: linear-gradient(-30deg, #7367f0, rgba(115, 103, 240, 0.5)) !important;
+}
+.userPanel-leftSide{
+    /* border: 1px solid red; */
+    height: 516px !important;
+    padding: 0 !important;
+}
+.userPanel-leftSide-CardBody{
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* .userPanel-tooltip{
+    background-color: #7367f0 !important;
+    background: #7367f0 !important;
+    border: 1px solid red !important;
+} */
+
+@media screen and (max-width: 990px){
+    .userPanel-Container{
+    max-width: 90% !important;
+    
+}
+    .userPanel-rightSide{
+    width: 20% !important;
+}
+}
+@media screen and (max-width: 768px){
+    .userPanel-Container{
+    max-width: 100% !important;
+    
+}
+    .userPanel-rightSide{
+    height: 40px !important;
+    width: 100% !important;
+}
+.userPanel-rightSide-imageBox{
+    /* border: 1px solid red !important; */
+    display: none;
+    margin: 15% 0;
+}
+.userPanel-rightSide-img{
+    display: none;
+    margin: 0 auto;
+}
+}
+@media screen and (max-width: 576px){
+    .userPanel-leftSide{
+    height: 722px !important;
+}
+}

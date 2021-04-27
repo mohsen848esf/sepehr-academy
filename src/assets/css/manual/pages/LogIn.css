@@ -1,0 +1,27 @@
+.login-FormText-Box{
+    background: rgba(24, 24, 26, 0.7);
+}
+.login-FormCard{
+    border-radius: 8px !important;
+    overflow: hidden;
+}
+@media screen and (max-width: 768px) {
+    .login-Form{
+        width: 100%;
+    }
+    .login-FormImage{
+        display: none;
+    }
+    .login-FormCard{
+        margin: 5% 18% !important;
+        width: 25rem !important;
+    }
+    
+}
+@media screen and (max-width: 375px) {
+    .login-FormCard{
+        margin: 5% 5% !important;
+        width: 20rem !important;
+    }
+    
+}
